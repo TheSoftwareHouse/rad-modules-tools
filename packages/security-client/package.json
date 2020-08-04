@@ -6,6 +6,9 @@
   "author": "",
   "license": "MIT",
   "main": "index.js",
+  "scripts": {
+    "build": "tsc --skipLibCheck"
+  },
   "dependencies": {
     "perron": "0.11.4"
   }
