@@ -5,5 +5,8 @@
   "description": "",
   "author": "",
   "license": "MIT",
-  "main": "index.js"
+  "main": "index.js",
+  "dependencies": {
+    "perron": "0.11.4"
+  }
 }
