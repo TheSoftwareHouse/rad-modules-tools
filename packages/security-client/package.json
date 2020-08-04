@@ -1,0 +1,9 @@
+{
+  "name": "security-client",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "main": "index.js"
+}
