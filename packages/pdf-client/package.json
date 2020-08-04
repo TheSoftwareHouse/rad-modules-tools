@@ -1,5 +1,5 @@
 {
-  "name": "pdf-client",
+  "name": "@tshio/pdf-client",
   "version": "0.0.0",
   "private": true,
   "description": "",
