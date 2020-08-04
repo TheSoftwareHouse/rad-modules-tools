@@ -1,0 +1,33 @@
+{
+  "name": "rad-modules-tools",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bootstrap": "./node_modules/.bin/lerna clean -y && ./node_modules/.bin/lerna bootstrap --hoist",
+    "build": "./node_modules/.bin/lerna run build",
+    "unit": "./node_modules/.bin/lerna run units",
+    "integration": "./node_modules/.bin/lerna run integration",
+    "add": "./node_modules/.bin/lerna add --exact",
+    "lint": "./node_modules/.bin/eslint -c ./eslint.json --ext .ts ./",
+    "watch": "rm -rf ./build/* && ./node_modules/.bin/tsc -w --pretty --skipLibCheck"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "13.11.1",
+    "@typescript-eslint/eslint-plugin": "2.27.0",
+    "@typescript-eslint/parser": "2.27.0",
+    "eslint": "6.8.0",
+    "eslint-config-airbnb-typescript": "7.2.0",
+    "eslint-config-prettier": "6.10.1",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-prettier": "3.1.2",
+    "eslint-plugin-unicorn": "18.0.1",
+    "lerna": "3.22.1",
+    "prettier": "2.0.4",
+    "typescript": "3.8.3"
+  }
+}

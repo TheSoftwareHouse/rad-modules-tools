@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - 12
+before_script:
+  - npm install
+  - npm run bootstrap
+jobs:
+  include:
+    - stage: compile
+      if: branch = master
+      name: "Compile TypeScript and Lint"
+      script:
+        - npm run watch
+        - npm run lint
+
+    - stage: units-tests
+      script:
+        - npm run units
+      name: "Run units tests"
+      if: branch = master
+
+    - stage: integration-tests
+      script:
+        - npm run integration
+      name: "Run integration tests"
+      if: branch = master
