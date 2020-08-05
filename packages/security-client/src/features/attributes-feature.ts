@@ -13,6 +13,20 @@ export interface GetAttributesParams {
   };
 }
 
+export interface Attribute {
+  id: number;
+  name: string;
+  userId?: string;
+  username?: string;
+}
+
+export interface AttributesResponse {
+  page: number;
+  limit: number;
+  total: number;
+  attributes: Attribute[];
+}
+
 export class AttributesFeature implements Authentication {
   private accessToken?: string;
 
@@ -23,7 +37,7 @@ export class AttributesFeature implements Authentication {
   }
 
   async getAttributes(params: GetAttributesParams) {
-    return this.serviceClient.request({
+    const response = await this.serviceClient.request({
       method: "GET",
       pathname: "/api/attributes",
       headers: {
@@ -32,5 +46,6 @@ export class AttributesFeature implements Authentication {
       },
       body: JSON.stringify(params),
     });
+    return response.body as AttributesResponse;
   }
 }
