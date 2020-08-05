@@ -1,13 +1,17 @@
-import { AttributesFeature } from "./features/attributes-feature";
+import ServiceClient from "perron";
+import { AttributesFeature, GetAttributesParams } from "./features/attributes-feature";
 
 export class SecurityClient {
-  private attributes: AttributesFeature;
+  private readonly serviceClient: ServiceClient;
+
+  private readonly attributes: AttributesFeature;
 
   public constructor(url: string) {
-    this.attributes = new AttributesFeature(url);
+    this.serviceClient = new ServiceClient(url);
+    this.attributes = new AttributesFeature(this.serviceClient);
   }
 
-  getAttributes() {
-    return this.attributes.getAttributes();
+  getAttributes(params: GetAttributesParams) {
+    return this.attributes.getAttributes(params);
   }
 }
