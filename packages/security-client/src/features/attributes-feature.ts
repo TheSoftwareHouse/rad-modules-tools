@@ -1,4 +1,5 @@
 import ServiceClient from "perron";
+import { Authentication } from "./authentication";
 
 export interface GetAttributesParams {
   page: number;
@@ -12,8 +13,24 @@ export interface GetAttributesParams {
   };
 }
 
-export class AttributesFeature {
+export class AttributesFeature implements Authentication {
+  private accessToken?: string;
+
   public constructor(private serviceClient: ServiceClient) {}
 
-  getAttributes(params: GetAttributesParams) {}
+  setAccessToken(token: string): void {
+    this.accessToken = token;
+  }
+
+  async getAttributes(params: GetAttributesParams) {
+    return this.serviceClient.request({
+      method: "GET",
+      pathname: "/api/attributes",
+      headers: {
+        authorization: `bearer ${this.accessToken}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(params),
+    });
+  }
 }
