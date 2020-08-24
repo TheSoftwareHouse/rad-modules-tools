@@ -2,7 +2,9 @@
   "private": true,
   "npmClient": "npm",
   "packages": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
-  "version": "independent"
+  "version": "independent",
+  "useWorkspaces": true
 }

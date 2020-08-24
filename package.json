@@ -3,15 +3,23 @@
   "private": true,
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
   "scripts": {
+    "docs": "doctoc --title '**Table of content**' README.md",
     "bootstrap": "./node_modules/.bin/lerna clean -y && ./node_modules/.bin/lerna bootstrap --hoist",
     "build": "./node_modules/.bin/lerna run build",
     "unit": "./node_modules/.bin/lerna run units",
     "integration": "./node_modules/.bin/lerna run integration",
     "add": "./node_modules/.bin/lerna add --exact",
     "lint": "./node_modules/.bin/eslint -c ./eslint.json --ext .ts ./",
-    "watch": "rm -rf ./build/* && ./node_modules/.bin/tsc -w --pretty --skipLibCheck"
+    "watch": "rm -rf ./build/* && ./node_modules/.bin/tsc -w --pretty --skipLibCheck",
+    "clean": "lerna run clean",
+    "pub": "lerna publish",
+    "test": "lerna run test --stream",
+    "format": "prettier --write \"**/**/*.ts\""
   },
   "keywords": [],
   "author": "",
@@ -20,6 +28,7 @@
     "@types/node": "13.11.1",
     "@typescript-eslint/eslint-plugin": "2.27.0",
     "@typescript-eslint/parser": "2.27.0",
+    "doctoc": "~1.4.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb-typescript": "7.2.0",
     "eslint-config-prettier": "6.10.1",
@@ -28,6 +37,17 @@
     "eslint-plugin-unicorn": "18.0.1",
     "lerna": "3.22.1",
     "prettier": "2.0.4",
-    "typescript": "3.8.3"
+    "rimraf": "3.0.2",
+    "ts-node": "9.0.0",
+    "tsconfig-paths": "~3.9.0",
+    "typescript": "4.0.2"
+  },
+  "dependencies": {
+    "@tshio/mailer-client": "file:packages/mailer-client",
+    "@tshio/node-security-client": "file:examples/node-security-client",
+    "@tshio/notifications-client": "file:packages/notifications-client",
+    "@tshio/pdf-client": "file:packages/pdf-client",
+    "@tshio/scheduler-client": "file:packages/scheduler-client",
+    "@tshio/security-client": "file:packages/security-client"
   }
 }
