@@ -2,11 +2,12 @@ language: node_js
 node_js:
   - 12
 
-script:
-  - npm lint
-  - npm test
-
 before_script:
   - npm install
   - npm run bootstrap
-  - npm build
+  - npm run build
+  - docker-compose up -d security
+
+script:
+  - npm run lint
+  - npm run test

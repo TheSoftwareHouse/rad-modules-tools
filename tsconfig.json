@@ -8,6 +8,7 @@
       "@tshio/examples": ["examples/*/src"]
     },
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "moduleResolution": "node"
   }
 }
