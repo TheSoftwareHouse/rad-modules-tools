@@ -1,10 +1,12 @@
 import { HttpService } from "./services/http-service";
 import { Credentials, Options, Resources, Token } from "./services/service";
+import * as HttpErrors from "./services/http-errors";
 
 export class SecurityClient {
   constructor(
     private options: Options = {
-      apiUrl: "http://localhost:50050",
+      host: "localhost",
+      port: 50050,
       autoSetToken: true,
     },
   ) {
@@ -15,13 +17,17 @@ export class SecurityClient {
 
   private httpService: HttpService;
 
-  public setToken(token: Token) {
-    this.token = token;
+  public async setToken(token: Token) {
+    return this.httpService.setToken(token);
   }
 
-  public async login(credentials: Credentials) {
-    return this.httpService.login(credentials);
+  public async login(username: string, password: string): Promise<Token> {
+    return this.httpService.login(username, password);
   }
 
-  public hasAccess(_resources: Resources, _credentials?: Credentials) {}
+  public async hasAccess(_resources: Resources, _credentials?: Credentials) {
+    return Promise.resolve("OK!@");
+  }
 }
+
+export { HttpErrors };
