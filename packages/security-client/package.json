@@ -1,11 +1,22 @@
 {
   "name": "@tshio/security-client",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "",
-  "author": "",
+  "author": "tsh.io",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rimraf -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build",
+    "test": "npm run build"
+  },
   "dependencies": {
     "perron": "0.11.4"
   }

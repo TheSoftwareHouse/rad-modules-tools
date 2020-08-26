@@ -1,0 +1,22 @@
+{
+  "name": "@tshio/node-security-client",
+  "description": "Example of using security-client",
+  "private": true,
+  "version": "1.0.0",
+  "main": "dist/index",
+  "types": "dist/index",
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rimraf -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "start2": "node dist/index.js",
+    "test": "npm run start2"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@tshio/security-client": "*"
+  }
+}

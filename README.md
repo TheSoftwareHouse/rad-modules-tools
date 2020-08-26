@@ -6,7 +6,7 @@ rad-modules-tools are set of tools that easily cooperate with rad-modules.
 # Usage
 
 It uses `lerna` to manage packages. Some useful scripts are prepared.
-- `npm run bootstap` - install all packages dependencies and links andy crss-dependencies
+- `npm run bootstrap` - install all packages dependencies and links andy crss-dependencies
 - `npm run build` - run `build` in each package
 - `npm run units` - run unit tests in each package
 - `npm run integration` - run integration tests in each package
