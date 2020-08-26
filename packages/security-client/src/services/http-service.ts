@@ -1,5 +1,5 @@
-import { ServiceClient } from "perron";
-import { ApiKey, Options, Token } from "./service";
+import { ResponseFilterError, ServiceClient } from "perron";
+import { Options, Token } from "./service";
 import {
   BadGateway,
   BadRequest,
@@ -7,6 +7,8 @@ import {
   Forbidden,
   GatewayTimeout,
   Gone,
+  HttpError,
+  HttpErrorBase,
   InternalServerError,
   MethodNotAllowed,
   NotFound,
@@ -34,62 +36,59 @@ export class HttpService {
               if (options?.credentials?.apiKey) {
                 request.headers["x-api-key"] = options.credentials.apiKey;
               } else if (options?.credentials?.token) {
-                request.headers["Authorization"] = `Bearer ${options.credentials.token.accessToken}`;
+                request.headers.Authorization = `Bearer ${options.credentials.token.accessToken}`;
               }
             }
             return request;
           },
-          response(response) {
-            if (response.statusCode < 400) {
-              return response;
-            }
-            const { error } = response.body as any;
-
-            switch (response.statusCode) {
-              case 400:
-                throw new BadRequest(error);
-              case 401:
-                throw new Unauthorized(error);
-              case 403:
-                throw new Forbidden(error);
-              case 404:
-                throw new NotFound(error);
-              case 405:
-                throw new MethodNotAllowed(error);
-              case 407:
-                throw new ProxyAuthenticationRequired(error);
-              case 408:
-                throw new RequestTimeout(error);
-              case 409:
-                throw new Conflict(error);
-              case 410:
-                throw new Gone(error);
-              case 429:
-                throw new TooManyRequests(error);
-              case 500:
-                throw new InternalServerError(error);
-              case 501:
-                throw new NotImplemented(error);
-              case 502:
-                throw new BadGateway(error);
-              case 503:
-                throw new ServiceUnavailable(error);
-              case 504:
-                throw new GatewayTimeout(error);
-              default:
-                throw new InternalServerError(error);
-            }
-          },
         },
+        ServiceClient.treat4xxAsError,
+        ServiceClient.treat5xxAsError,
       ],
     });
   }
 
   private serviceClient: ServiceClient;
 
-  private autoAuthorize = false;
+  private getHttpError(error: ResponseFilterError): HttpError {
+    const { response } = error;
+    const { error: errorMessage } = response.body as any;
 
-  private credentials: Token | ApiKey;
+    switch (response.statusCode) {
+      case 400:
+        return new BadRequest(errorMessage);
+      case 401:
+        return new Unauthorized(errorMessage);
+      case 403:
+        return new Forbidden(errorMessage);
+      case 404:
+        return new NotFound(errorMessage);
+      case 405:
+        return new MethodNotAllowed(errorMessage);
+      case 407:
+        return new ProxyAuthenticationRequired(errorMessage);
+      case 408:
+        return new RequestTimeout(errorMessage);
+      case 409:
+        return new Conflict(errorMessage);
+      case 410:
+        return new Gone(errorMessage);
+      case 429:
+        return new TooManyRequests(errorMessage);
+      case 500:
+        throw new InternalServerError(errorMessage);
+      case 501:
+        return new NotImplemented(errorMessage);
+      case 502:
+        return new BadGateway(errorMessage);
+      case 503:
+        return new ServiceUnavailable(errorMessage);
+      case 504:
+        return new GatewayTimeout(errorMessage);
+      default:
+        return new HttpErrorBase(error.message);
+    }
+  }
 
   public async setApiKey(apiKey: string) {
     const { credentials = { apiKey } } = this.options;
@@ -113,7 +112,10 @@ export class HttpService {
           password,
         }),
       })
-      .then((response) => response!.body as Token);
+      .then((response) => response!.body as Token)
+      .catch((error) => {
+        throw this.getHttpError(error);
+      });
   }
 
   public async resetPassword(username: string) {
