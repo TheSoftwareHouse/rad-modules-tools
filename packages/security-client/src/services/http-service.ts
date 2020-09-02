@@ -114,7 +114,7 @@ export class HttpService {
       })
       .then((response) => response!.body as Token)
       .catch((error) => {
-        throw this.getHttpError(error);
+        throw getHttpError(error);
       });
   }
 
@@ -127,7 +127,10 @@ export class HttpService {
           username,
         }),
       })
-      .then((response) => response.body);
+      .then((response) => response.body)
+      .catch((error) => {
+        throw getHttpError(error);
+      });
   }
 
   public async refreshToken(accessToken: string, refreshToken: string) {
@@ -140,6 +143,125 @@ export class HttpService {
           refreshToken,
         }),
       })
-      .then((response) => response.body);
+      .then((response) => response.body)
+      .catch((error) => {
+        throw getHttpError(error);
+      });
+  }
+
+  // users
+
+  public async activateUser(token: string) {
+    return this.serviceClient
+      .request({
+        pathname: `/api/users/activate-user/${token}`,
+        method: "POST",
+      })
+      .then((response) => response.body)
+      .catch((error) => {
+        throw getHttpError(error);
+      });
+  }
+
+  public async isAuthenticated() {
+    return this.serviceClient
+      .request({
+        pathname: "/api/users/is-authenticated",
+        method: "GET",
+      })
+      .then((response) => response.body)
+      .catch((error) => {
+        throw getHttpError(error);
+      });
+  }
+
+  public async deactivateUser() {
+    return this.serviceClient
+      .request({
+        pathname: "/api/users/deactivate-user",
+        method: "POST",
+      })
+      .then((response) => response.body)
+      .catch((error) => {
+        throw getHttpError(error);
+      });
+  }
+
+  public async hasAttributes(attributes: string[]) {
+    return this.serviceClient
+      .request({
+        pathname: "/api/users/has-attributes",
+        method: "POST",
+        body: JSON.stringify({ attributes }),
+      })
+      .then((response) => response.body)
+      .catch((error) => {
+        throw getHttpError(error);
+      });
+  }
+
+  public async hasAccess(resources: string[]) {
+    return this.serviceClient
+      .request({
+        pathname: "/api/users/has-access",
+        method: "POST",
+        body: JSON.stringify({ resources }),
+      })
+      .then((response) => response.body)
+      .catch((error) => {
+        throw getHttpError(error);
+      });
+  }
+
+  public async addAttributes(userId: string, attributes: string[]) {
+    return this.serviceClient
+      .request({
+        pathname: "/api/users/add-attribute",
+        method: "POST",
+        body: JSON.stringify({ userId, attributes: attributes.join(",") }),
+      })
+      .then((response) => response.body)
+      .catch((error) => {
+        throw getHttpError(error);
+      });
+  }
+
+  public async removeAttributes(userId: string, attributes: string[]) {
+    return this.serviceClient
+      .request({
+        pathname: `/api/users/remove-attribute?userId=${userId}attribute`,
+        query: { userId, attributes: attributes.join(",") },
+        method: "DELETE",
+      })
+      .then((response) => response.body)
+      .catch((error) => {
+        throw getHttpError(error);
+      });
+  }
+
+  public async addUser({ username, password, attributes }) {
+    return this.serviceClient
+      .request({
+        pathname: "/api/users/add-user",
+        method: "POST",
+        body: JSON.stringify({ username, password, attributes }),
+      })
+      .then((response) => response.body)
+      .catch((error) => {
+        throw getHttpError(error);
+      });
+  }
+
+  public async deleteUser(userId: string) {
+    return this.serviceClient
+      .request({
+        pathname: "/api/users/delete-user",
+        method: "DELETE",
+        body: JSON.stringify({ userId }),
+      })
+      .then((response) => response.body)
+      .catch((error) => {
+        throw getHttpError(error);
+      });
   }
 }
