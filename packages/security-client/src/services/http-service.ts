@@ -1,5 +1,6 @@
 import { ResponseFilterError, ServiceClient } from "perron";
 import { Options, Token } from "./service";
+import { users } from "../resources/users";
 import {
   BadGateway,
   BadRequest,
@@ -19,6 +20,7 @@ import {
   TooManyRequests,
   Unauthorized,
 } from "./http-errors";
+import { Users } from "../defs/user";
 
 export function getHttpError(error: ResponseFilterError): HttpError {
   const { response } = error;
@@ -86,9 +88,12 @@ export class HttpService {
         ServiceClient.treat5xxAsError,
       ],
     });
+    this.users = users(this.serviceClient);
   }
 
   private serviceClient: ServiceClient;
+
+  public users: Users;
 
   public async setApiKey(apiKey: string) {
     const { credentials = { apiKey } } = this.options;
@@ -142,122 +147,6 @@ export class HttpService {
           accessToken,
           refreshToken,
         }),
-      })
-      .then((response) => response.body)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  }
-
-  // users
-
-  public async activateUser(token: string) {
-    return this.serviceClient
-      .request({
-        pathname: `/api/users/activate-user/${token}`,
-        method: "POST",
-      })
-      .then((response) => response.body)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  }
-
-  public async isAuthenticated() {
-    return this.serviceClient
-      .request({
-        pathname: "/api/users/is-authenticated",
-        method: "GET",
-      })
-      .then((response) => response.body)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  }
-
-  public async deactivateUser() {
-    return this.serviceClient
-      .request({
-        pathname: "/api/users/deactivate-user",
-        method: "POST",
-      })
-      .then((response) => response.body)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  }
-
-  public async hasAttributes(attributes: string[]) {
-    return this.serviceClient
-      .request({
-        pathname: "/api/users/has-attributes",
-        method: "POST",
-        body: JSON.stringify({ attributes }),
-      })
-      .then((response) => response.body)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  }
-
-  public async hasAccess(resources: string[]) {
-    return this.serviceClient
-      .request({
-        pathname: "/api/users/has-access",
-        method: "POST",
-        body: JSON.stringify({ resources }),
-      })
-      .then((response) => response.body)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  }
-
-  public async addAttributes(userId: string, attributes: string[]) {
-    return this.serviceClient
-      .request({
-        pathname: "/api/users/add-attribute",
-        method: "POST",
-        body: JSON.stringify({ userId, attributes: attributes.join(",") }),
-      })
-      .then((response) => response.body)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  }
-
-  public async removeAttributes(userId: string, attributes: string[]) {
-    return this.serviceClient
-      .request({
-        pathname: `/api/users/remove-attribute?userId=${userId}attribute`,
-        query: { userId, attributes: attributes.join(",") },
-        method: "DELETE",
-      })
-      .then((response) => response.body)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  }
-
-  public async addUser({ username, password, attributes }) {
-    return this.serviceClient
-      .request({
-        pathname: "/api/users/add-user",
-        method: "POST",
-        body: JSON.stringify({ username, password, attributes }),
-      })
-      .then((response) => response.body)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  }
-
-  public async deleteUser(userId: string) {
-    return this.serviceClient
-      .request({
-        pathname: "/api/users/delete-user",
-        method: "DELETE",
-        body: JSON.stringify({ userId }),
       })
       .then((response) => response.body)
       .catch((error) => {
