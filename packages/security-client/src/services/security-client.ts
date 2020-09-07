@@ -23,6 +23,8 @@ import {
 import { Users } from "../defs/user";
 import { auth } from "../resources/auth";
 import { tokens } from "../resources/tokens";
+import { attributes } from "../resources/attributes";
+import { policy } from "../resources/policy";
 
 export function getHttpError(error: ResponseFilterError): HttpError {
   const { response } = error;
@@ -70,7 +72,7 @@ export interface ApiResources {
   attributes: any;
 }
 
-export class HttpService {
+export class SecurityClient {
   constructor(private options: Options) {
     this.serviceClient = new ServiceClient({
       hostname: process.env.API_HOST || options.host,
@@ -99,6 +101,8 @@ export class HttpService {
     this.users = users(this.serviceClient);
     this.auth = auth(this.serviceClient);
     this.tokens = tokens(this.serviceClient);
+    this.attributes = attributes(this.serviceClient);
+    this.policy = policy(this.serviceClient);
   }
 
   private serviceClient: ServiceClient;
@@ -108,6 +112,10 @@ export class HttpService {
   public auth: any;
 
   public tokens: any;
+
+  public attributes: any;
+
+  public policy: any;
 
   public async setApiKey(apiKey: string) {
     const { credentials = { apiKey } } = this.options;

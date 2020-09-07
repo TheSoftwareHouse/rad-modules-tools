@@ -1,17 +1,18 @@
-import { SecurityClient } from "@tshio/security-client";
+import { getSecurityClient } from "@tshio/security-client";
 import * as assert from "assert";
 
-const securityClient = new SecurityClient();
+const securityClient = getSecurityClient();
+
 (async () => {
-  const loginResponse = await securityClient.login("superadmin", "superadmin");
+  const loginResponse = await securityClient.auth.login("superadmin", "superadmin");
   assert.strictEqual(typeof loginResponse.accessToken, "string");
   assert.strictEqual(typeof loginResponse.refreshToken, "string");
 
-  const unauthorized = await securityClient.login("superadmin", "wrong password").catch((error) => error);
+  const unauthorized = await securityClient.auth.login("superadmin", "wrong password").catch((error) => error);
   assert.strictEqual(unauthorized.message, "Wrong username or password");
   assert.strictEqual(unauthorized.statusCode, 401);
 
-  const badRequest = await securityClient.login("superadmin", "").catch((error) => error);
+  const badRequest = await securityClient.auth.login("superadmin", "").catch((error) => error);
   assert.strictEqual(badRequest.message, '"password" is not allowed to be empty');
   assert.strictEqual(badRequest.statusCode, 400);
 })().catch((error) => {

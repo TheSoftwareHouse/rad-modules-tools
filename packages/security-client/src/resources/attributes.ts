@@ -1,4 +1,4 @@
-import { getHttpError } from "../services/http-service";
+import { getHttpError } from "../services/security-client";
 import { ServiceClient } from "perron";
 import { AttributesQueryFilter, GetAttributesResponse } from "../defs/attributes";
 // import { User, UsersQueryFilter } from "../defs/user";

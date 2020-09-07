@@ -8,38 +8,55 @@ export interface User {
   updatedAt: Date;
 }
 
-export type GetAttributesColumns = "id" | "name" | "user.id" | "user.username";
+export type GetPoliciesColumns = "id" | "resource" | "attribute";
 
-export type GetAttributesFilterOperators = "eq" | "eqOr" | "neq" | "lt" | "gt" | "include" | "includeOr";
+export type GetPoliciesFilterOperators = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr";
 
-export interface AttributesQueryFilter {
+export interface PoliciesQueryFilter {
   page?: number;
   limit?: number;
   filter?: {
-    [column in GetAttributesColumns]: {
-      [operator in GetAttributesFilterOperators]: string;
+    [column in GetPoliciesColumns]: {
+      [operator in GetPoliciesFilterOperators]: string;
     };
   };
   order?: {
-    by: "user.username" | "name";
+    by: "resource" | "attribute";
     type: "asc" | "desc";
   };
 }
 
-export interface Attribute {
-  id: string;
-  name: string;
-  userId: string;
-  username: string;
-}
-
-export interface GetAttributesResponse {
-  attributes: Attribute[];
-  total: number;
-  page: number;
-  limit: number;
-}
-
 export interface Policy {
-  getAttributes(queryFilter: AttributesQueryFilter): Promise<GetAttributesResponse>;
+  id: string;
+  resource: string;
+  attribute: string;
 }
+
+export interface GetPoliciesResponse {
+  policies: Policy[];
+  total: number;
+}
+
+// export interface Policy {
+//   getAttributes(queryFilter: AttributesQueryFilter): Promise<GetAttributesResponse>;
+// }
+
+export interface AddPolicyRequest {
+  resource: string;
+  attribute: string;
+}
+
+export interface AddPolicyResponse {
+  id: string;
+}
+
+export interface PolicyIdQuery {
+  id: string;
+}
+
+export interface PolicyQuery {
+  resource: string;
+  attribute: string;
+}
+
+export type RemovePolicyRequest = PolicyIdQuery | PolicyQuery;

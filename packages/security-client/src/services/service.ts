@@ -1,4 +1,4 @@
-import { HttpService } from "./http-service";
+import { SecurityClient } from "./security-client";
 
 export type Credentials = {
   username: string;
@@ -29,4 +29,4 @@ export type Options = {
   };
 };
 
-export { HttpService };
+export { SecurityClient };
