@@ -21,6 +21,8 @@ import {
   Unauthorized,
 } from "./http-errors";
 import { Users } from "../defs/user";
+import { auth } from "../resources/auth";
+import { tokens } from "../resources/tokens";
 
 export function getHttpError(error: ResponseFilterError): HttpError {
   const { response } = error;
@@ -62,6 +64,12 @@ export function getHttpError(error: ResponseFilterError): HttpError {
   }
 }
 
+export interface ApiResources {
+  public: any;
+  users: any;
+  attributes: any;
+}
+
 export class HttpService {
   constructor(private options: Options) {
     this.serviceClient = new ServiceClient({
@@ -89,11 +97,17 @@ export class HttpService {
       ],
     });
     this.users = users(this.serviceClient);
+    this.auth = auth(this.serviceClient);
+    this.tokens = tokens(this.serviceClient);
   }
 
   private serviceClient: ServiceClient;
 
   public users: Users;
+
+  public auth: any;
+
+  public tokens: any;
 
   public async setApiKey(apiKey: string) {
     const { credentials = { apiKey } } = this.options;
@@ -105,52 +119,5 @@ export class HttpService {
     const { credentials = { token } } = this.options;
     credentials.token = token;
     this.options.credentials = credentials;
-  }
-
-  public async login(username: string, password: string): Promise<Token> {
-    return this.serviceClient
-      .request({
-        pathname: "/api/public/auth/login",
-        method: "POST",
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      })
-      .then((response) => response!.body as Token)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  }
-
-  public async resetPassword(username: string) {
-    return this.serviceClient
-      .request({
-        pathname: "/api/public/auth/reset-password",
-        method: "POST",
-        body: JSON.stringify({
-          username,
-        }),
-      })
-      .then((response) => response.body)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  }
-
-  public async refreshToken(accessToken: string, refreshToken: string) {
-    return this.serviceClient
-      .request({
-        pathname: "/api/public/auth/refresh-token",
-        method: "POST",
-        body: JSON.stringify({
-          accessToken,
-          refreshToken,
-        }),
-      })
-      .then((response) => response.body)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
   }
 }

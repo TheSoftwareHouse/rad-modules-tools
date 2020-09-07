@@ -4,6 +4,7 @@ exports.HttpService = exports.getHttpError = void 0;
 const perron_1 = require("perron");
 const users_1 = require("../resources/users");
 const http_errors_1 = require("./http-errors");
+const auth_1 = require("../resources/auth");
 function getHttpError(error) {
     const { response } = error;
     const { error: errorMessage } = response.body;
@@ -73,6 +74,7 @@ class HttpService {
             ],
         });
         this.users = users_1.users(this.serviceClient);
+        this.auth = auth_1.auth(this.serviceClient);
     }
     async setApiKey(apiKey) {
         const { credentials = { apiKey } } = this.options;
@@ -83,50 +85,6 @@ class HttpService {
         const { credentials = { token } } = this.options;
         credentials.token = token;
         this.options.credentials = credentials;
-    }
-    async login(username, password) {
-        return this.serviceClient
-            .request({
-            pathname: "/api/public/auth/login",
-            method: "POST",
-            body: JSON.stringify({
-                username,
-                password,
-            }),
-        })
-            .then((response) => response.body)
-            .catch((error) => {
-            throw getHttpError(error);
-        });
-    }
-    async resetPassword(username) {
-        return this.serviceClient
-            .request({
-            pathname: "/api/public/auth/reset-password",
-            method: "POST",
-            body: JSON.stringify({
-                username,
-            }),
-        })
-            .then((response) => response.body)
-            .catch((error) => {
-            throw getHttpError(error);
-        });
-    }
-    async refreshToken(accessToken, refreshToken) {
-        return this.serviceClient
-            .request({
-            pathname: "/api/public/auth/refresh-token",
-            method: "POST",
-            body: JSON.stringify({
-                accessToken,
-                refreshToken,
-            }),
-        })
-            .then((response) => response.body)
-            .catch((error) => {
-            throw getHttpError(error);
-        });
     }
 }
 exports.HttpService = HttpService;

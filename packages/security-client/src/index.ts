@@ -22,7 +22,7 @@ export class SecurityClient {
   }
 
   public async login(username: string, password: string): Promise<Token> {
-    return this.httpService.login(username, password);
+    return this.httpService.auth.login(username, password);
   }
 
   public async hasAccess(_resources: Resources, _credentials?: Credentials) {

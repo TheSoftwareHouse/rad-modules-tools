@@ -36,7 +36,7 @@ class SecurityClient {
         return this.httpService.setToken(token);
     }
     async login(username, password) {
-        return this.httpService.login(username, password);
+        return this.httpService.auth.login(username, password);
     }
     async hasAccess(_resources, _credentials) {
         return Promise.resolve("OK!@");
