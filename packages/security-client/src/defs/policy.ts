@@ -37,10 +37,6 @@ export interface GetPoliciesResponse {
   total: number;
 }
 
-// export interface Policy {
-//   getAttributes(queryFilter: AttributesQueryFilter): Promise<GetAttributesResponse>;
-// }
-
 export interface AddPolicyRequest {
   resource: string;
   attribute: string;

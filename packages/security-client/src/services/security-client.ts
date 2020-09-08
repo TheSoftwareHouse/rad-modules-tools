@@ -66,12 +66,6 @@ export function getHttpError(error: ResponseFilterError): HttpError {
   }
 }
 
-export interface ApiResources {
-  public: any;
-  users: any;
-  attributes: any;
-}
-
 export class SecurityClient {
   constructor(private options: Options) {
     this.serviceClient = new ServiceClient({
@@ -105,7 +99,7 @@ export class SecurityClient {
     this.policy = policy(this.serviceClient);
   }
 
-  private serviceClient: ServiceClient;
+  public serviceClient: ServiceClient;
 
   public users: Users;
 

@@ -1,7 +1,6 @@
 import { getHttpError } from "../services/security-client";
 import { ServiceClient } from "perron";
 import { Token } from "../services/service";
-// import { User, UsersQueryFilter } from "../defs/user";
 
 export const auth = (serviceClient: ServiceClient) => ({
   login(username: string, password: string): Promise<Token> {
