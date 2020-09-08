@@ -1,19 +1,32 @@
-import { HttpService } from "./http-service";
+import { SecurityClient } from "./security-client";
 
 export type Credentials = {
   username: string;
   password: string;
 };
 
-export type Token = string;
+export type Token = {
+  accessToken: string;
+  refreshToken?: string;
+};
 
 export type ApiKey = string;
 
 export type Resources = string[];
 
 export type Options = {
-  apiUrl: string;
-  autoSetToken: boolean;
+  host: string;
+  port: number;
+  autoSetToken?: boolean;
+  credentials?: {
+    username?: string;
+    password?: string;
+    apiKey?: string;
+    token?: {
+      accessToken: string;
+      refreshToken?: string;
+    };
+  };
 };
 
-export { HttpService };
+export { SecurityClient };
