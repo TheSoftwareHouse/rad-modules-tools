@@ -1,15 +1,15 @@
 import { getHttpError } from "../services/security-client";
 import { ServiceClient } from "perron";
-import { User, UsersQueryFilter } from "../defs/user";
+import { GetUsersResponse, UsersQueryFilter } from "../defs/user";
 
 export const users = (serviceClient: ServiceClient) => ({
-  getUsers(_queryFilter: UsersQueryFilter): Promise<User[]> {
+  getUsers(_queryFilter: UsersQueryFilter): Promise<GetUsersResponse> {
     return serviceClient
       .request({
-        pathname: "/api/users/get-users",
+        pathname: "/api/users",
         method: "GET",
       })
-      .then((response) => response.body as User[])
+      .then((response) => response.body as GetUsersResponse)
       .catch((error) => {
         throw getHttpError(error);
       });

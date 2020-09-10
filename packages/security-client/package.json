@@ -15,9 +15,16 @@
     "clean": "rimraf -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build",
-    "test": "npm run build"
+    "test": "npm run build",
+    "integration": "mocha dist/test/**/*.spec.js --exit"
   },
   "dependencies": {
     "perron": "0.11.4"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.3",
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3"
   }
 }

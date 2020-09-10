@@ -38,8 +38,15 @@ export interface UsersQueryFilter {
   };
 }
 
+export interface GetUsersResponse {
+  users: User[];
+  total: number;
+  page: number;
+  limit: number;
+}
+
 export interface Users {
-  getUsers(queryFilter: UsersQueryFilter): Promise<User[]>;
+  getUsers(queryFilter: UsersQueryFilter): Promise<GetUsersResponse>;
   activateUser(token: string);
   isAuthenticated();
   deactivateUser();

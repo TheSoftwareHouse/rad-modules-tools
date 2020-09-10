@@ -28,9 +28,9 @@ import { policy } from "../resources/policy";
 
 export function getHttpError(error: ResponseFilterError): HttpError {
   const { response } = error;
-  const { error: errorMessage } = response.body as any;
+  const errorMessage = (response as any)?.body?.error ?? error.message;
 
-  switch (response.statusCode) {
+  switch (response?.statusCode) {
     case 400:
       return new BadRequest(errorMessage);
     case 401:
@@ -112,14 +112,10 @@ export class SecurityClient {
   public policy: any;
 
   public async setApiKey(apiKey: string) {
-    const { credentials = { apiKey } } = this.options;
-    credentials.apiKey = apiKey;
-    this.options.credentials = credentials;
+    this.options.credentials.apiKey = apiKey;
   }
 
   public async setToken(token: Token) {
-    const { credentials = { token } } = this.options;
-    credentials.token = token;
-    this.options.credentials = credentials;
+    this.options.credentials.token = token;
   }
 }
