@@ -9,7 +9,7 @@ describe("Resource Users", () => {
   let userId;
 
   before("Set token", async () => {
-    const result = await securityClient.auth.login("superadmin", "superadmin");
+    const result = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
     assert.deepStrictEqual(Object.keys(result ?? []), ["accessToken", "refreshToken"]);
     await securityClient.setToken(result);
     token = result;
@@ -112,7 +112,10 @@ describe("Resource Users", () => {
     const result = await securityClient.users.setPassword(setPasswordRequest);
     assert.deepStrictEqual(result, { passwordChanged: true });
 
-    const newToken = await securityClient.auth.login(setPasswordRequest.username, setPasswordRequest.newPassword);
+    const newToken = await securityClient.auth.login({
+      username: setPasswordRequest.username,
+      password: setPasswordRequest.newPassword,
+    });
     assert.deepEqual(Object.keys(newToken ?? []), ["accessToken", "refreshToken"]);
 
     await securityClient.users.setPassword({

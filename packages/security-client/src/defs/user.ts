@@ -139,15 +139,6 @@ export interface IsAuthenticatedResponse {
   isAuthenticated: boolean;
 }
 
-export interface ResetPasswordRequest {
-  resetPasswordToken: string;
-  newPassword?: string;
-}
-
-export interface ResetPasswordResponse {
-  newPassword: string;
-}
-
 export interface PasswordResetTokenRequest {
   username: string;
 }

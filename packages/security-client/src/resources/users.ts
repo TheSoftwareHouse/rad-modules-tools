@@ -24,8 +24,6 @@ import {
   IsAuthenticatedResponse,
   PasswordResetTokenRequest,
   PasswordResetTokenResponse,
-  ResetPasswordRequest,
-  ResetPasswordResponse,
   SetPasswordRequest,
   SetPasswordResponse,
 } from "../defs/user";
@@ -211,21 +209,6 @@ export const users = (serviceClient: ServiceClient) => ({
         body: JSON.stringify(request),
       })
       .then((response) => response.body as SetPasswordResponse)
-      .catch((error) => {
-        throw getHttpError(error);
-      });
-  },
-
-  resetPassword(request: ResetPasswordRequest): Promise<ResetPasswordResponse> {
-    return serviceClient
-      .request({
-        pathname: `/api/users/reset-password/${request.resetPasswordToken}`,
-        method: "POST",
-        body: JSON.stringify({
-          newPassword: request.newPassword,
-        }),
-      })
-      .then((response) => response.body as ResetPasswordResponse)
       .catch((error) => {
         throw getHttpError(error);
       });

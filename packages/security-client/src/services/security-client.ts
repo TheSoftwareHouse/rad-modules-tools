@@ -25,6 +25,8 @@ import { tokens } from "../resources/tokens";
 import { attributes } from "../resources/attributes";
 import { policy } from "../resources/policy";
 import { Users } from "../defs/user";
+import { Auth } from "../defs/auth";
+import { Policy } from "../defs/policy";
 
 export function getHttpError(error: ResponseFilterError): HttpError {
   const { response } = error;
@@ -103,13 +105,13 @@ export class SecurityClient {
 
   public users: Users;
 
-  public auth: any;
+  public auth: Auth;
 
   public tokens: any;
 
   public attributes: any;
 
-  public policy: any;
+  public policy: Policy;
 
   public async setApiKey(apiKey: string) {
     this.options.credentials.apiKey = apiKey;
