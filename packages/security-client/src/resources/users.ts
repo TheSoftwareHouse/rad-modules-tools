@@ -19,6 +19,9 @@ import {
   GetUsersByResourceResponse,
   GetUsersRequest,
   GetUsersResponse,
+  HasAccessResponse,
+  HasAttributesResponse,
+  IsAuthenticatedResponse,
   PasswordResetTokenRequest,
   PasswordResetTokenResponse,
   ResetPasswordRequest,
@@ -53,13 +56,13 @@ export const users = (serviceClient: ServiceClient) => ({
       });
   },
 
-  isAuthenticated() {
+  isAuthenticated(): Promise<IsAuthenticatedResponse> {
     return serviceClient
       .request({
         pathname: "/api/users/is-authenticated",
         method: "GET",
       })
-      .then((response) => response.body)
+      .then((response) => response.body as IsAuthenticatedResponse)
       .catch((error) => {
         throw getHttpError(error);
       });
@@ -84,27 +87,27 @@ export const users = (serviceClient: ServiceClient) => ({
       });
   },
 
-  hasAttributes(attributes: string[]) {
+  hasAttributes(attributes: string[]): Promise<HasAttributesResponse> {
     return serviceClient
       .request({
         pathname: "/api/users/has-attributes",
         method: "POST",
         body: JSON.stringify({ attributes }),
       })
-      .then((response) => response.body)
+      .then((response) => response.body as HasAttributesResponse)
       .catch((error) => {
         throw getHttpError(error);
       });
   },
 
-  hasAccess(resources: string[]) {
+  hasAccess(resources: string[]): Promise<HasAccessResponse> {
     return serviceClient
       .request({
         pathname: "/api/users/has-access",
         method: "POST",
         body: JSON.stringify({ resources }),
       })
-      .then((response) => response.body)
+      .then((response) => response.body as HasAccessResponse)
       .catch((error) => {
         throw getHttpError(error);
       });

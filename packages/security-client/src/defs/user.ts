@@ -126,6 +126,19 @@ export interface GetUsersByResourceResponse {
   limit: number;
 }
 
+export interface HasAccessResponse {
+  hasAccess: boolean;
+  forbidden: string[];
+}
+
+export interface HasAttributesResponse {
+  hasAllAttributes: boolean;
+}
+
+export interface IsAuthenticatedResponse {
+  isAuthenticated: boolean;
+}
+
 export interface ResetPasswordRequest {
   resetPasswordToken: string;
   newPassword?: string;
@@ -151,15 +164,11 @@ export interface Users {
   deactivateUser(request: DeactivateUserRequest): Promise<DeactivateUserResponse>;
   deleteUser(request: DeleteUserRequest): Promise<DeleteUserResponse>;
   getUser(request: GetUserRequest): Promise<GetUserResponse>;
-  getUserId(username: string);
+  getUserId(request: GetUserIdRequest): Promise<GetUserIdResponse>;
   getUserByResource(request: GetUsersByResourceRequest): Promise<GetUsersByResourceResponse>;
-  isAuthenticated();
-  deactivateUser();
-  hasAttributes(attributes: string[]);
-  hasAccess(resources: string[]);
-  addAttributes(userId: string, attributes: string[]);
-  addUser({ username, password, attributes });
-  deleteUser(userId: string);
+  hasAccess(resources: string[]): Promise<HasAccessResponse>;
+  hasAttributes(attributes: string[]): Promise<HasAttributesResponse>;
+  isAuthenticated(): Promise<IsAuthenticatedResponse>;
   setPassword(request: SetPasswordRequest): Promise<SetPasswordResponse>;
   passwordResetToken(request: PasswordResetTokenRequest): Promise<PasswordResetTokenResponse>;
 }

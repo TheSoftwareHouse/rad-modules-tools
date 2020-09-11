@@ -24,6 +24,7 @@ import { auth } from "../resources/auth";
 import { tokens } from "../resources/tokens";
 import { attributes } from "../resources/attributes";
 import { policy } from "../resources/policy";
+import { Users } from "../defs/user";
 
 export function getHttpError(error: ResponseFilterError): HttpError {
   const { response } = error;
@@ -100,7 +101,7 @@ export class SecurityClient {
 
   public serviceClient: ServiceClient;
 
-  public users: any;
+  public users: Users;
 
   public auth: any;
 
