@@ -20,7 +20,6 @@ import {
   TooManyRequests,
   Unauthorized,
 } from "./http-errors";
-import { Users } from "../defs/user";
 import { auth } from "../resources/auth";
 import { tokens } from "../resources/tokens";
 import { attributes } from "../resources/attributes";
@@ -101,7 +100,7 @@ export class SecurityClient {
 
   public serviceClient: ServiceClient;
 
-  public users: Users;
+  public users: any;
 
   public auth: any;
 

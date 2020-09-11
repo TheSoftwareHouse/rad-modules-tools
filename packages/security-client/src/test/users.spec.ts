@@ -25,6 +25,23 @@ describe("Resource Users", () => {
     assert.strictEqual(result.limit, 25);
   });
 
+  it("Should get users", async () => {
+    const usersQueryFilter: UsersQueryFilter = { limit: 500, page: 100 };
+
+    const result = await securityClient.users.getUsers(usersQueryFilter);
+    assert.deepStrictEqual(Object.keys(result ?? {}), ["users", "total", "page", "limit"]);
+    assert.strictEqual(result.users.length, result.total);
+    assert.strictEqual(result.page, 1);
+    assert.strictEqual(result.limit, 500);
+  });
+
+  it("Should get users", async () => {
+    const usersQueryFilter: UsersQueryFilter = { limit: 10000 };
+
+    const result = await securityClient.users.getUsers(usersQueryFilter).catch((error) => error.message);
+    assert.strictEqual(result, '"limit" must be less than or equal to 1000');
+  });
+
   it("Should isAuthenticated", async () => {
     const result = await securityClient.users.isAuthenticated();
     assert.deepStrictEqual(Object.keys(result ?? {}), ["isAuthenticated"]);
@@ -63,13 +80,13 @@ describe("Resource Users", () => {
   });
 
   it("Should getUserId", async () => {
-    const result = await securityClient.users.getUserId("superadmin");
+    const result = await securityClient.users.getUserId({ username: "superadmin" });
     assert.deepStrictEqual(Object.keys(result ?? {}), ["userId"]);
     userId = result.userId;
   });
 
   it("Should getUser", async () => {
-    const result = await securityClient.users.getUser(userId);
+    const result = await securityClient.users.getUser({ userId });
     assert.deepStrictEqual(Object.keys(result ?? {}), [
       "id",
       "username",
@@ -84,5 +101,34 @@ describe("Resource Users", () => {
     assert.strictEqual(result.isActive, true);
     assert.deepStrictEqual(result.attributes, ["ROLE_SUPERADMIN"]);
     assert.strictEqual(result.isSuperAdmin, true);
+  });
+
+  it("Should setPassword", async () => {
+    const setPasswordRequest = {
+      username: "superadmin",
+      oldPassword: "superadmin",
+      newPassword: "newPassword",
+    };
+    const result = await securityClient.users.setPassword(setPasswordRequest);
+    assert.deepStrictEqual(result, { passwordChanged: true });
+
+    const newToken = await securityClient.auth.login(setPasswordRequest.username, setPasswordRequest.newPassword);
+    assert.deepEqual(Object.keys(newToken ?? []), ["accessToken", "refreshToken"]);
+
+    await securityClient.users.setPassword({
+      username: "superadmin",
+      oldPassword: setPasswordRequest.newPassword,
+      newPassword: setPasswordRequest.oldPassword,
+    });
+    assert.deepStrictEqual(result, { passwordChanged: true });
+  });
+
+  it("Should passwordResetToken", async () => {
+    const passwordResetToken = {
+      username: "superadmin",
+    };
+    const result = await securityClient.users.passwordResetToken(passwordResetToken);
+
+    assert.deepStrictEqual(Object.keys(result || []), ["resetPasswordToken"]);
   });
 });
