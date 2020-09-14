@@ -11,6 +11,7 @@
     "dist"
   ],
   "scripts": {
+    "docs": "typedoc --options typedoc.js",
     "build": "npm run clean && npm run compile",
     "clean": "rimraf -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
@@ -22,6 +23,8 @@
     "perron": "0.11.4"
   },
   "devDependencies": {
+    "typedoc": "^0.19.1",
+    "typedoc-plugin-markdown": "^2.4.2",
     "@types/chai": "^4.2.12",
     "@types/mocha": "^8.0.3",
     "chai": "^4.2.0",

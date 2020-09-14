@@ -8,7 +8,7 @@
     "examples/*"
   ],
   "scripts": {
-    "docs": "typedoc --options typedoc.js",
+    "docs": "lerna run docs",
     "bootstrap": "./node_modules/.bin/lerna clean -y && ./node_modules/.bin/lerna bootstrap --hoist",
     "build": "./node_modules/.bin/lerna run build",
     "unit": "./node_modules/.bin/lerna run units",
