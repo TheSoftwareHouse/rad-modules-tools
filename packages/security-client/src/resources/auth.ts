@@ -13,6 +13,15 @@ import {
 
 export const auth = (serviceClient: ServiceClient) =>
   ({
+    /**
+     * Returns Token object
+     *
+     *
+     * @param {Promise<Token>} request - LoginRequest
+     * @returns Token
+     *
+     * @beta
+     */
     login(request: LoginRequest): Promise<Token> {
       return serviceClient
         .request({

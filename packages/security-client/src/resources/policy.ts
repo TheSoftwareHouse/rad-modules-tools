@@ -11,6 +11,20 @@ import {
 
 export const policy = (serviceClient: ServiceClient) =>
   ({
+    /**
+     * Add policy.
+     * @param request new resource object
+     *
+     * ~~~
+     * const policyItem: AddPolicyRequest = {
+     *   resource: "EXAMPLE RESOURCE",
+     *   attribute: "EXAMPLE ATTRIBUTE",
+     * }
+     *
+     * const response = await securityClient.policy.addPolicy(policyItem);
+     * ~~~
+     *
+     */
     addPolicy(request: AddPolicyRequest): Promise<AddPolicyResponse> {
       return serviceClient
         .request({

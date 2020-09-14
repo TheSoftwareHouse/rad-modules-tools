@@ -14,3 +14,4 @@ It uses `lerna` to manage packages. Some useful scripts are prepared.
 - `npm run lint` - run linter analysis 
 - `npm run watch` - build packages and watch for changes
 
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
