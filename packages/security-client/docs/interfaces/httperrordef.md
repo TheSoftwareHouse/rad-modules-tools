@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [HttpErrorDef](httperrordef.md)
-
 # Interface: HttpErrorDef
 
 ## Hierarchy
@@ -31,11 +29,11 @@
 
 ### Properties
 
-* [message](httperrordef.md#markdown-header-message)
-* [name](httperrordef.md#markdown-header-name)
-* [stack](httperrordef.md#markdown-header-optional-stack)
-* [statusCode](httperrordef.md#markdown-header-statuscode)
-* [title](httperrordef.md#markdown-header-title)
+* [message](httperrordef.md#message)
+* [name](httperrordef.md#name)
+* [stack](httperrordef.md#optional-stack)
+* [statusCode](httperrordef.md#statuscode)
+* [title](httperrordef.md#title)
 
 ## Properties
 
@@ -43,7 +41,7 @@
 
 • **message**: *string*
 
-*Inherited from [HttpError](httperror.md).[message](httperror.md#markdown-header-message)*
+*Inherited from [HttpError](httperror.md).[message](httperror.md#message)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:974
 
@@ -53,7 +51,7 @@ ___
 
 • **name**: *string*
 
-*Inherited from [HttpError](httperror.md).[name](httperror.md#markdown-header-name)*
+*Inherited from [HttpError](httperror.md).[name](httperror.md#name)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:973
 
@@ -63,7 +61,7 @@ ___
 
 • **stack**? : *string*
 
-*Inherited from [HttpError](httperror.md).[stack](httperror.md#markdown-header-optional-stack)*
+*Inherited from [HttpError](httperror.md).[stack](httperror.md#optional-stack)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:975
 
@@ -73,9 +71,9 @@ ___
 
 • **statusCode**: *number*
 
-*Inherited from [HttpError](httperror.md).[statusCode](httperror.md#markdown-header-statuscode)*
+*Inherited from [HttpError](httperror.md).[statusCode](httperror.md#statuscode)*
 
-*Defined in [packages/security-client/src/services/http-errors.ts:4](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/http-errors.ts#L4)*
+*Defined in [packages/security-client/src/services/http-errors.ts:4](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/http-errors.ts#L4)*
 
 ___
 
@@ -83,4 +81,4 @@ ___
 
 • **title**: *string*
 
-*Defined in [packages/security-client/src/services/http-errors.ts:8](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/http-errors.ts#L8)*
+*Defined in [packages/security-client/src/services/http-errors.ts:8](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/http-errors.ts#L8)*

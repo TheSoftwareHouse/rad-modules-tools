@@ -1,10 +1,8 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [HttpError](httperror.md)
-
 # Interface: HttpError
 
 ## Hierarchy
 
-* [Error](httperror.md#markdown-header-error)
+* [Error](httperror.md#error)
 
   ↳ **HttpError**
 
@@ -14,11 +12,11 @@
 
 ### Properties
 
-* [Error](httperror.md#markdown-header-error)
-* [message](httperror.md#markdown-header-message)
-* [name](httperror.md#markdown-header-name)
-* [stack](httperror.md#markdown-header-optional-stack)
-* [statusCode](httperror.md#markdown-header-statuscode)
+* [Error](httperror.md#error)
+* [message](httperror.md#message)
+* [name](httperror.md#name)
+* [stack](httperror.md#optional-stack)
+* [statusCode](httperror.md#statuscode)
 
 ## Properties
 
@@ -34,7 +32,7 @@ ___
 
 • **message**: *string*
 
-*Inherited from [HttpError](httperror.md).[message](httperror.md#markdown-header-message)*
+*Inherited from [HttpError](httperror.md).[message](httperror.md#message)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:974
 
@@ -44,7 +42,7 @@ ___
 
 • **name**: *string*
 
-*Inherited from [HttpError](httperror.md).[name](httperror.md#markdown-header-name)*
+*Inherited from [HttpError](httperror.md).[name](httperror.md#name)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:973
 
@@ -54,7 +52,7 @@ ___
 
 • **stack**? : *string*
 
-*Inherited from [HttpError](httperror.md).[stack](httperror.md#markdown-header-optional-stack)*
+*Inherited from [HttpError](httperror.md).[stack](httperror.md#optional-stack)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:975
 
@@ -64,4 +62,4 @@ ___
 
 • **statusCode**: *number*
 
-*Defined in [packages/security-client/src/services/http-errors.ts:4](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/http-errors.ts#L4)*
+*Defined in [packages/security-client/src/services/http-errors.ts:4](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/http-errors.ts#L4)*

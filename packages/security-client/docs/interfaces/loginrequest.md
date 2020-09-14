@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [LoginRequest](loginrequest.md)
-
 # Interface: LoginRequest
 
 ## Hierarchy
@@ -10,8 +8,8 @@
 
 ### Properties
 
-* [password](loginrequest.md#markdown-header-password)
-* [username](loginrequest.md#markdown-header-username)
+* [password](loginrequest.md#password)
+* [username](loginrequest.md#username)
 
 ## Properties
 
@@ -19,7 +17,7 @@
 
 • **password**: *string*
 
-*Defined in [packages/security-client/src/defs/auth.ts:5](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/auth.ts#L5)*
+*Defined in [packages/security-client/src/defs/auth.ts:5](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/auth.ts#L5)*
 
 ___
 
@@ -27,4 +25,4 @@ ___
 
 • **username**: *string*
 
-*Defined in [packages/security-client/src/defs/auth.ts:4](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/auth.ts#L4)*
+*Defined in [packages/security-client/src/defs/auth.ts:4](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/auth.ts#L4)*

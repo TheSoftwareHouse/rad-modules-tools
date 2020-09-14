@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [CreateAccessKeyRequest](createaccesskeyrequest.md)
-
 # Interface: CreateAccessKeyRequest
 
 ## Hierarchy
@@ -10,7 +8,7 @@
 
 ### Properties
 
-* [accessToken](createaccesskeyrequest.md#markdown-header-accesstoken)
+* [accessToken](createaccesskeyrequest.md#accesstoken)
 
 ## Properties
 
@@ -18,4 +16,4 @@
 
 • **accessToken**: *string*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:2](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L2)*
+*Defined in [packages/security-client/src/defs/tokens.ts:2](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L2)*

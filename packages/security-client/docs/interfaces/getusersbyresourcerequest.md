@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [GetUsersByResourceRequest](getusersbyresourcerequest.md)
-
 # Interface: GetUsersByResourceRequest
 
 ## Hierarchy
@@ -10,9 +8,9 @@
 
 ### Properties
 
-* [limit](getusersbyresourcerequest.md#markdown-header-optional-limit)
-* [page](getusersbyresourcerequest.md#markdown-header-optional-page)
-* [resource](getusersbyresourcerequest.md#markdown-header-resource)
+* [limit](getusersbyresourcerequest.md#optional-limit)
+* [page](getusersbyresourcerequest.md#optional-page)
+* [resource](getusersbyresourcerequest.md#resource)
 
 ## Properties
 
@@ -20,7 +18,7 @@
 
 • **limit**? : *number*
 
-*Defined in [packages/security-client/src/defs/user.ts:119](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L119)*
+*Defined in [packages/security-client/src/defs/user.ts:119](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L119)*
 
 ___
 
@@ -28,7 +26,7 @@ ___
 
 • **page**? : *number*
 
-*Defined in [packages/security-client/src/defs/user.ts:118](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L118)*
+*Defined in [packages/security-client/src/defs/user.ts:118](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L118)*
 
 ___
 
@@ -36,4 +34,4 @@ ___
 
 • **resource**: *string*
 
-*Defined in [packages/security-client/src/defs/user.ts:117](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L117)*
+*Defined in [packages/security-client/src/defs/user.ts:117](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L117)*

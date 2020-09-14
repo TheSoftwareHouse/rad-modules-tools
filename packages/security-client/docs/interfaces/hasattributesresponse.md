@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [HasAttributesResponse](hasattributesresponse.md)
-
 # Interface: HasAttributesResponse
 
 ## Hierarchy
@@ -10,7 +8,7 @@
 
 ### Properties
 
-* [hasAllAttributes](hasattributesresponse.md#markdown-header-hasallattributes)
+* [hasAllAttributes](hasattributesresponse.md#hasallattributes)
 
 ## Properties
 
@@ -18,4 +16,4 @@
 
 • **hasAllAttributes**: *boolean*
 
-*Defined in [packages/security-client/src/defs/user.ts:135](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L135)*
+*Defined in [packages/security-client/src/defs/user.ts:135](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L135)*

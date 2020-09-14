@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [AttributesQueryFilter](attributesqueryfilter.md)
-
 # Interface: AttributesQueryFilter
 
 ## Hierarchy
@@ -10,10 +8,10 @@
 
 ### Properties
 
-* [filter](attributesqueryfilter.md#markdown-header-optional-filter)
-* [limit](attributesqueryfilter.md#markdown-header-optional-limit)
-* [order](attributesqueryfilter.md#markdown-header-optional-order)
-* [page](attributesqueryfilter.md#markdown-header-optional-page)
+* [filter](attributesqueryfilter.md#optional-filter)
+* [limit](attributesqueryfilter.md#optional-limit)
+* [order](attributesqueryfilter.md#optional-order)
+* [page](attributesqueryfilter.md#optional-page)
 
 ## Properties
 
@@ -21,7 +19,7 @@
 
 • **filter**? : *object*
 
-*Defined in [packages/security-client/src/defs/attributes.ts:18](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/attributes.ts#L18)*
+*Defined in [packages/security-client/src/defs/attributes.ts:18](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/attributes.ts#L18)*
 
 #### Type declaration:
 
@@ -31,7 +29,7 @@ ___
 
 • **limit**? : *number*
 
-*Defined in [packages/security-client/src/defs/attributes.ts:17](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/attributes.ts#L17)*
+*Defined in [packages/security-client/src/defs/attributes.ts:17](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/attributes.ts#L17)*
 
 ___
 
@@ -39,7 +37,7 @@ ___
 
 • **order**? : *object*
 
-*Defined in [packages/security-client/src/defs/attributes.ts:23](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/attributes.ts#L23)*
+*Defined in [packages/security-client/src/defs/attributes.ts:23](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/attributes.ts#L23)*
 
 #### Type declaration:
 
@@ -53,4 +51,4 @@ ___
 
 • **page**? : *number*
 
-*Defined in [packages/security-client/src/defs/attributes.ts:16](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/attributes.ts#L16)*
+*Defined in [packages/security-client/src/defs/attributes.ts:16](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/attributes.ts#L16)*

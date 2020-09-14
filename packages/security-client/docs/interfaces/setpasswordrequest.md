@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [SetPasswordRequest](setpasswordrequest.md)
-
 # Interface: SetPasswordRequest
 
 ## Hierarchy
@@ -10,9 +8,9 @@
 
 ### Properties
 
-* [newPassword](setpasswordrequest.md#markdown-header-newpassword)
-* [oldPassword](setpasswordrequest.md#markdown-header-oldpassword)
-* [username](setpasswordrequest.md#markdown-header-username)
+* [newPassword](setpasswordrequest.md#newpassword)
+* [oldPassword](setpasswordrequest.md#oldpassword)
+* [username](setpasswordrequest.md#username)
 
 ## Properties
 
@@ -20,7 +18,7 @@
 
 • **newPassword**: *string*
 
-*Defined in [packages/security-client/src/defs/user.ts:53](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L53)*
+*Defined in [packages/security-client/src/defs/user.ts:53](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L53)*
 
 ___
 
@@ -28,7 +26,7 @@ ___
 
 • **oldPassword**: *string*
 
-*Defined in [packages/security-client/src/defs/user.ts:52](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L52)*
+*Defined in [packages/security-client/src/defs/user.ts:52](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L52)*
 
 ___
 
@@ -36,4 +34,4 @@ ___
 
 • **username**: *string*
 
-*Defined in [packages/security-client/src/defs/user.ts:51](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L51)*
+*Defined in [packages/security-client/src/defs/user.ts:51](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L51)*

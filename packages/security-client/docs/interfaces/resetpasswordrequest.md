@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [ResetPasswordRequest](resetpasswordrequest.md)
-
 # Interface: ResetPasswordRequest
 
 ## Hierarchy
@@ -10,8 +8,8 @@
 
 ### Properties
 
-* [newPassword](resetpasswordrequest.md#markdown-header-optional-newpassword)
-* [resetPasswordToken](resetpasswordrequest.md#markdown-header-resetpasswordtoken)
+* [newPassword](resetpasswordrequest.md#optional-newpassword)
+* [resetPasswordToken](resetpasswordrequest.md#resetpasswordtoken)
 
 ## Properties
 
@@ -19,7 +17,7 @@
 
 • **newPassword**? : *string*
 
-*Defined in [packages/security-client/src/defs/auth.ts:10](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/auth.ts#L10)*
+*Defined in [packages/security-client/src/defs/auth.ts:10](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/auth.ts#L10)*
 
 ___
 
@@ -27,4 +25,4 @@ ___
 
 • **resetPasswordToken**: *string*
 
-*Defined in [packages/security-client/src/defs/auth.ts:9](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/auth.ts#L9)*
+*Defined in [packages/security-client/src/defs/auth.ts:9](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/auth.ts#L9)*

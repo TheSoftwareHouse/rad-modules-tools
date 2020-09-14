@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [ActivateUserRequest](activateuserrequest.md)
-
 # Interface: ActivateUserRequest
 
 ## Hierarchy
@@ -10,7 +8,7 @@
 
 ### Properties
 
-* [activationToken](activateuserrequest.md#markdown-header-activationtoken)
+* [activationToken](activateuserrequest.md#activationtoken)
 
 ## Properties
 
@@ -18,4 +16,4 @@
 
 • **activationToken**: *string*
 
-*Defined in [packages/security-client/src/defs/user.ts:61](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L61)*
+*Defined in [packages/security-client/src/defs/user.ts:61](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L61)*

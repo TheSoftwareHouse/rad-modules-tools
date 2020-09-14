@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [GetUsersByResourceResponse](getusersbyresourceresponse.md)
-
 # Interface: GetUsersByResourceResponse
 
 ## Hierarchy
@@ -10,10 +8,10 @@
 
 ### Properties
 
-* [limit](getusersbyresourceresponse.md#markdown-header-limit)
-* [page](getusersbyresourceresponse.md#markdown-header-page)
-* [total](getusersbyresourceresponse.md#markdown-header-total)
-* [users](getusersbyresourceresponse.md#markdown-header-users)
+* [limit](getusersbyresourceresponse.md#limit)
+* [page](getusersbyresourceresponse.md#page)
+* [total](getusersbyresourceresponse.md#total)
+* [users](getusersbyresourceresponse.md#users)
 
 ## Properties
 
@@ -21,7 +19,7 @@
 
 • **limit**: *number*
 
-*Defined in [packages/security-client/src/defs/user.ts:126](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L126)*
+*Defined in [packages/security-client/src/defs/user.ts:126](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L126)*
 
 ___
 
@@ -29,7 +27,7 @@ ___
 
 • **page**: *number*
 
-*Defined in [packages/security-client/src/defs/user.ts:125](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L125)*
+*Defined in [packages/security-client/src/defs/user.ts:125](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L125)*
 
 ___
 
@@ -37,7 +35,7 @@ ___
 
 • **total**: *number*
 
-*Defined in [packages/security-client/src/defs/user.ts:124](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L124)*
+*Defined in [packages/security-client/src/defs/user.ts:124](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L124)*
 
 ___
 
@@ -45,4 +43,4 @@ ___
 
 • **users**: *[User](user.md)[]*
 
-*Defined in [packages/security-client/src/defs/user.ts:123](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L123)*
+*Defined in [packages/security-client/src/defs/user.ts:123](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L123)*

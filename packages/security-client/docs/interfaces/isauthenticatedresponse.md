@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [IsAuthenticatedResponse](isauthenticatedresponse.md)
-
 # Interface: IsAuthenticatedResponse
 
 ## Hierarchy
@@ -10,7 +8,7 @@
 
 ### Properties
 
-* [isAuthenticated](isauthenticatedresponse.md#markdown-header-isauthenticated)
+* [isAuthenticated](isauthenticatedresponse.md#isauthenticated)
 
 ## Properties
 
@@ -18,4 +16,4 @@
 
 • **isAuthenticated**: *boolean*
 
-*Defined in [packages/security-client/src/defs/user.ts:139](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L139)*
+*Defined in [packages/security-client/src/defs/user.ts:139](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L139)*

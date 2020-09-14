@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [PolicyItem](policyitem.md)
-
 # Interface: PolicyItem
 
 ## Hierarchy
@@ -10,9 +8,9 @@
 
 ### Properties
 
-* [attribute](policyitem.md#markdown-header-attribute)
-* [id](policyitem.md#markdown-header-id)
-* [resource](policyitem.md#markdown-header-resource)
+* [attribute](policyitem.md#attribute)
+* [id](policyitem.md#id)
+* [resource](policyitem.md#resource)
 
 ## Properties
 
@@ -20,7 +18,7 @@
 
 • **attribute**: *string*
 
-*Defined in [packages/security-client/src/defs/policy.ts:32](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L32)*
+*Defined in [packages/security-client/src/defs/policy.ts:32](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L32)*
 
 ___
 
@@ -28,7 +26,7 @@ ___
 
 • **id**: *string*
 
-*Defined in [packages/security-client/src/defs/policy.ts:30](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L30)*
+*Defined in [packages/security-client/src/defs/policy.ts:30](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L30)*
 
 ___
 
@@ -36,4 +34,4 @@ ___
 
 • **resource**: *string*
 
-*Defined in [packages/security-client/src/defs/policy.ts:31](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L31)*
+*Defined in [packages/security-client/src/defs/policy.ts:31](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L31)*

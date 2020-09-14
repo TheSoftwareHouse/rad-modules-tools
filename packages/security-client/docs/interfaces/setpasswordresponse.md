@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [SetPasswordResponse](setpasswordresponse.md)
-
 # Interface: SetPasswordResponse
 
 ## Hierarchy
@@ -10,7 +8,7 @@
 
 ### Properties
 
-* [passwordChanged](setpasswordresponse.md#markdown-header-passwordchanged)
+* [passwordChanged](setpasswordresponse.md#passwordchanged)
 
 ## Properties
 
@@ -18,4 +16,4 @@
 
 • **passwordChanged**: *boolean*
 
-*Defined in [packages/security-client/src/defs/user.ts:57](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L57)*
+*Defined in [packages/security-client/src/defs/user.ts:57](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L57)*

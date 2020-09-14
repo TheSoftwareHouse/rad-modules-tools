@@ -20,10 +20,10 @@ import {
   TooManyRequests,
   Unauthorized,
 } from "./http-errors";
-import { auth } from "../resources/auth";
+import { AuthResources } from "../resources/auth";
 import { tokens } from "../resources/tokens";
 import { attributes } from "../resources/attributes";
-import { policy } from "../resources/policy";
+import { PolicyResources } from "../resources/policy";
 import { Users } from "../defs/user";
 import { Auth } from "../defs/auth";
 import { Policy } from "../defs/policy";
@@ -97,10 +97,10 @@ export class SecurityClient {
       ],
     });
     this.users = users(this.serviceClient);
-    this.auth = auth(this.serviceClient);
+    this.auth = new AuthResources(this.serviceClient);
     this.tokens = tokens(this.serviceClient);
     this.attributes = attributes(this.serviceClient);
-    this.policy = policy(this.serviceClient);
+    this.policy = new PolicyResources(this.serviceClient);
   }
 
   public serviceClient: ServiceClient;
@@ -113,7 +113,7 @@ export class SecurityClient {
 
   public attributes: Attributes;
 
-  public policy: Policy;
+  public policy: PolicyResources;
 
   public async setApiKey(apiKey: string) {
     this.options.credentials.apiKey = apiKey;

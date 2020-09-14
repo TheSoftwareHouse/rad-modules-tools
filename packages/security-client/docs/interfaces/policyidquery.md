@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [PolicyIdQuery](policyidquery.md)
-
 # Interface: PolicyIdQuery
 
 ## Hierarchy
@@ -10,7 +8,7 @@
 
 ### Properties
 
-* [id](policyidquery.md#markdown-header-id)
+* [id](policyidquery.md#id)
 
 ## Properties
 
@@ -18,4 +16,4 @@
 
 • **id**: *string*
 
-*Defined in [packages/security-client/src/defs/policy.ts:54](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L54)*
+*Defined in [packages/security-client/src/defs/policy.ts:54](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L54)*

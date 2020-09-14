@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [AddUserRequest](adduserrequest.md)
-
 # Interface: AddUserRequest
 
 ## Hierarchy
@@ -10,9 +8,9 @@
 
 ### Properties
 
-* [attributes](adduserrequest.md#markdown-header-optional-attributes)
-* [password](adduserrequest.md#markdown-header-password)
-* [username](adduserrequest.md#markdown-header-username)
+* [attributes](adduserrequest.md#optional-attributes)
+* [password](adduserrequest.md#password)
+* [username](adduserrequest.md#username)
 
 ## Properties
 
@@ -20,7 +18,7 @@
 
 • **attributes**? : *string[]*
 
-*Defined in [packages/security-client/src/defs/user.ts:79](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L79)*
+*Defined in [packages/security-client/src/defs/user.ts:79](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L79)*
 
 ___
 
@@ -28,7 +26,7 @@ ___
 
 • **password**: *string*
 
-*Defined in [packages/security-client/src/defs/user.ts:78](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L78)*
+*Defined in [packages/security-client/src/defs/user.ts:78](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L78)*
 
 ___
 
@@ -36,4 +34,4 @@ ___
 
 • **username**: *string*
 
-*Defined in [packages/security-client/src/defs/user.ts:77](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L77)*
+*Defined in [packages/security-client/src/defs/user.ts:77](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L77)*

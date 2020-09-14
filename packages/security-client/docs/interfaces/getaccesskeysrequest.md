@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [GetAccessKeysRequest](getaccesskeysrequest.md)
-
 # Interface: GetAccessKeysRequest
 
 ## Hierarchy
@@ -10,8 +8,8 @@
 
 ### Properties
 
-* [limit](getaccesskeysrequest.md#markdown-header-limit)
-* [page](getaccesskeysrequest.md#markdown-header-page)
+* [limit](getaccesskeysrequest.md#limit)
+* [page](getaccesskeysrequest.md#page)
 
 ## Properties
 
@@ -19,7 +17,7 @@
 
 • **limit**: *number*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:23](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L23)*
+*Defined in [packages/security-client/src/defs/tokens.ts:23](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L23)*
 
 ___
 
@@ -27,4 +25,4 @@ ___
 
 • **page**: *number*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:22](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L22)*
+*Defined in [packages/security-client/src/defs/tokens.ts:22](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L22)*

@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [CreateAccessKeyResponse](createaccesskeyresponse.md)
-
 # Interface: CreateAccessKeyResponse
 
 ## Hierarchy
@@ -10,9 +8,9 @@
 
 ### Properties
 
-* [apiKey](createaccesskeyresponse.md#markdown-header-apikey)
-* [createdBy](createaccesskeyresponse.md#markdown-header-createdby)
-* [type](createaccesskeyresponse.md#markdown-header-type)
+* [apiKey](createaccesskeyresponse.md#apikey)
+* [createdBy](createaccesskeyresponse.md#createdby)
+* [type](createaccesskeyresponse.md#type)
 
 ## Properties
 
@@ -20,7 +18,7 @@
 
 • **apiKey**: *string*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:6](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L6)*
+*Defined in [packages/security-client/src/defs/tokens.ts:6](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L6)*
 
 ___
 
@@ -28,7 +26,7 @@ ___
 
 • **createdBy**: *string*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:8](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L8)*
+*Defined in [packages/security-client/src/defs/tokens.ts:8](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L8)*
 
 ___
 
@@ -36,4 +34,4 @@ ___
 
 • **type**: *"custom"*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:7](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L7)*
+*Defined in [packages/security-client/src/defs/tokens.ts:7](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L7)*

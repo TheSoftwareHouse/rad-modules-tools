@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [AddPolicyRequest](addpolicyrequest.md)
-
 # Interface: AddPolicyRequest
 
 ## Hierarchy
@@ -10,8 +8,8 @@
 
 ### Properties
 
-* [attribute](addpolicyrequest.md#markdown-header-attribute)
-* [resource](addpolicyrequest.md#markdown-header-resource)
+* [attribute](addpolicyrequest.md#attribute)
+* [resource](addpolicyrequest.md#resource)
 
 ## Properties
 
@@ -19,7 +17,7 @@
 
 • **attribute**: *string*
 
-*Defined in [packages/security-client/src/defs/policy.ts:46](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L46)*
+*Defined in [packages/security-client/src/defs/policy.ts:46](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L46)*
 
 ___
 
@@ -27,4 +25,4 @@ ___
 
 • **resource**: *string*
 
-*Defined in [packages/security-client/src/defs/policy.ts:45](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L45)*
+*Defined in [packages/security-client/src/defs/policy.ts:45](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L45)*

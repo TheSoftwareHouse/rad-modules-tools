@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [PoliciesQueryFilter](policiesqueryfilter.md)
-
 # Interface: PoliciesQueryFilter
 
 ## Hierarchy
@@ -10,10 +8,10 @@
 
 ### Properties
 
-* [filter](policiesqueryfilter.md#markdown-header-optional-filter)
-* [limit](policiesqueryfilter.md#markdown-header-optional-limit)
-* [order](policiesqueryfilter.md#markdown-header-optional-order)
-* [page](policiesqueryfilter.md#markdown-header-optional-page)
+* [filter](policiesqueryfilter.md#optional-filter)
+* [limit](policiesqueryfilter.md#optional-limit)
+* [order](policiesqueryfilter.md#optional-order)
+* [page](policiesqueryfilter.md#optional-page)
 
 ## Properties
 
@@ -21,7 +19,7 @@
 
 • **filter**? : *object*
 
-*Defined in [packages/security-client/src/defs/policy.ts:18](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L18)*
+*Defined in [packages/security-client/src/defs/policy.ts:18](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L18)*
 
 #### Type declaration:
 
@@ -31,7 +29,7 @@ ___
 
 • **limit**? : *number*
 
-*Defined in [packages/security-client/src/defs/policy.ts:17](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L17)*
+*Defined in [packages/security-client/src/defs/policy.ts:17](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L17)*
 
 ___
 
@@ -39,7 +37,7 @@ ___
 
 • **order**? : *object*
 
-*Defined in [packages/security-client/src/defs/policy.ts:23](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L23)*
+*Defined in [packages/security-client/src/defs/policy.ts:23](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L23)*
 
 #### Type declaration:
 
@@ -53,4 +51,4 @@ ___
 
 • **page**? : *number*
 
-*Defined in [packages/security-client/src/defs/policy.ts:16](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L16)*
+*Defined in [packages/security-client/src/defs/policy.ts:16](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L16)*

@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [GenerateTokenResponse](generatetokenresponse.md)
-
 # Interface: GenerateTokenResponse
 
 ## Hierarchy
@@ -10,8 +8,8 @@
 
 ### Properties
 
-* [accessToken](generatetokenresponse.md#markdown-header-accesstoken)
-* [refreshToken](generatetokenresponse.md#markdown-header-refreshtoken)
+* [accessToken](generatetokenresponse.md#accesstoken)
+* [refreshToken](generatetokenresponse.md#refreshtoken)
 
 ## Properties
 
@@ -19,7 +17,7 @@
 
 • **accessToken**: *string*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:17](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L17)*
+*Defined in [packages/security-client/src/defs/tokens.ts:17](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L17)*
 
 ___
 
@@ -27,4 +25,4 @@ ___
 
 • **refreshToken**: *string*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:18](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L18)*
+*Defined in [packages/security-client/src/defs/tokens.ts:18](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L18)*

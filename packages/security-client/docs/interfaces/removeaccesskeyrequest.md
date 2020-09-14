@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [RemoveAccessKeyRequest](removeaccesskeyrequest.md)
-
 # Interface: RemoveAccessKeyRequest
 
 ## Hierarchy
@@ -10,7 +8,7 @@
 
 ### Properties
 
-* [apiKey](removeaccesskeyrequest.md#markdown-header-apikey)
+* [apiKey](removeaccesskeyrequest.md#apikey)
 
 ## Properties
 
@@ -18,4 +16,4 @@
 
 • **apiKey**: *string*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:38](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L38)*
+*Defined in [packages/security-client/src/defs/tokens.ts:38](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L38)*

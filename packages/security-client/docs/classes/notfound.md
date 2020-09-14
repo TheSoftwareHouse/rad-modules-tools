@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [NotFound](notfound.md)
-
 # Class: NotFound
 
 ## Hierarchy
@@ -16,15 +14,15 @@
 
 ### Constructors
 
-* [constructor](notfound.md#markdown-header-constructor)
+* [constructor](notfound.md#constructor)
 
 ### Properties
 
-* [message](notfound.md#markdown-header-message)
-* [name](notfound.md#markdown-header-name)
-* [stack](notfound.md#markdown-header-optional-stack)
-* [statusCode](notfound.md#markdown-header-statuscode)
-* [title](notfound.md#markdown-header-title)
+* [message](notfound.md#message)
+* [name](notfound.md#name)
+* [stack](notfound.md#optional-stack)
+* [statusCode](notfound.md#statuscode)
+* [title](notfound.md#title)
 
 ## Constructors
 
@@ -32,9 +30,9 @@
 
 \+ **new NotFound**(`message`: string | null): *[NotFound](notfound.md)*
 
-*Inherited from [HttpErrorBase](httperrorbase.md).[constructor](httperrorbase.md#markdown-header-constructor)*
+*Inherited from [HttpErrorBase](httperrorbase.md).[constructor](httperrorbase.md#constructor)*
 
-*Defined in [packages/security-client/src/services/http-errors.ts:22](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/http-errors.ts#L22)*
+*Defined in [packages/security-client/src/services/http-errors.ts:22](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/http-errors.ts#L22)*
 
 **Parameters:**
 
@@ -50,9 +48,9 @@ Name | Type | Default |
 
 • **message**: *string*
 
-*Implementation of [HttpErrorDef](../interfaces/httperrordef.md).[message](../interfaces/httperrordef.md#markdown-header-message)*
+*Implementation of [HttpErrorDef](../interfaces/httperrordef.md).[message](../interfaces/httperrordef.md#message)*
 
-*Inherited from [HttpError](../interfaces/httperror.md).[message](../interfaces/httperror.md#markdown-header-message)*
+*Inherited from [HttpError](../interfaces/httperror.md).[message](../interfaces/httperror.md#message)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:974
 
@@ -62,9 +60,9 @@ ___
 
 • **name**: *string*
 
-*Implementation of [HttpErrorDef](../interfaces/httperrordef.md).[name](../interfaces/httperrordef.md#markdown-header-name)*
+*Implementation of [HttpErrorDef](../interfaces/httperrordef.md).[name](../interfaces/httperrordef.md#name)*
 
-*Inherited from [HttpError](../interfaces/httperror.md).[name](../interfaces/httperror.md#markdown-header-name)*
+*Inherited from [HttpError](../interfaces/httperror.md).[name](../interfaces/httperror.md#name)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:973
 
@@ -74,9 +72,9 @@ ___
 
 • **stack**? : *string*
 
-*Implementation of [HttpErrorDef](../interfaces/httperrordef.md).[stack](../interfaces/httperrordef.md#markdown-header-optional-stack)*
+*Implementation of [HttpErrorDef](../interfaces/httperrordef.md).[stack](../interfaces/httperrordef.md#optional-stack)*
 
-*Inherited from [HttpError](../interfaces/httperror.md).[stack](../interfaces/httperror.md#markdown-header-optional-stack)*
+*Inherited from [HttpError](../interfaces/httperror.md).[stack](../interfaces/httperror.md#optional-stack)*
 
 Defined in node_modules/typescript/lib/lib.es5.d.ts:975
 
@@ -86,11 +84,11 @@ ___
 
 • **statusCode**: *number* = 404
 
-*Implementation of [HttpErrorDef](../interfaces/httperrordef.md).[statusCode](../interfaces/httperrordef.md#markdown-header-statuscode)*
+*Implementation of [HttpErrorDef](../interfaces/httperrordef.md).[statusCode](../interfaces/httperrordef.md#statuscode)*
 
-*Overrides [HttpErrorBase](httperrorbase.md).[statusCode](httperrorbase.md#markdown-header-statuscode)*
+*Overrides [HttpErrorBase](httperrorbase.md).[statusCode](httperrorbase.md#statuscode)*
 
-*Defined in [packages/security-client/src/services/http-errors.ts:53](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/http-errors.ts#L53)*
+*Defined in [packages/security-client/src/services/http-errors.ts:53](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/http-errors.ts#L53)*
 
 ___
 
@@ -98,8 +96,8 @@ ___
 
 • **title**: *string* = "Not Found"
 
-*Implementation of [HttpErrorDef](../interfaces/httperrordef.md).[title](../interfaces/httperrordef.md#markdown-header-title)*
+*Implementation of [HttpErrorDef](../interfaces/httperrordef.md).[title](../interfaces/httperrordef.md#title)*
 
-*Overrides [HttpErrorBase](httperrorbase.md).[title](httperrorbase.md#markdown-header-title)*
+*Overrides [HttpErrorBase](httperrorbase.md).[title](httperrorbase.md#title)*
 
-*Defined in [packages/security-client/src/services/http-errors.ts:55](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/http-errors.ts#L55)*
+*Defined in [packages/security-client/src/services/http-errors.ts:55](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/http-errors.ts#L55)*

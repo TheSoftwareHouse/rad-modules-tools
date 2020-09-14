@@ -1,11 +1,10 @@
-[@tshio/security-client](README.md) › [Globals](globals.md)
-
 # @tshio/security-client
 
 ## Index
 
 ### Classes
 
+* [AuthResources](classes/authresources.md)
 * [BadGateway](classes/badgateway.md)
 * [BadRequest](classes/badrequest.md)
 * [Conflict](classes/conflict.md)
@@ -17,6 +16,7 @@
 * [MethodNotAllowed](classes/methodnotallowed.md)
 * [NotFound](classes/notfound.md)
 * [NotImplemented](classes/notimplemented.md)
+* [PolicyResources](classes/policyresources.md)
 * [ProxyAuthenticationRequired](classes/proxyauthenticationrequired.md)
 * [RequestTimeout](classes/requesttimeout.md)
 * [SecurityClient](classes/securityclient.md)
@@ -82,36 +82,34 @@
 
 ### Type aliases
 
-* [ApiKey](globals.md#markdown-header-apikey)
-* [Credentials](globals.md#markdown-header-credentials)
-* [FilterOperators](globals.md#markdown-header-filteroperators)
-* [GetAttributesColumns](globals.md#markdown-header-getattributescolumns)
-* [GetAttributesFilterOperators](globals.md#markdown-header-getattributesfilteroperators)
-* [GetPoliciesColumns](globals.md#markdown-header-getpoliciescolumns)
-* [GetPoliciesFilterOperators](globals.md#markdown-header-getpoliciesfilteroperators)
-* [GetPoliciesRequest](globals.md#markdown-header-getpoliciesrequest)
-* [GetUserColumns](globals.md#markdown-header-getusercolumns)
-* [GetUserResponse](globals.md#markdown-header-getuserresponse)
-* [GetUsersRequest](globals.md#markdown-header-getusersrequest)
-* [Options](globals.md#markdown-header-options)
-* [RefreshTokenResponse](globals.md#markdown-header-refreshtokenresponse)
-* [RefreshUserActiveTokenResponse](globals.md#markdown-header-refreshuseractivetokenresponse)
-* [RemovePolicyRequest](globals.md#markdown-header-removepolicyrequest)
-* [Resources](globals.md#markdown-header-resources)
-* [Token](globals.md#markdown-header-token)
+* [ApiKey](globals.md#apikey)
+* [Credentials](globals.md#credentials)
+* [FilterOperators](globals.md#filteroperators)
+* [GetAttributesColumns](globals.md#getattributescolumns)
+* [GetAttributesFilterOperators](globals.md#getattributesfilteroperators)
+* [GetPoliciesColumns](globals.md#getpoliciescolumns)
+* [GetPoliciesFilterOperators](globals.md#getpoliciesfilteroperators)
+* [GetPoliciesRequest](globals.md#getpoliciesrequest)
+* [GetUserColumns](globals.md#getusercolumns)
+* [GetUserResponse](globals.md#getuserresponse)
+* [GetUsersRequest](globals.md#getusersrequest)
+* [Options](globals.md#options)
+* [RefreshTokenResponse](globals.md#refreshtokenresponse)
+* [RefreshUserActiveTokenResponse](globals.md#refreshuseractivetokenresponse)
+* [RemovePolicyRequest](globals.md#removepolicyrequest)
+* [Resources](globals.md#resources)
+* [Token](globals.md#token)
 
 ### Functions
 
-* [attributes](globals.md#markdown-header-const-attributes)
-* [auth](globals.md#markdown-header-const-auth)
-* [getHttpError](globals.md#markdown-header-gethttperror)
-* [getSecurityClient](globals.md#markdown-header-const-getsecurityclient)
-* [isClientError](globals.md#markdown-header-isclienterror)
-* [isHttpError](globals.md#markdown-header-ishttperror)
-* [isServerError](globals.md#markdown-header-isservererror)
-* [policy](globals.md#markdown-header-const-policy)
-* [tokens](globals.md#markdown-header-const-tokens)
-* [users](globals.md#markdown-header-const-users)
+* [attributes](globals.md#const-attributes)
+* [getHttpError](globals.md#gethttperror)
+* [getSecurityClient](globals.md#const-getsecurityclient)
+* [isClientError](globals.md#isclienterror)
+* [isHttpError](globals.md#ishttperror)
+* [isServerError](globals.md#isservererror)
+* [tokens](globals.md#const-tokens)
+* [users](globals.md#const-users)
 
 ## Type aliases
 
@@ -119,7 +117,7 @@
 
 Ƭ **ApiKey**: *string*
 
-*Defined in [packages/security-client/src/services/service.ts:13](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/service.ts#L13)*
+*Defined in [packages/security-client/src/services/service.ts:13](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/service.ts#L13)*
 
 ___
 
@@ -127,7 +125,7 @@ ___
 
 Ƭ **Credentials**: *object*
 
-*Defined in [packages/security-client/src/services/service.ts:3](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/service.ts#L3)*
+*Defined in [packages/security-client/src/services/service.ts:3](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/service.ts#L3)*
 
 #### Type declaration:
 
@@ -141,7 +139,7 @@ ___
 
 Ƭ **FilterOperators**: *"eq" | "eqOr" | "neq" | "neqOr" | "lt" | "ltOr" | "gt" | "gtOr" | "gte" | "gteOr" | "include" | "includeOr"*
 
-*Defined in [packages/security-client/src/defs/user.ts:13](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L13)*
+*Defined in [packages/security-client/src/defs/user.ts:13](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L13)*
 
 ___
 
@@ -149,7 +147,7 @@ ___
 
 Ƭ **GetAttributesColumns**: *"id" | "name" | "user.id" | "user.username"*
 
-*Defined in [packages/security-client/src/defs/attributes.ts:11](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/attributes.ts#L11)*
+*Defined in [packages/security-client/src/defs/attributes.ts:11](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/attributes.ts#L11)*
 
 ___
 
@@ -157,7 +155,7 @@ ___
 
 Ƭ **GetAttributesFilterOperators**: *"eq" | "eqOr" | "neq" | "lt" | "gt" | "include" | "includeOr"*
 
-*Defined in [packages/security-client/src/defs/attributes.ts:13](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/attributes.ts#L13)*
+*Defined in [packages/security-client/src/defs/attributes.ts:13](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/attributes.ts#L13)*
 
 ___
 
@@ -165,7 +163,7 @@ ___
 
 Ƭ **GetPoliciesColumns**: *"id" | "resource" | "attribute"*
 
-*Defined in [packages/security-client/src/defs/policy.ts:11](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L11)*
+*Defined in [packages/security-client/src/defs/policy.ts:11](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L11)*
 
 ___
 
@@ -173,7 +171,7 @@ ___
 
 Ƭ **GetPoliciesFilterOperators**: *"eq" | "neq" | "lt" | "gt" | "include" | "includeOr"*
 
-*Defined in [packages/security-client/src/defs/policy.ts:13](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L13)*
+*Defined in [packages/security-client/src/defs/policy.ts:13](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L13)*
 
 ___
 
@@ -181,7 +179,7 @@ ___
 
 Ƭ **GetPoliciesRequest**: *[PoliciesQueryFilter](interfaces/policiesqueryfilter.md)*
 
-*Defined in [packages/security-client/src/defs/policy.ts:35](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L35)*
+*Defined in [packages/security-client/src/defs/policy.ts:35](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L35)*
 
 ___
 
@@ -189,7 +187,7 @@ ___
 
 Ƭ **GetUserColumns**: *"id" | "username" | "isActive" | "createdAt" | "updatedAt" | "attribute.name"*
 
-*Defined in [packages/security-client/src/defs/user.ts:11](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L11)*
+*Defined in [packages/security-client/src/defs/user.ts:11](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L11)*
 
 ___
 
@@ -197,7 +195,7 @@ ___
 
 Ƭ **GetUserResponse**: *[User](interfaces/user.md)*
 
-*Defined in [packages/security-client/src/defs/user.ts:106](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L106)*
+*Defined in [packages/security-client/src/defs/user.ts:106](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L106)*
 
 ___
 
@@ -205,7 +203,7 @@ ___
 
 Ƭ **GetUsersRequest**: *[UsersQueryFilter](interfaces/usersqueryfilter.md)*
 
-*Defined in [packages/security-client/src/defs/user.ts:41](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L41)*
+*Defined in [packages/security-client/src/defs/user.ts:41](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L41)*
 
 ___
 
@@ -213,7 +211,7 @@ ___
 
 Ƭ **Options**: *object*
 
-*Defined in [packages/security-client/src/services/service.ts:17](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/service.ts#L17)*
+*Defined in [packages/security-client/src/services/service.ts:17](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/service.ts#L17)*
 
 #### Type declaration:
 
@@ -241,17 +239,17 @@ ___
 
 ###  RefreshTokenResponse
 
-Ƭ **RefreshTokenResponse**: *[Token](globals.md#markdown-header-token)*
+Ƭ **RefreshTokenResponse**: *[Token](globals.md#token)*
 
-*Defined in [packages/security-client/src/defs/auth.ts:22](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/auth.ts#L22)*
+*Defined in [packages/security-client/src/defs/auth.ts:22](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/auth.ts#L22)*
 
 ___
 
 ###  RefreshUserActiveTokenResponse
 
-Ƭ **RefreshUserActiveTokenResponse**: *[Token](globals.md#markdown-header-token)*
+Ƭ **RefreshUserActiveTokenResponse**: *[Token](globals.md#token)*
 
-*Defined in [packages/security-client/src/defs/auth.ts:24](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/auth.ts#L24)*
+*Defined in [packages/security-client/src/defs/auth.ts:24](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/auth.ts#L24)*
 
 ___
 
@@ -259,7 +257,7 @@ ___
 
 Ƭ **RemovePolicyRequest**: *[PolicyIdQuery](interfaces/policyidquery.md) | [PolicyQuery](interfaces/policyquery.md)*
 
-*Defined in [packages/security-client/src/defs/policy.ts:62](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L62)*
+*Defined in [packages/security-client/src/defs/policy.ts:62](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L62)*
 
 ___
 
@@ -267,7 +265,7 @@ ___
 
 Ƭ **Resources**: *string[]*
 
-*Defined in [packages/security-client/src/services/service.ts:15](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/service.ts#L15)*
+*Defined in [packages/security-client/src/services/service.ts:15](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/service.ts#L15)*
 
 ___
 
@@ -275,7 +273,7 @@ ___
 
 Ƭ **Token**: *object*
 
-*Defined in [packages/security-client/src/services/service.ts:8](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/service.ts#L8)*
+*Defined in [packages/security-client/src/services/service.ts:8](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/service.ts#L8)*
 
 #### Type declaration:
 
@@ -289,7 +287,7 @@ ___
 
 ▸ **attributes**(`serviceClient`: ServiceClient): *[Attributes](interfaces/attributes.md)*
 
-*Defined in [packages/security-client/src/resources/attributes.ts:5](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/resources/attributes.ts#L5)*
+*Defined in [packages/security-client/src/resources/attributes.ts:5](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/resources/attributes.ts#L5)*
 
 **Parameters:**
 
@@ -301,27 +299,11 @@ Name | Type |
 
 ___
 
-### `Const` auth
-
-▸ **auth**(`serviceClient`: ServiceClient): *[Auth](interfaces/auth.md)*
-
-*Defined in [packages/security-client/src/resources/auth.ts:14](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/resources/auth.ts#L14)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`serviceClient` | ServiceClient |
-
-**Returns:** *[Auth](interfaces/auth.md)*
-
-___
-
 ###  getHttpError
 
 ▸ **getHttpError**(`error`: ResponseFilterError): *[HttpError](interfaces/httperror.md)*
 
-*Defined in [packages/security-client/src/services/security-client.ts:33](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/security-client.ts#L33)*
+*Defined in [packages/security-client/src/services/security-client.ts:33](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/security-client.ts#L33)*
 
 **Parameters:**
 
@@ -335,15 +317,15 @@ ___
 
 ### `Const` getSecurityClient
 
-▸ **getSecurityClient**(`options`: [Options](globals.md#markdown-header-options)): *[SecurityClient](classes/securityclient.md)‹›*
+▸ **getSecurityClient**(`options`: [Options](globals.md#options)): *[SecurityClient](classes/securityclient.md)‹›*
 
-*Defined in [packages/security-client/src/index.ts:5](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/index.ts#L5)*
+*Defined in [packages/security-client/src/index.ts:5](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/index.ts#L5)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`options` | [Options](globals.md#markdown-header-options) | {
+`options` | [Options](globals.md#options) | {
     host: "localhost",
     port: 50050,
     autoSetToken: true,
@@ -356,15 +338,15 @@ ___
 
 ###  isClientError
 
-▸ **isClientError**(`e`: [Error](interfaces/httperror.md#markdown-header-error)): *boolean*
+▸ **isClientError**(`e`: [Error](interfaces/httperror.md#error)): *boolean*
 
-*Defined in [packages/security-client/src/services/http-errors.ts:15](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/http-errors.ts#L15)*
+*Defined in [packages/security-client/src/services/http-errors.ts:15](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/http-errors.ts#L15)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`e` | [Error](interfaces/httperror.md#markdown-header-error) |
+`e` | [Error](interfaces/httperror.md#error) |
 
 **Returns:** *boolean*
 
@@ -372,15 +354,15 @@ ___
 
 ###  isHttpError
 
-▸ **isHttpError**(`e`: [Error](interfaces/httperror.md#markdown-header-error)): *e is HttpError*
+▸ **isHttpError**(`e`: [Error](interfaces/httperror.md#error)): *e is HttpError*
 
-*Defined in [packages/security-client/src/services/http-errors.ts:11](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/http-errors.ts#L11)*
+*Defined in [packages/security-client/src/services/http-errors.ts:11](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/http-errors.ts#L11)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`e` | [Error](interfaces/httperror.md#markdown-header-error) |
+`e` | [Error](interfaces/httperror.md#error) |
 
 **Returns:** *e is HttpError*
 
@@ -388,33 +370,17 @@ ___
 
 ###  isServerError
 
-▸ **isServerError**(`e`: [Error](interfaces/httperror.md#markdown-header-error)): *boolean*
+▸ **isServerError**(`e`: [Error](interfaces/httperror.md#error)): *boolean*
 
-*Defined in [packages/security-client/src/services/http-errors.ts:30](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/services/http-errors.ts#L30)*
+*Defined in [packages/security-client/src/services/http-errors.ts:30](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/services/http-errors.ts#L30)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`e` | [Error](interfaces/httperror.md#markdown-header-error) |
+`e` | [Error](interfaces/httperror.md#error) |
 
 **Returns:** *boolean*
-
-___
-
-### `Const` policy
-
-▸ **policy**(`serviceClient`: ServiceClient): *[Policy](interfaces/policy.md)*
-
-*Defined in [packages/security-client/src/resources/policy.ts:12](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/resources/policy.ts#L12)*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`serviceClient` | ServiceClient |
-
-**Returns:** *[Policy](interfaces/policy.md)*
 
 ___
 
@@ -422,7 +388,7 @@ ___
 
 ▸ **tokens**(`serviceClient`: ServiceClient): *[Tokens](interfaces/tokens.md)*
 
-*Defined in [packages/security-client/src/resources/tokens.ts:14](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/resources/tokens.ts#L14)*
+*Defined in [packages/security-client/src/resources/tokens.ts:14](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/resources/tokens.ts#L14)*
 
 **Parameters:**
 
@@ -438,7 +404,7 @@ ___
 
 ▸ **users**(`serviceClient`: ServiceClient): *object*
 
-*Defined in [packages/security-client/src/resources/users.ts:31](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/resources/users.ts#L31)*
+*Defined in [packages/security-client/src/resources/users.ts:31](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/resources/users.ts#L31)*
 
 **Parameters:**
 
@@ -458,13 +424,13 @@ Name | Type |
 
 * **deleteUser**(`request`: [DeleteUserRequest](interfaces/deleteuserrequest.md)): *Promise‹[DeleteUserResponse](interfaces/deleteuserresponse.md)›*
 
-* **getUser**(`request`: [GetUserRequest](interfaces/getuserrequest.md)): *Promise‹[GetUserResponse](globals.md#markdown-header-getuserresponse)›*
+* **getUser**(`request`: [GetUserRequest](interfaces/getuserrequest.md)): *Promise‹[GetUserResponse](globals.md#getuserresponse)›*
 
 * **getUserByResource**(`request`: [GetUsersByResourceRequest](interfaces/getusersbyresourcerequest.md)): *Promise‹[GetUsersByResourceResponse](interfaces/getusersbyresourceresponse.md)›*
 
 * **getUserId**(`request`: [GetUserIdRequest](interfaces/getuseridrequest.md)): *Promise‹[GetUserIdResponse](interfaces/getuseridresponse.md)›*
 
-* **getUsers**(`queryFilter`: [GetUsersRequest](globals.md#markdown-header-getusersrequest)): *Promise‹[GetUsersResponse](interfaces/getusersresponse.md)›*
+* **getUsers**(`queryFilter`: [GetUsersRequest](globals.md#getusersrequest)): *Promise‹[GetUsersResponse](interfaces/getusersresponse.md)›*
 
 * **hasAccess**(`resources`: string[]): *Promise‹[HasAccessResponse](interfaces/hasaccessresponse.md)›*
 

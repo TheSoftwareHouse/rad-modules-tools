@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [Users](users.md)
-
 # Interface: Users
 
 ## Hierarchy
@@ -10,20 +8,20 @@
 
 ### Methods
 
-* [activateUser](users.md#markdown-header-activateuser)
-* [addAttributes](users.md#markdown-header-addattributes)
-* [addUser](users.md#markdown-header-adduser)
-* [deactivateUser](users.md#markdown-header-deactivateuser)
-* [deleteUser](users.md#markdown-header-deleteuser)
-* [getUser](users.md#markdown-header-getuser)
-* [getUserByResource](users.md#markdown-header-getuserbyresource)
-* [getUserId](users.md#markdown-header-getuserid)
-* [getUsers](users.md#markdown-header-getusers)
-* [hasAccess](users.md#markdown-header-hasaccess)
-* [hasAttributes](users.md#markdown-header-hasattributes)
-* [isAuthenticated](users.md#markdown-header-isauthenticated)
-* [passwordResetToken](users.md#markdown-header-passwordresettoken)
-* [setPassword](users.md#markdown-header-setpassword)
+* [activateUser](users.md#activateuser)
+* [addAttributes](users.md#addattributes)
+* [addUser](users.md#adduser)
+* [deactivateUser](users.md#deactivateuser)
+* [deleteUser](users.md#deleteuser)
+* [getUser](users.md#getuser)
+* [getUserByResource](users.md#getuserbyresource)
+* [getUserId](users.md#getuserid)
+* [getUsers](users.md#getusers)
+* [hasAccess](users.md#hasaccess)
+* [hasAttributes](users.md#hasattributes)
+* [isAuthenticated](users.md#isauthenticated)
+* [passwordResetToken](users.md#passwordresettoken)
+* [setPassword](users.md#setpassword)
 
 ## Methods
 
@@ -31,7 +29,7 @@
 
 ▸ **activateUser**(`request`: [ActivateUserRequest](activateuserrequest.md)): *Promise‹[ActivateUserResponse](activateuserresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:152](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L152)*
+*Defined in [packages/security-client/src/defs/user.ts:152](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L152)*
 
 **Parameters:**
 
@@ -47,7 +45,7 @@ ___
 
 ▸ **addAttributes**(`request`: [AddAttributesRequest](addattributesrequest.md)): *Promise‹[AddAttributesResponse](addattributesresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:153](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L153)*
+*Defined in [packages/security-client/src/defs/user.ts:153](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L153)*
 
 **Parameters:**
 
@@ -63,7 +61,7 @@ ___
 
 ▸ **addUser**(`request`: [AddUserRequest](adduserrequest.md)): *Promise‹[AddUserResponse](adduserresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:154](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L154)*
+*Defined in [packages/security-client/src/defs/user.ts:154](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L154)*
 
 **Parameters:**
 
@@ -79,7 +77,7 @@ ___
 
 ▸ **deactivateUser**(`request`: [DeactivateUserRequest](deactivateuserrequest.md)): *Promise‹[DeactivateUserResponse](deactivateuserresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:155](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L155)*
+*Defined in [packages/security-client/src/defs/user.ts:155](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L155)*
 
 **Parameters:**
 
@@ -95,7 +93,7 @@ ___
 
 ▸ **deleteUser**(`request`: [DeleteUserRequest](deleteuserrequest.md)): *Promise‹[DeleteUserResponse](deleteuserresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:156](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L156)*
+*Defined in [packages/security-client/src/defs/user.ts:156](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L156)*
 
 **Parameters:**
 
@@ -109,9 +107,9 @@ ___
 
 ###  getUser
 
-▸ **getUser**(`request`: [GetUserRequest](getuserrequest.md)): *Promise‹[GetUserResponse](../globals.md#markdown-header-getuserresponse)›*
+▸ **getUser**(`request`: [GetUserRequest](getuserrequest.md)): *Promise‹[GetUserResponse](../globals.md#getuserresponse)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:157](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L157)*
+*Defined in [packages/security-client/src/defs/user.ts:157](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L157)*
 
 **Parameters:**
 
@@ -119,7 +117,7 @@ Name | Type |
 ------ | ------ |
 `request` | [GetUserRequest](getuserrequest.md) |
 
-**Returns:** *Promise‹[GetUserResponse](../globals.md#markdown-header-getuserresponse)›*
+**Returns:** *Promise‹[GetUserResponse](../globals.md#getuserresponse)›*
 
 ___
 
@@ -127,7 +125,7 @@ ___
 
 ▸ **getUserByResource**(`request`: [GetUsersByResourceRequest](getusersbyresourcerequest.md)): *Promise‹[GetUsersByResourceResponse](getusersbyresourceresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:159](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L159)*
+*Defined in [packages/security-client/src/defs/user.ts:159](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L159)*
 
 **Parameters:**
 
@@ -143,7 +141,7 @@ ___
 
 ▸ **getUserId**(`request`: [GetUserIdRequest](getuseridrequest.md)): *Promise‹[GetUserIdResponse](getuseridresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:158](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L158)*
+*Defined in [packages/security-client/src/defs/user.ts:158](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L158)*
 
 **Parameters:**
 
@@ -159,7 +157,7 @@ ___
 
 ▸ **getUsers**(`queryFilter`: [UsersQueryFilter](usersqueryfilter.md)): *Promise‹[GetUsersResponse](getusersresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:151](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L151)*
+*Defined in [packages/security-client/src/defs/user.ts:151](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L151)*
 
 **Parameters:**
 
@@ -175,7 +173,7 @@ ___
 
 ▸ **hasAccess**(`resources`: string[]): *Promise‹[HasAccessResponse](hasaccessresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:160](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L160)*
+*Defined in [packages/security-client/src/defs/user.ts:160](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L160)*
 
 **Parameters:**
 
@@ -191,7 +189,7 @@ ___
 
 ▸ **hasAttributes**(`attributes`: string[]): *Promise‹[HasAttributesResponse](hasattributesresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:161](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L161)*
+*Defined in [packages/security-client/src/defs/user.ts:161](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L161)*
 
 **Parameters:**
 
@@ -207,7 +205,7 @@ ___
 
 ▸ **isAuthenticated**(): *Promise‹[IsAuthenticatedResponse](isauthenticatedresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:162](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L162)*
+*Defined in [packages/security-client/src/defs/user.ts:162](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L162)*
 
 **Returns:** *Promise‹[IsAuthenticatedResponse](isauthenticatedresponse.md)›*
 
@@ -217,7 +215,7 @@ ___
 
 ▸ **passwordResetToken**(`request`: [PasswordResetTokenRequest](passwordresettokenrequest.md)): *Promise‹[PasswordResetTokenResponse](passwordresettokenresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:164](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L164)*
+*Defined in [packages/security-client/src/defs/user.ts:164](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L164)*
 
 **Parameters:**
 
@@ -233,7 +231,7 @@ ___
 
 ▸ **setPassword**(`request`: [SetPasswordRequest](setpasswordrequest.md)): *Promise‹[SetPasswordResponse](setpasswordresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/user.ts:163](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L163)*
+*Defined in [packages/security-client/src/defs/user.ts:163](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L163)*
 
 **Parameters:**
 

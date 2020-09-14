@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [AddPolicyResponse](addpolicyresponse.md)
-
 # Interface: AddPolicyResponse
 
 ## Hierarchy
@@ -10,7 +8,7 @@
 
 ### Properties
 
-* [id](addpolicyresponse.md#markdown-header-id)
+* [id](addpolicyresponse.md#id)
 
 ## Properties
 
@@ -18,4 +16,4 @@
 
 • **id**: *string*
 
-*Defined in [packages/security-client/src/defs/policy.ts:50](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L50)*
+*Defined in [packages/security-client/src/defs/policy.ts:50](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L50)*

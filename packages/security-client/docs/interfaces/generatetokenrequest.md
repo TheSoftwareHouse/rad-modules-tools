@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [GenerateTokenRequest](generatetokenrequest.md)
-
 # Interface: GenerateTokenRequest
 
 ## Hierarchy
@@ -10,8 +8,8 @@
 
 ### Properties
 
-* [accessExpirationInSeconds](generatetokenrequest.md#markdown-header-accessexpirationinseconds)
-* [refreshExpirationInSeconds](generatetokenrequest.md#markdown-header-refreshexpirationinseconds)
+* [accessExpirationInSeconds](generatetokenrequest.md#accessexpirationinseconds)
+* [refreshExpirationInSeconds](generatetokenrequest.md#refreshexpirationinseconds)
 
 ## Properties
 
@@ -19,7 +17,7 @@
 
 • **accessExpirationInSeconds**: *number*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:12](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L12)*
+*Defined in [packages/security-client/src/defs/tokens.ts:12](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L12)*
 
 ___
 
@@ -27,4 +25,4 @@ ___
 
 • **refreshExpirationInSeconds**: *number*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:13](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L13)*
+*Defined in [packages/security-client/src/defs/tokens.ts:13](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L13)*

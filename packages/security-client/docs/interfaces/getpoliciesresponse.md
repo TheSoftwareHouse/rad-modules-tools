@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [GetPoliciesResponse](getpoliciesresponse.md)
-
 # Interface: GetPoliciesResponse
 
 ## Hierarchy
@@ -10,10 +8,10 @@
 
 ### Properties
 
-* [limit](getpoliciesresponse.md#markdown-header-limit)
-* [page](getpoliciesresponse.md#markdown-header-page)
-* [policies](getpoliciesresponse.md#markdown-header-policies)
-* [total](getpoliciesresponse.md#markdown-header-total)
+* [limit](getpoliciesresponse.md#limit)
+* [page](getpoliciesresponse.md#page)
+* [policies](getpoliciesresponse.md#policies)
+* [total](getpoliciesresponse.md#total)
 
 ## Properties
 
@@ -21,7 +19,7 @@
 
 • **limit**: *number*
 
-*Defined in [packages/security-client/src/defs/policy.ts:41](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L41)*
+*Defined in [packages/security-client/src/defs/policy.ts:41](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L41)*
 
 ___
 
@@ -29,7 +27,7 @@ ___
 
 • **page**: *number*
 
-*Defined in [packages/security-client/src/defs/policy.ts:40](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L40)*
+*Defined in [packages/security-client/src/defs/policy.ts:40](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L40)*
 
 ___
 
@@ -37,7 +35,7 @@ ___
 
 • **policies**: *[PolicyItem](policyitem.md)[]*
 
-*Defined in [packages/security-client/src/defs/policy.ts:38](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L38)*
+*Defined in [packages/security-client/src/defs/policy.ts:38](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L38)*
 
 ___
 
@@ -45,4 +43,4 @@ ___
 
 • **total**: *number*
 
-*Defined in [packages/security-client/src/defs/policy.ts:39](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/policy.ts#L39)*
+*Defined in [packages/security-client/src/defs/policy.ts:39](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/policy.ts#L39)*

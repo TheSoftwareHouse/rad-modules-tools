@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [Attribute](attribute.md)
-
 # Interface: Attribute
 
 ## Hierarchy
@@ -10,10 +8,10 @@
 
 ### Properties
 
-* [id](attribute.md#markdown-header-id)
-* [name](attribute.md#markdown-header-name)
-* [userId](attribute.md#markdown-header-userid)
-* [username](attribute.md#markdown-header-username)
+* [id](attribute.md#id)
+* [name](attribute.md#name)
+* [userId](attribute.md#userid)
+* [username](attribute.md#username)
 
 ## Properties
 
@@ -21,7 +19,7 @@
 
 • **id**: *string*
 
-*Defined in [packages/security-client/src/defs/attributes.ts:30](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/attributes.ts#L30)*
+*Defined in [packages/security-client/src/defs/attributes.ts:30](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/attributes.ts#L30)*
 
 ___
 
@@ -29,7 +27,7 @@ ___
 
 • **name**: *string*
 
-*Defined in [packages/security-client/src/defs/attributes.ts:31](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/attributes.ts#L31)*
+*Defined in [packages/security-client/src/defs/attributes.ts:31](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/attributes.ts#L31)*
 
 ___
 
@@ -37,7 +35,7 @@ ___
 
 • **userId**: *string*
 
-*Defined in [packages/security-client/src/defs/attributes.ts:32](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/attributes.ts#L32)*
+*Defined in [packages/security-client/src/defs/attributes.ts:32](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/attributes.ts#L32)*
 
 ___
 
@@ -45,4 +43,4 @@ ___
 
 • **username**: *string*
 
-*Defined in [packages/security-client/src/defs/attributes.ts:33](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/attributes.ts#L33)*
+*Defined in [packages/security-client/src/defs/attributes.ts:33](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/attributes.ts#L33)*

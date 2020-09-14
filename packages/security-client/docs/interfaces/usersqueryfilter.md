@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [UsersQueryFilter](usersqueryfilter.md)
-
 # Interface: UsersQueryFilter
 
 ## Hierarchy
@@ -10,10 +8,10 @@
 
 ### Properties
 
-* [filter](usersqueryfilter.md#markdown-header-optional-filter)
-* [limit](usersqueryfilter.md#markdown-header-optional-limit)
-* [order](usersqueryfilter.md#markdown-header-optional-order)
-* [page](usersqueryfilter.md#markdown-header-optional-page)
+* [filter](usersqueryfilter.md#optional-filter)
+* [limit](usersqueryfilter.md#optional-limit)
+* [order](usersqueryfilter.md#optional-order)
+* [page](usersqueryfilter.md#optional-page)
 
 ## Properties
 
@@ -21,7 +19,7 @@
 
 • **filter**? : *object*
 
-*Defined in [packages/security-client/src/defs/user.ts:30](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L30)*
+*Defined in [packages/security-client/src/defs/user.ts:30](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L30)*
 
 #### Type declaration:
 
@@ -31,7 +29,7 @@ ___
 
 • **limit**? : *number*
 
-*Defined in [packages/security-client/src/defs/user.ts:29](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L29)*
+*Defined in [packages/security-client/src/defs/user.ts:29](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L29)*
 
 ___
 
@@ -39,11 +37,11 @@ ___
 
 • **order**? : *object*
 
-*Defined in [packages/security-client/src/defs/user.ts:35](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L35)*
+*Defined in [packages/security-client/src/defs/user.ts:35](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L35)*
 
 #### Type declaration:
 
-* **by**: *[GetUserColumns](../globals.md#markdown-header-getusercolumns)*
+* **by**: *[GetUserColumns](../globals.md#getusercolumns)*
 
 * **type**: *"asc" | "desc"*
 
@@ -53,4 +51,4 @@ ___
 
 • **page**? : *number*
 
-*Defined in [packages/security-client/src/defs/user.ts:28](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L28)*
+*Defined in [packages/security-client/src/defs/user.ts:28](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L28)*

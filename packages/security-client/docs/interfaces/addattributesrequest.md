@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [AddAttributesRequest](addattributesrequest.md)
-
 # Interface: AddAttributesRequest
 
 ## Hierarchy
@@ -10,8 +8,8 @@
 
 ### Properties
 
-* [attributes](addattributesrequest.md#markdown-header-attributes)
-* [userId](addattributesrequest.md#markdown-header-userid)
+* [attributes](addattributesrequest.md#attributes)
+* [userId](addattributesrequest.md#userid)
 
 ## Properties
 
@@ -19,7 +17,7 @@
 
 • **attributes**: *string[]*
 
-*Defined in [packages/security-client/src/defs/user.ts:71](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L71)*
+*Defined in [packages/security-client/src/defs/user.ts:71](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L71)*
 
 ___
 
@@ -27,4 +25,4 @@ ___
 
 • **userId**: *string*
 
-*Defined in [packages/security-client/src/defs/user.ts:70](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L70)*
+*Defined in [packages/security-client/src/defs/user.ts:70](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L70)*

@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [PasswordResetTokenResponse](passwordresettokenresponse.md)
-
 # Interface: PasswordResetTokenResponse
 
 ## Hierarchy
@@ -10,7 +8,7 @@
 
 ### Properties
 
-* [resetPasswordToken](passwordresettokenresponse.md#markdown-header-resetpasswordtoken)
+* [resetPasswordToken](passwordresettokenresponse.md#resetpasswordtoken)
 
 ## Properties
 
@@ -18,4 +16,4 @@
 
 • **resetPasswordToken**: *string*
 
-*Defined in [packages/security-client/src/defs/user.ts:147](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/user.ts#L147)*
+*Defined in [packages/security-client/src/defs/user.ts:147](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/user.ts#L147)*

@@ -1,5 +1,3 @@
-[@tshio/security-client](../README.md) › [Globals](../globals.md) › [Tokens](tokens.md)
-
 # Interface: Tokens
 
 ## Hierarchy
@@ -10,10 +8,10 @@
 
 ### Methods
 
-* [createAccessKey](tokens.md#markdown-header-createaccesskey)
-* [generateToken](tokens.md#markdown-header-generatetoken)
-* [getAccessKeys](tokens.md#markdown-header-getaccesskeys)
-* [removeAccessKey](tokens.md#markdown-header-removeaccesskey)
+* [createAccessKey](tokens.md#createaccesskey)
+* [generateToken](tokens.md#generatetoken)
+* [getAccessKeys](tokens.md#getaccesskeys)
+* [removeAccessKey](tokens.md#removeaccesskey)
 
 ## Methods
 
@@ -21,7 +19,7 @@
 
 ▸ **createAccessKey**(`request`: [CreateAccessKeyRequest](createaccesskeyrequest.md)): *Promise‹[CreateAccessKeyResponse](createaccesskeyresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:42](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L42)*
+*Defined in [packages/security-client/src/defs/tokens.ts:42](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L42)*
 
 **Parameters:**
 
@@ -37,7 +35,7 @@ ___
 
 ▸ **generateToken**(`request`: [GenerateTokenRequest](generatetokenrequest.md)): *Promise‹[GenerateTokenResponse](generatetokenresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:43](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L43)*
+*Defined in [packages/security-client/src/defs/tokens.ts:43](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L43)*
 
 **Parameters:**
 
@@ -53,7 +51,7 @@ ___
 
 ▸ **getAccessKeys**(`request?`: [GetAccessKeysRequest](getaccesskeysrequest.md)): *Promise‹[GetAccessKeysResponse](getaccesskeysresponse.md)›*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:44](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L44)*
+*Defined in [packages/security-client/src/defs/tokens.ts:44](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L44)*
 
 **Parameters:**
 
@@ -69,7 +67,7 @@ ___
 
 ▸ **removeAccessKey**(`request?`: [RemoveAccessKeyRequest](removeaccesskeyrequest.md)): *Promise‹void›*
 
-*Defined in [packages/security-client/src/defs/tokens.ts:45](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/afe5496/packages/security-client/src/defs/tokens.ts#L45)*
+*Defined in [packages/security-client/src/defs/tokens.ts:45](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/56e5326/packages/security-client/src/defs/tokens.ts#L45)*
 
 **Parameters:**
 
