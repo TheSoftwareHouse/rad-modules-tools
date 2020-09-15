@@ -148,7 +148,7 @@ export interface PasswordResetTokenResponse {
 }
 
 export interface Users {
-  getUsers(queryFilter: UsersQueryFilter): Promise<GetUsersResponse>;
+  getUsers(queryFilter?: UsersQueryFilter): Promise<GetUsersResponse>;
   activateUser(request: ActivateUserRequest): Promise<ActivateUserResponse>;
   addAttributes(request: AddAttributesRequest): Promise<AddAttributesResponse>;
   addUser(request: AddUserRequest): Promise<AddUserResponse>;

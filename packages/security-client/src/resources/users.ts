@@ -29,7 +29,7 @@ import {
 } from "../defs/user";
 
 export const users = (serviceClient: ServiceClient) => ({
-  getUsers(queryFilter: GetUsersRequest): Promise<GetUsersResponse> {
+  getUsers(queryFilter?: GetUsersRequest): Promise<GetUsersResponse> {
     return serviceClient
       .request({
         pathname: "/api/users",
