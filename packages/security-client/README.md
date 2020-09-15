@@ -627,6 +627,285 @@ console.log(resetPasswordToken)
 // => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
 ```
 
+## Attributes API
+
+### async securityClient.attributes.getAttributes(queryFilter?)
+
+Return attributes list (if no queryFilter parameters returns first 25 attributes)
+```js
+{
+  attributes: Attribute[];
+  total: number;
+  page: number;
+  limit: number;
+}
+```
+```js
+Attribute {
+  id: string;
+  name: string;
+  userId: string;
+  username: string;
+}
+```
+or throw HttpError
+
+#### queryFilter
+
+Type: `object`
+
+##### page
+
+Type: `number`
+
+Optional, default value: `1`
+
+##### limit
+
+Type: `number`
+
+Optional, default value: `25`
+
+##### filter
+
+Type: `object`
+
+##### filter[column] = operator
+```ts
+export type GetAttributesColumns = "id" | "name" | "user.id" | "user.username";
+
+export type GetAttributesFilterOperators = "eq" | "eqOr" | "neq" | "lt" | "gt" | "include" | "includeOr";
+
+```
+
+##### order
+
+Type: `object`
+
+##### order.by
+
+Type: `string`
+
+Default: `id`
+
+Values: `id | name | user.id | user.username`
+
+##### order.type
+
+Type: `string`
+
+Default: `asc`
+
+Values: `asc` | `desc`
+
+Examples:
+```js
+const attributes = await securityClient.attributes.getAttributes();
+console.log(attributes);
+// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", name: "ROLE_SUPERADMIN", userId: "21637dee-3d21-4cd4-aa0f-117d1a11b123", username: "superadmin}], total: 1, page: 1, limit: 25, }
+
+const attributes = await securityClient.attributes.getAttributes({
+  page: 1,
+  limit: 10,
+});
+console.log(attributes);
+// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", name: "ROLE_SUPERADMIN", userId: "21637dee-3d21-4cd4-aa0f-117d1a11b123", username: "superadmin}], total: 1, page: 1, limit: 10, }
+
+const attributes = await securityClient.attributes.getAttributes({
+  page: 1,
+  limit: 10,
+  filter: {
+    name: {
+      eq: "ROLE_SUPERADMIN",
+    }
+  },
+  order: {
+    by: "name",
+    type: "asc",
+  },
+});
+console.log(users);
+// => { users: [{username: "superadmin", ...}, ...], total: 1, page: 1, limit: 10, }
+```
+
+
+## Policy API
+
+### async securityClient.policy.addPolicy(policy)
+
+Adds a new policy
+
+Return object with policy id
+```js
+{
+  id: string;
+}
+```
+or throw HttpError
+
+#### policy
+
+Type: `object`
+
+##### resource
+
+Type: `string`
+
+Resource name
+
+##### attribute
+
+Type: `string`
+
+Attribute name
+
+Examples:
+```js
+const { id } = await securityClient.policy.addPolicy({ resource: "NEW_RESOURCE", attribute: "ATTR_1"});
+console.log(id);
+// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
+```
+
+### async securityClient.policy.getPolicies(queryFilter)
+
+Get policies list (if no query parameters returns first 25 policies)
+
+Return object
+```js
+{
+  policies: PolicyItem[];
+  total: number;
+  page: number;
+  limit: number;
+}
+```
+```
+PolicyItem {
+  id: string;
+  resource: string;
+  attribute: string;
+}
+```
+or throw HttpError
+
+#### queryFilter
+
+Type: `object`
+
+##### page
+
+Type: `number`
+
+Optional, default value: `1`
+
+##### limit
+
+Type: `number`
+
+Optional, default value: `25`
+
+##### filter
+
+Type: `object`
+
+##### filter[column] = operator
+```ts
+export type GetPoliciesColumns = "id" | "resource" | "attribute";
+
+export type GetPoliciesFilterOperators = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr";
+```
+
+##### order
+
+Type: `object`
+
+##### order.by
+
+Type: `string`
+
+Default: `id`
+
+Values: `id | resource | attribute`
+
+##### order.type
+
+Type: `string`
+
+Default: `asc`
+
+Values: `asc` | `desc`
+
+Examples:
+```js
+const policies = await securityClient.policy.getPolicies();
+console.log(policies);
+// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", resource: "api/users", attribute: "ADMIN_PANEL"}], total: 1, page: 1, limit: 25 }
+
+const policies = await securityClient.policy.getPolicies({
+  page: 1,
+  limit: 10,
+});
+console.log(policies);
+// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", resource: "api/users", attribute: "ADMIN_PANEL"}], total: 1, page: 1, limit: 10 }
+
+const policies = await securityClient.policy.getPolicies({
+  page: 1,
+  limit: 10,
+  filter: {
+    attribute: {
+      eq: "ROLE_SUPERADMIN",
+    }
+  },
+  order: {
+    by: "resource",
+    type: "asc",
+  },
+});
+console.log(policies);
+// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", resource: "api/users", attribute: "ADMIN_PANEL"}], total: 1, page: 1, limit: 10 }
+```
+
+### async securityClient.policy.removePolicy(policyId | policyQuery)
+
+Removes a policy (identified either by id or resource and attribute)
+
+Return an empty object or throw HttpError
+
+#### policyId
+
+Type: `object`
+
+##### id
+
+Type: `string`
+
+Policy id
+
+#### policyQuery
+
+Type: `object`
+
+##### resource
+
+Type: `string`
+
+Resource name
+
+##### attribute
+
+Type: `string`
+
+Attribute name
+
+Examples:
+```js
+await securityClient.policy.removePolicy({ resource: "RESOURCE", attribute: "ATTR_1"});
+
+// or
+
+await securityClient.policy.removePolicy({ id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"});
+```
+
 ### Understanding filters and ordering
 
 Filters can be used search for a single condition or they can be wrapped in logical operands AND and OR. Filtering can be a simple conditional evaluation of a single field. The operator, `column`, and `operator` used in a filter are specific to the API they are used in. 

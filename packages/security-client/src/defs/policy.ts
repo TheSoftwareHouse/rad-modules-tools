@@ -63,6 +63,6 @@ export type RemovePolicyRequest = PolicyIdQuery | PolicyQuery;
 
 export interface Policy {
   addPolicy(request: AddPolicyRequest): Promise<AddPolicyResponse>;
-  getPolicies(queryFilter: GetPoliciesRequest): Promise<GetPoliciesResponse>;
+  getPolicies(queryFilter?: GetPoliciesRequest): Promise<GetPoliciesResponse>;
   removePolicy(request: RemovePolicyRequest): Promise<void>;
 }

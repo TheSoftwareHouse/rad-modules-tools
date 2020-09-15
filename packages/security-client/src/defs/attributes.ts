@@ -41,5 +41,5 @@ export interface GetAttributesResponse {
 }
 
 export interface Attributes {
-  getAttributes(queryFilter: AttributesQueryFilter): Promise<GetAttributesResponse>;
+  getAttributes(queryFilter?: AttributesQueryFilter): Promise<GetAttributesResponse>;
 }

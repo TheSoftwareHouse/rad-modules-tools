@@ -4,7 +4,7 @@ import { Attributes, AttributesQueryFilter, GetAttributesResponse } from "../def
 
 export const attributes = (serviceClient: ServiceClient) =>
   ({
-    getAttributes(queryFilter: AttributesQueryFilter) {
+    getAttributes(queryFilter: AttributesQueryFilter = {}): Promise<GetAttributesResponse> {
       return serviceClient
         .request({
           pathname: "/api/attributes",

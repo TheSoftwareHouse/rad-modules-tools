@@ -25,7 +25,7 @@ export class PolicyResources implements Policy {
       });
   }
 
-  getPolicies(queryFilter: GetPoliciesRequest): Promise<GetPoliciesResponse> {
+  getPolicies(queryFilter: GetPoliciesRequest = {}): Promise<GetPoliciesResponse> {
     return this.serviceClient
       .request({
         pathname: "/api/policy/get-policies",
@@ -39,7 +39,7 @@ export class PolicyResources implements Policy {
   }
 
   async removePolicy(request: RemovePolicyRequest): Promise<void> {
-    await serviceClient
+    await this.serviceClient
       .request({
         pathname: "/api/policy/remove-policy",
         method: "DELETE",
