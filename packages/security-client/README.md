@@ -5,14 +5,22 @@
 $ npm install @tshio/security-client
 ```
 
-## Loading the module
+## Loading and configuration module
 
 ```js
 // CommonJS
-const SecurityClient = require('@tshio/security-client');
+const { getSecurityClient } = require('@tshio/security-client');
 
 // ES Module
-import SecurityClient from '@tshio/security-client';
+import { getSecurityClient } from '@tshio/security-client';
+
+
+const options = {
+  host: "localhost",
+  port: "50050",
+}
+
+const securityClient = getSecurityClient(options);
 ```
 
 ## Usage
