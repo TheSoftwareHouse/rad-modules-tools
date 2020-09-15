@@ -232,6 +232,101 @@ console.log(users);
 // => { users: [{username: "superadmin", ...}, ...], total: 1, page: 1, limit: 10, }
 ```
 
+### async securityClient.users.activateUser({ activationToken })
+
+Activate a new user
+
+Returns an object
+```ts
+{
+  userId: string,
+  isActive: boolean
+}
+```
+or throw HttpError
+
+#### activationToken
+
+Type: `string`
+
+Activation token
+
+```js
+const result = await securityClient.auth.activateUser({ 
+  activationToken: "activation token..."
+});
+
+console.log(result);
+// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: true } 
+```
+
+### async securityClient.users.deactivateUser({ userId })
+
+Deactivate a user
+
+Returns an object
+```ts
+{
+  userId: string;
+  isActive: boolean;
+  deactivationDate: Date;
+}
+```
+or throw HttpError
+
+#### userId
+
+Type: `string`
+
+User ID
+
+```js
+const result = await securityClient.auth.deactivateUser({ 
+  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
+});
+
+console.log(result);
+// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: false,  deactivationDate: Date Tue Sep 15 2020 14:03:25 GMT+0200 (Central European Summer Time)} 
+```
+
+### async securityClient.users.isAuthenticated()
+
+Am I logged?
+
+Returns `{ isAuthenticated: boolean }` or throw HttpError
+
+```js
+const  { isAuthenticated } = await securityClient.users.isAuthenticated();
+
+console.log(isAuthenticated);
+// => true
+```
+
+### async securityClient.users.hasAttributes(attributes)
+
+Check if the user has access to provided attributes
+
+Returns an object
+```ts
+{
+  hasAllAttributes: boolean;
+}
+```
+or throw HttpError
+
+#### attributes
+
+Type: `array`
+
+Array of attributes
+
+```js
+const { hasAllAttributes } = await securityClient.users.hasAttributes(["ADMIN_PANEL"]);
+
+console.log(result);
+// => true
+```
+
 
 ### Understanding filters and ordering
 
