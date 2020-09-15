@@ -1,4 +1,18 @@
 # `Security Client`
+
+## Table of Contents
+=================
+
+  * [Install](#install)
+  * [Loading and configuration](#loading-and-configuration-module)
+  * [Usage](#usage)
+  * [API](#api)
+    * [Authorization](#authorization-api)
+    * [Token](#token-api)
+    * [Users](#users-api)
+    * [Attributes](#attributes-api)
+    * [Policy](#policy-api)
+  
 ## Install
 
 ```sh
@@ -61,7 +75,7 @@ Type: `string`
 
 Type: `string`
 
-## Auth API
+## Authorization API
 
 ### async securityClient.auth.login(credentials)
 

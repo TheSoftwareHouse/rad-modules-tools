@@ -148,15 +148,16 @@ export interface PasswordResetTokenResponse {
 }
 
 export interface Users {
-  getUsers(queryFilter?: UsersQueryFilter): Promise<GetUsersResponse>;
+  getUsers(queryFilter?: GetUsersRequest): Promise<GetUsersResponse>;
   activateUser(request: ActivateUserRequest): Promise<ActivateUserResponse>;
   addAttributes(request: AddAttributesRequest): Promise<AddAttributesResponse>;
+  removeAttributes(userId: string, attributes: string[]);
   addUser(request: AddUserRequest): Promise<AddUserResponse>;
   deactivateUser(request: DeactivateUserRequest): Promise<DeactivateUserResponse>;
   deleteUser(request: DeleteUserRequest): Promise<DeleteUserResponse>;
   getUser(request: GetUserRequest): Promise<GetUserResponse>;
   getUserId(request: GetUserIdRequest): Promise<GetUserIdResponse>;
-  getUserByResource(request: GetUsersByResourceRequest): Promise<GetUsersByResourceResponse>;
+  getUsersByResource(request: GetUsersByResourceRequest): Promise<GetUsersByResourceResponse>;
   hasAccess(resources: string[]): Promise<HasAccessResponse>;
   hasAttributes(attributes: string[]): Promise<HasAttributesResponse>;
   isAuthenticated(): Promise<IsAuthenticatedResponse>;

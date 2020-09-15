@@ -1,3 +1,4 @@
+import "mocha";
 import { getSecurityClient } from "..";
 import * as assert from "assert";
 import { UsersQueryFilter } from "../defs/user";

@@ -1,3 +1,4 @@
+import "mocha";
 import * as assert from "assert";
 import { getSecurityClient } from "..";
 import { AddPolicyRequest, GetPoliciesRequest } from "../defs/policy";
