@@ -304,7 +304,7 @@ console.log(isAuthenticated);
 
 ### async securityClient.users.hasAttributes(attributes)
 
-Check if the user has access to provided attributes
+Check if the user has provided attributes
 
 Returns an object
 ```ts
@@ -327,6 +327,305 @@ console.log(result);
 // => true
 ```
 
+### async securityClient.users.hasAccess(resources)
+
+Check if the user has access to provided resources
+
+Returns an object
+```ts
+{
+  hasAccess: boolean;  // true if the user has access to all of the resources
+  forbidden: string[]; // list of forbidden resources
+}
+```
+or throw HttpError
+
+#### resources
+
+Type: `array`
+
+Array of resources
+
+```js
+const result = await securityClient.users.hasAccess(["api/users"]);
+
+console.log(result);
+// => { hasAccess: true, forbidden: [] }
+```
+
+### async securityClient.users.addAttributes({ userId, attributes })
+
+Add attributes to the user
+
+Returns an empty object or throw HttpError
+
+#### userId
+
+Type: `string`
+
+User ID
+
+#### attributes
+
+Type: `array`
+
+Array of attributes
+
+```js
+await securityClient.users.addAttributes({
+  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", 
+  attributes: ["ATTR_1", "ATTR_2"]
+});
+```
+
+### async securityClient.users.removeAttributes({ userId, attributes })
+
+Remove attributes from the user
+
+Returns an empty object or throw HttpError
+
+#### userId
+
+Type: `string`
+
+User ID
+
+#### attributes
+
+Type: `array`
+
+Array of attributes
+
+```js
+await securityClient.users.removeAttributes({
+  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", 
+  attributes: ["ATTR_1", "ATTR_2"]
+});
+```
+
+### async securityClient.users.addUser({ username, password, attributes? })
+
+Create a new user
+
+Returns an object
+```js
+{
+  newUserId: string;
+}
+```
+throw HttpError
+
+#### username
+
+Type: `string`
+
+New user username
+
+#### password
+
+Type: `string`
+
+New user password
+
+#### attributes
+
+Type: `array`
+
+Array of attributes, optional.
+
+```js
+const { newUserId } = await securityClient.users.addUser({
+  username: "new-user", 
+  password: "password",
+  attributes: ["ADMIN_PANEL"],
+});
+
+console.log(newUserId);
+// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
+```
+
+### async securityClient.users.deleteUser({ userId })
+
+Delete user
+
+Returns an empty object or throw HttpError
+
+#### userId
+
+Type: `string`
+
+User ID
+
+```js
+await securityClient.users.getUser({
+  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382",
+});
+```
+
+### async securityClient.users.getUser({ userId })
+
+Get user
+
+Returns an user object 
+```js
+User {
+  id: string;
+  username: string;
+  isActive: boolean;
+  isSuperAdmin: boolean;
+  attributes: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+or throw HttpError
+
+#### userId
+
+Type: `string`
+
+User ID
+
+```js
+const result = await securityClient.users.getUser({
+  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382",
+});
+```
+
+### async securityClient.users.getUserId({ username })
+
+Get user id
+
+Returns an object 
+```js
+{
+  userId: string;
+}
+```
+or throw HttpError
+
+#### username
+
+Type: `string`
+
+User username
+
+```js
+const { userId } = await securityClient.users.getUserId({
+  username: "superadmin",
+});
+console.log(userId)
+// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
+```
+
+### async securityClient.users.getUserByResources({ resource, page?, limit? })
+
+Get users by resource name
+
+Returns an object 
+```js
+{
+  users: User[];
+  total: number;
+  page: number;
+  limit: number;
+}
+```
+or throw HttpError
+
+#### resource
+
+Type: `string`
+
+Resource name
+
+#### page
+
+Type: `number`
+
+Page, optional
+
+Default: `1`
+
+#### limit
+
+Type: `number`
+
+Limit, optional `1-10000`
+
+Default: `25`
+```js
+const result = await securityClient.getUserByResources.getUserId({
+  resource: "RES1",
+});
+console.log(result)
+// => { users: [...],  total: 5, page: 1, limit: 25 }
+```
+
+### async securityClient.users.setPassword({ username, oldPassword, newPassword })
+
+Set a new password for user
+
+Returns an object 
+```js
+{
+  passwordChanged: boolean;
+}
+```
+or throw HttpError
+
+#### username
+
+Type: `string`
+
+User username
+
+#### oldPassword
+
+Type: `string`
+
+User password
+
+#### newPassword
+
+Type: `string`
+
+The new user password
+```js
+const { passwordChanged } = await securityClient.getUserByResources.setPassword({
+  username: "superadmin",
+  oldPassword: "superadmin",
+  newPassword: "My new password"
+});
+console.log(passwordChanged)
+// => true
+```
+
+### async securityClient.users.passwordResetToken({ username })
+
+Returns token which will be used to reset the user password
+
+Returns an object 
+```js
+{
+  resetPasswordToken: string;
+}
+```
+or throw HttpError
+
+#### username
+
+Type: `string`
+
+User username
+
+```js
+const { resetPasswordToken } = await securityClient.passwordResetToken.setPassword({
+  username: "superadmin"
+});
+console.log(resetPasswordToken)
+// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
+```
 
 ### Understanding filters and ordering
 

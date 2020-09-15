@@ -188,7 +188,7 @@ export const users = (serviceClient: ServiceClient) => ({
       });
   },
 
-  getUserByResource(request: GetUsersByResourceRequest): Promise<GetUsersByResourceResponse> {
+  getUsersByResource(request: GetUsersByResourceRequest): Promise<GetUsersByResourceResponse> {
     return serviceClient
       .request({
         pathname: "/api/users/get-user-id",
