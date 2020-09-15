@@ -13,7 +13,7 @@ describe("Resource Users", () => {
   before("Set token", async () => {
     const result = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
     assert.deepStrictEqual(Object.keys(result ?? []), ["accessToken", "refreshToken"]);
-    await securityClient.setToken(result);
+    securityClient.setToken(result);
   });
 
   it("Should addPolicy", async () => {

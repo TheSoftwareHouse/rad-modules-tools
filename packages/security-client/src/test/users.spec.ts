@@ -11,7 +11,7 @@ describe("Resource Users", () => {
   before("Set token", async () => {
     const result = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
     assert.deepStrictEqual(Object.keys(result ?? []), ["accessToken", "refreshToken"]);
-    await securityClient.setToken(result);
+    securityClient.setToken(result);
     token = result;
   });
 
@@ -58,7 +58,7 @@ describe("Resource Users", () => {
     assert.strictEqual(result.statusCode, 401);
     assert.strictEqual(result.title, "Unauthorized");
     assert.strictEqual(result.message, "localhost: Response filter marked request as failed. Response status 401");
-    await securityClient.setToken(token);
+    securityClient.setToken(token);
   });
 
   it("Should hasAttributes", async () => {

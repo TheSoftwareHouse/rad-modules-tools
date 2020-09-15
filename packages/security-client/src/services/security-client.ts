@@ -115,11 +115,11 @@ export class SecurityClient {
 
   public policy: PolicyResources;
 
-  public async setApiKey(apiKey: string) {
+  public setApiKey(apiKey: string) {
     this.options.credentials.apiKey = apiKey;
   }
 
-  public async setToken(token: Token) {
+  public setToken(token: Token) {
     this.options.credentials.token = token;
   }
 }
