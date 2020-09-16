@@ -1,4 +1,4 @@
-# `Security Client`
+# Security Client
 
 ## Table of Contents
 =================
@@ -37,7 +37,7 @@ const options = {
 const securityClient = getSecurityClient(options);
 ```
 
-## Usage
+## Getting started
 
 ### Login and authorization
 
@@ -52,12 +52,192 @@ const SecurityClient = require('@tshio/security-client');
     // => { accessToken: "xxx", refreshToken: "xxx" }
    
     securityClient.setToken(token); // From now, the token will be automatically added to all API requests
+    
+    // Alternatively, you can set the API Key instead of a Token
+    // securityClient.setApiKey("api key string");
+})();
+```
+
+### Examples
+```js
+(async () => {
+    const securityClient = SecurityClient.getSecurityClient();
+    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
+
+    securityClient.setToken(token);
+
+    // Add User
+    const newUser = {
+      username: "superadmin2",
+       password: "superadmin",
+       attributes: ["ROLE_SUPERADMIN"],
+    }
+
+    const { newUserId } = await securityClient.users.addUser(newUser);
+
+    console.log(newUserId);
+    // => 45287eff-cdb0-4cd4-8a0f-a07d1a11b382
+
+    // Add Attribute
+    const newUserAttribute = {
+      userId: newUserId,
+       attributes: ["ATTR1", "ATTR2"],
+    }
+
+    await securityClient.users.addAttributes(newUserAttribute)
+
+    const user = await securityClient.users.getUser({ userId: newUserId });
+    console.log(user);
+    // =>
+    // {
+    //   id: '78204778-de24-4957-83d5-e01235d1d52a',
+    //   username: 'superadmin2',
+    //   isActive: true,
+    //   activationToken: null,
+    //   createdAt: '2020-09-16T11:25:44.509Z',
+    //   updatedAt: '2020-09-16T11:25:44.509Z',
+    //   attributes: [ 'ROLE_SUPERADMIN', 'ATTR1', 'ATTR2' ],
+    //   isSuperAdmin: true
+    // }
+
+    // Get Users with query filter
+    const users = await securityClient.users.getUsers({
+      filter: {
+        username: {
+          include: "superadmin2",
+        },
+      },
+    });
+
+    console.log(users);
+    // =>
+    // {
+    //   users: [
+    //     {
+    //       id: 'c44ed13d-09cc-4797-8835-18e98b5f3e07',
+    //       username: 'superadmin2',
+    //       isActive: true,
+    //       activationToken: null,
+    //       createdAt: '2020-09-16T13:16:25.997Z',
+    //       updatedAt: '2020-09-16T13:16:25.997Z',
+    //       attributes: [Array],
+    //       isSuperAdmin: true
+    //     }
+    //   ],
+    //     total: 1,
+    //   page: 1,
+    //   limit: 25
+    // }
+    
+    // Delete user
+    await securityClient.users.deleteUser({ userId: newUserId });
+
+    // Get policies
+    const policy = await securityClient.policy.getPolicies({ limit: 100 });
+    console.log(policy);
+
+    // Add policy
+    const newPolicy = {
+      resource: "TEST",
+      attribute: "TEST",
+    }
+
+    const { id } = await securityClient.policy.addPolicy(newPolicy);
+
+    // Get policies with query filter
+    const result2 = await securityClient.policy.getPolicies({
+      filter: {
+        id: {
+          eq: id,
+        },
+      }
+    });
+
+    console.log(result2);
+    // =>
+    // {
+    //   policies: [
+    //     {
+    //       id: '7d9b054a-0c41-4517-8818-baa8af70cc12',
+    //       attribute: 'TEST',
+    //       resource: 'TEST'
+    //     }
+    //   ],
+    //     total: 1,
+    //   page: 1,
+    //   limit: 25
+    // }
+
+
+    // Remove policy
+    await securityClient.policy.removePolicy({ id });
+})();
+```
+
+## Add user and attributes
+
+```js
+const { getSecurityClient } = require('@tshio/security-client');
+
+(async () => {
+    const securityClient = getSecurityClient();
+    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
+   
+    securityClient.setToken(token);
+  
+    const newUser = {
+      username: "superadmin2",
+      password: "superadmin",
+      attributes: ["ROLE_SUPERADMIN"],
+    }
+   
+    const { newUserId } = await securityClient.users.addUser(newUser);
+
+    console.log(newUserId);
+    // => 45287eff-cdb0-4cd4-8a0f-a07d1a11b382
+  
+    const newUserAttribute = {
+      userId: newUserId,
+      attributes: ["ATTR1", "ATTR2"],
+    }
+
+    await securityClient.users.addAttributes(newUserAttribute)
+  
+    const user = await securityClient.users.getUser({ userId: newUserId });
+    console.log(user);
+    // =>
+
+    await securityClient.users.deleteUser({ userId: newUserId });
+})();
+```
+
+## Add user
+
+```js
+const { getSecurityClient } = require('@tshio/security-client');
+
+(async () => {
+    const securityClient = getSecurityClient();
+    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
+   
+    securityClient.setToken(token);
+  
+    const user = {
+      username: "superadmin2",
+      password: "superadmin",
+      attributes: ["ROLE_SUPERADMIN"],
+    }
+   
+    const { newUserId } = await security.users.addUser(user);
+
+    console.log(newUserId);
+    // => 45287eff-cdb0-4cd4-8a0f-a07d1a11b382
 })();
 ```
 
 ## API
 
-### securityClient.setToken(token)
+### `securityClient.setToken(token)`
 
 Set the token object for authorize api requests.
 
@@ -65,35 +245,32 @@ Set the token object for authorize api requests.
 
 #### token
 
-Type: `object`
+ - Type: `object`
 
 ##### accessToken
 
-Type: `string`
+ - Type: `string`
 
 ##### refreshToken
 
-Type: `string`
+ - Type: `string`
 
 ## Authorization API
 
-### async securityClient.auth.login(credentials)
+### `async securityClient.auth.login({ username, password })`
 
 Login to rad-security
 
 Returns a Token object or throw HttpError
 
-#### credentials
+##### Parameters
 
-Type: `object`
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| username | `string`   | User name                             |
+| password | `string`   | User password                         |
 
-##### username
-
-Type: `string`
-
-##### password
-
-Type: string
+##### Example
 
 ```js
 const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
@@ -101,23 +278,19 @@ console.log(token);
 // => { accessToken: "...", refreshToken: "..." }
 ```
 
-### async securityClient.auth.resetPassword({resetPasswordToken, newPassword?})
+### `async securityClient.auth.resetPassword({resetPasswordToken, newPassword?})`
 
 Reset password
 
 Returns a new password or throw HttpError
 
-#### resetPasswordRequest
-
-Type: `object`
-
 ##### resetPasswordToken
 
-Type: `string`
+ - Type: `string`
 
 ##### newPassword
 
-Type: string
+- Type: string
 
 The `newPassword` is optional. If `undefined`, the password will be generated randomly
 .
@@ -128,15 +301,11 @@ const token = await securityClient.auth.resetPassword({
 });
 ```
 
-### async securityClient.auth.refreshToken(token)
+### `async securityClient.auth.refreshToken({ asccessToken, refreshToken })`
 
 Refreshes access token.
 
 Returns a new Token object or throw HttpError
-
-#### token
-
-Type: `object`
 
 ##### accessToken
 
@@ -147,7 +316,7 @@ Type: `string`
 Type: `string`
 
 
-### async securityClient.auth.refreshUserActiveToken(userId)
+### `async securityClient.auth.refreshUserActiveToken(userId)`
 
 Refresh user's active token if token has expired.
 
@@ -155,12 +324,12 @@ Returns a new Token object or throw HttpError
 
 #### userId
 
-Type: `string`
+ - Type: `string`
 
 
 ## Users API
 
-### async securityClient.users.getUsers(queryFilter)
+### `async securityClient.users.getUsers(queryFilter)`
 
 Get users list (if no query parameters returns first 25 users)
 
@@ -254,7 +423,7 @@ console.log(users);
 // => { users: [{username: "superadmin", ...}, ...], total: 1, page: 1, limit: 10, }
 ```
 
-### async securityClient.users.activateUser({ activationToken })
+### `async securityClient.users.activateUser({ activationToken })`
 
 Activate a new user
 
@@ -282,7 +451,7 @@ console.log(result);
 // => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: true } 
 ```
 
-### async securityClient.users.deactivateUser({ userId })
+### `async securityClient.users.deactivateUser({ userId })`
 
 Deactivate a user
 
@@ -311,7 +480,7 @@ console.log(result);
 // => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: false,  deactivationDate: Date Tue Sep 15 2020 14:03:25 GMT+0200 (Central European Summer Time)} 
 ```
 
-### async securityClient.users.isAuthenticated()
+### `async securityClient.users.isAuthenticated()`
 
 Am I logged?
 
@@ -324,7 +493,7 @@ console.log(isAuthenticated);
 // => true
 ```
 
-### async securityClient.users.hasAttributes(attributes)
+### `async securityClient.users.hasAttributes(attributes)`
 
 Check if the user has provided attributes
 
@@ -349,7 +518,7 @@ console.log(result);
 // => true
 ```
 
-### async securityClient.users.hasAccess(resources)
+### `async securityClient.users.hasAccess(resources)`
 
 Check if the user has access to provided resources
 
@@ -375,7 +544,7 @@ console.log(result);
 // => { hasAccess: true, forbidden: [] }
 ```
 
-### async securityClient.users.addAttributes({ userId, attributes })
+### `async securityClient.users.addAttributes({ userId, attributes })`
 
 Add attributes to the user
 
@@ -400,7 +569,7 @@ await securityClient.users.addAttributes({
 });
 ```
 
-### async securityClient.users.removeAttributes({ userId, attributes })
+### `async securityClient.users.removeAttributes({ userId, attributes })`
 
 Remove attributes from the user
 
@@ -425,7 +594,7 @@ await securityClient.users.removeAttributes({
 });
 ```
 
-### async securityClient.users.addUser({ username, password, attributes? })
+### `async securityClient.users.addUser({ username, password, attributes? })`
 
 Create a new user
 
@@ -466,7 +635,7 @@ console.log(newUserId);
 // => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
 ```
 
-### async securityClient.users.deleteUser({ userId })
+### `async securityClient.users.deleteUser({ userId })`
 
 Delete user
 
@@ -484,7 +653,7 @@ await securityClient.users.getUser({
 });
 ```
 
-### async securityClient.users.getUser({ userId })
+### `async securityClient.users.getUser({ userId })`
 
 Get user
 
@@ -514,7 +683,7 @@ const result = await securityClient.users.getUser({
 });
 ```
 
-### async securityClient.users.getUserId({ username })
+### `async securityClient.users.getUserId({ username })`
 
 Get user id
 
@@ -540,7 +709,7 @@ console.log(userId)
 // => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
 ```
 
-### async securityClient.users.getUserByResources({ resource, page?, limit? })
+### `async securityClient.users.getUserByResources({ resource, page?, limit? })`
 
 Get users by resource name
 
@@ -584,7 +753,7 @@ console.log(result)
 // => { users: [...],  total: 5, page: 1, limit: 25 }
 ```
 
-### async securityClient.users.setPassword({ username, oldPassword, newPassword })
+### `async securityClient.users.setPassword({ username, oldPassword, newPassword })`
 
 Set a new password for user
 
@@ -623,7 +792,7 @@ console.log(passwordChanged)
 // => true
 ```
 
-### async securityClient.users.passwordResetToken({ username })
+### `async securityClient.users.passwordResetToken({ username })`
 
 Returns token which will be used to reset the user password
 
@@ -651,7 +820,7 @@ console.log(resetPasswordToken)
 
 ## Attributes API
 
-### async securityClient.attributes.getAttributes(queryFilter?)
+### `async securityClient.attributes.getAttributes(queryFilter?)`
 
 Return attributes list (if no queryFilter parameters returns first 25 attributes)
 ```js
@@ -753,7 +922,7 @@ console.log(users);
 
 ## Policy API
 
-### async securityClient.policy.addPolicy(policy)
+### `async securityClient.policy.addPolicy(policy)`
 
 Adds a new policy
 
@@ -788,7 +957,7 @@ console.log(id);
 // => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
 ```
 
-### async securityClient.policy.getPolicies(queryFilter)
+### `async securityClient.policy.getPolicies(queryFilter)`
 
 Get policies list (if no query parameters returns first 25 policies)
 
@@ -887,7 +1056,7 @@ console.log(policies);
 // => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", resource: "api/users", attribute: "ADMIN_PANEL"}], total: 1, page: 1, limit: 10 }
 ```
 
-### async securityClient.policy.removePolicy(policyId | policyQuery)
+### `async securityClient.policy.removePolicy(policyId | policyQuery)`
 
 Removes a policy (identified either by id or resource and attribute)
 

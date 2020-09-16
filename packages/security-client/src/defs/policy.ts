@@ -16,8 +16,8 @@ export interface PoliciesQueryFilter {
   page?: number;
   limit?: number;
   filter?: {
-    [column in GetPoliciesColumns]: {
-      [operator in GetPoliciesFilterOperators]: string;
+    [column in GetPoliciesColumns]?: {
+      [operator in GetPoliciesFilterOperators]?: string;
     };
   };
   order?: {

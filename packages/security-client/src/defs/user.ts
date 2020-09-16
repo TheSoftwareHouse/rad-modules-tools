@@ -28,8 +28,8 @@ export interface UsersQueryFilter {
   page?: number;
   limit?: number;
   filter?: {
-    [column in GetUserColumns]: {
-      [operator in FilterOperators]: string;
+    [column in GetUserColumns]?: {
+      [operator in FilterOperators]?: string;
     };
   };
   order?: {

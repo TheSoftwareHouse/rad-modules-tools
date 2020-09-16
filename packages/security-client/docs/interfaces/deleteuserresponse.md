@@ -1,5 +1,0 @@
-# Interface: DeleteUserResponse
-
-## Hierarchy
-
-* **DeleteUserResponse**

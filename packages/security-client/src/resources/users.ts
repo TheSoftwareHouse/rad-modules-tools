@@ -1,5 +1,6 @@
 import { getHttpError } from "../services/security-client";
 import { ServiceClient } from "perron";
+import * as qs from "qs";
 import {
   ActivateUserRequest,
   ActivateUserResponse,
@@ -34,9 +35,8 @@ export const users = (serviceClient: ServiceClient) =>
     getUsers(queryFilter?: GetUsersRequest): Promise<GetUsersResponse> {
       return serviceClient
         .request({
-          pathname: "/api/users",
+          pathname: `/api/users?${qs.stringify(queryFilter)}`,
           method: "GET",
-          query: queryFilter,
         })
         .then((response) => response.body as GetUsersResponse)
         .catch((error) => {
@@ -157,7 +157,7 @@ export const users = (serviceClient: ServiceClient) =>
         .request({
           pathname: "/api/users/delete-user",
           method: "DELETE",
-          body: JSON.stringify(request),
+          query: request,
         })
         .then((response) => response.body)
         .catch((error) => {

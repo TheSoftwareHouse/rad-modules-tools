@@ -17,6 +17,7 @@
     "dist"
   ],
   "dependencies": {
-    "@tshio/security-client": "*"
+    "@tshio/security-client": "*",
+    "qs": "6.9.4"
   }
 }

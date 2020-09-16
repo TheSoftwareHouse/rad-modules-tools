@@ -1,5 +1,0 @@
-# Interface: AddAttributesResponse
-
-## Hierarchy
-
-* **AddAttributesResponse**

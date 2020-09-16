@@ -5,7 +5,7 @@ import { AddPolicyRequest, GetPoliciesRequest } from "../defs/policy";
 
 const securityClient = getSecurityClient();
 
-describe("Resource Users", () => {
+describe("Resource Policy", () => {
   const policyItem: AddPolicyRequest = {
     resource: "TEST_RESOURCE",
     attribute: "TEST_ATTRIBUTE",

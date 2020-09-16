@@ -1,5 +1,6 @@
 import { getHttpError } from "../services/security-client";
 import { ServiceClient } from "perron";
+import * as qs from "qs";
 import {
   AddPolicyRequest,
   AddPolicyResponse,
@@ -28,9 +29,8 @@ export class PolicyResources implements Policy {
   getPolicies(queryFilter: GetPoliciesRequest = {}): Promise<GetPoliciesResponse> {
     return this.serviceClient
       .request({
-        pathname: "/api/policy/get-policies",
+        pathname: `/api/policy/get-policies?${qs.stringify(queryFilter)}`,
         method: "GET",
-        query: queryFilter,
       })
       .then((response) => response.body as GetPoliciesResponse)
       .catch((error) => {
@@ -43,9 +43,7 @@ export class PolicyResources implements Policy {
       .request({
         pathname: "/api/policy/remove-policy",
         method: "DELETE",
-        query: {
-          ...request,
-        },
+        query: request,
       })
       .catch((error) => {
         throw getHttpError(error);
