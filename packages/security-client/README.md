@@ -237,27 +237,24 @@ const { getSecurityClient } = require('@tshio/security-client');
 
 ## API
 
-### `securityClient.setToken(token)`
+### securityClient.setToken({ accessToken, refreshToken })
 
 Set the token object for authorize api requests.
 
 **This command is crucial, the token will be used for authorization all of api requests.**
 
-#### token
+##### Parameters
 
- - Type: `object`
+| Name         | Type       | Description                           |
+|--------------|------------|---------------------------------------|
+| accessToken  | `string`   | Access token                          |
+| refreshToken | `string`   | Refresh token                         |
 
-##### accessToken
-
- - Type: `string`
-
-##### refreshToken
-
- - Type: `string`
+[Back to API](#api)
 
 ## Authorization API
 
-### `async securityClient.auth.login({ username, password })`
+### async securityClient.auth.login({ username, password })
 
 Login to rad-security
 
@@ -278,19 +275,22 @@ console.log(token);
 // => { accessToken: "...", refreshToken: "..." }
 ```
 
-### `async securityClient.auth.resetPassword({resetPasswordToken, newPassword?})`
+[Back to Authorization API](#authorization-api)
+
+<hr />
+
+### async securityClient.auth.resetPassword({resetPasswordToken, newPassword?})
 
 Reset password
 
 Returns a new password or throw HttpError
 
-##### resetPasswordToken
+##### Parameters
 
- - Type: `string`
-
-##### newPassword
-
-- Type: string
+| Name               | Type       | Description                           |
+|--------------------|------------|---------------------------------------|
+| resetPasswordToken | `string`   | Reset password token                  |
+| newPassword        | `string`   | **optional** <p>New password</p>      |
 
 The `newPassword` is optional. If `undefined`, the password will be generated randomly
 .
@@ -301,57 +301,55 @@ const token = await securityClient.auth.resetPassword({
 });
 ```
 
-### `async securityClient.auth.refreshToken({ asccessToken, refreshToken })`
+[Back to Authorization API](#authorization-api)
+
+<hr />
+
+### async securityClient.auth.refreshToken({ asccessToken, refreshToken })
 
 Refreshes access token.
 
 Returns a new Token object or throw HttpError
 
-##### accessToken
+##### Parameters
 
-Type: `string`
+| Name         | Type       | Description                           |
+|--------------|------------|---------------------------------------|
+| accessToken  | `string`   | Access token                          |
+| refreshToken | `string`   | Refresh token                         |
 
-##### refreshToken
+[Back to Authorization API](#authorization-api)
 
-Type: `string`
+<hr />
 
-
-### `async securityClient.auth.refreshUserActiveToken(userId)`
+### async securityClient.auth.refreshUserActiveToken(userId)
 
 Refresh user's active token if token has expired.
 
 Returns a new Token object or throw HttpError
 
-#### userId
+##### Parameters
 
- - Type: `string`
+| Name         | Type       | Description                           |
+|--------------|------------|---------------------------------------|
+| userId       | `string`   | User ID                               |
 
+[Back to Authorization API](#authorization-api)
 
 ## Users API
 
-### `async securityClient.users.getUsers(queryFilter)`
+### async securityClient.users.getUsers({ page?, limit?, filter?, order?})
 
 Get users list (if no query parameters returns first 25 users)
 
-#### queryFilter
+##### Parameters
 
-Type: `object`
-
-##### page
-
-Type: `number`
-
-Optional, default value: `1`
-
-##### limit
-
-Type: `number`
-
-Optional, default value: `25`
-
-##### filter
-
-Type: `object`
+| Name         | Type       | Description                                     | Default |
+|--------------|------------|-------------------------------------------------|---------|
+| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
+| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
+| filter       | `object`   | **optional** <p>[Query filter](#understanding-filters-and-ordering)</p>               | {}      |
+| order        | `object`   | **optional** <p>[Order filter](#understanding-filters-and-ordering)</p>                | {}      |
 
 ##### filter[column] = operator
 ```ts
@@ -373,27 +371,8 @@ export type FilterOperators =
 
 ```
 
-##### order
+##### Example
 
-Type: `object`
-
-##### order.by
-
-Type: `string`
-
-Default: `id`
-
-Values: `id | username | isActive | createdAt | updatedAt | attribute.name`
-
-##### order.type
-
-Type: `string`
-
-Default: `asc`
-
-Values: `asc` | `desc`
-
-Examples:
 ```js
 const users = await securityClient.users.getUsers();
 console.log(users);
@@ -423,7 +402,11 @@ console.log(users);
 // => { users: [{username: "superadmin", ...}, ...], total: 1, page: 1, limit: 10, }
 ```
 
-### `async securityClient.users.activateUser({ activationToken })`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.activateUser({ activationToken })
 
 Activate a new user
 
@@ -436,11 +419,13 @@ Returns an object
 ```
 or throw HttpError
 
-#### activationToken
+##### Parameters
 
-Type: `string`
+| Name                  | Type       | Description                           |
+|-----------------------|------------|---------------------------------------|
+| activationToken       | `string`   | Activation token                      |
 
-Activation token
+##### Example
 
 ```js
 const result = await securityClient.auth.activateUser({ 
@@ -451,7 +436,11 @@ console.log(result);
 // => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: true } 
 ```
 
-### `async securityClient.users.deactivateUser({ userId })`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.deactivateUser({ userId })
 
 Deactivate a user
 
@@ -465,11 +454,13 @@ Returns an object
 ```
 or throw HttpError
 
-#### userId
+##### Parameters
 
-Type: `string`
+| Name                  | Type       | Description                           |
+|-----------------------|------------|---------------------------------------|
+| userId                | `string`   | User ID                               |
 
-User ID
+##### Example
 
 ```js
 const result = await securityClient.auth.deactivateUser({ 
@@ -480,11 +471,17 @@ console.log(result);
 // => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: false,  deactivationDate: Date Tue Sep 15 2020 14:03:25 GMT+0200 (Central European Summer Time)} 
 ```
 
-### `async securityClient.users.isAuthenticated()`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.isAuthenticated()
 
 Am I logged?
 
 Returns `{ isAuthenticated: boolean }` or throw HttpError
+
+##### Example
 
 ```js
 const  { isAuthenticated } = await securityClient.users.isAuthenticated();
@@ -493,7 +490,11 @@ console.log(isAuthenticated);
 // => true
 ```
 
-### `async securityClient.users.hasAttributes(attributes)`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.hasAttributes(attributes)
 
 Check if the user has provided attributes
 
@@ -505,11 +506,13 @@ Returns an object
 ```
 or throw HttpError
 
-#### attributes
+##### Parameters
 
-Type: `array`
+| Name                  | Type       | Description                           |
+|-----------------------|------------|---------------------------------------|
+| attributes            | `string[]` | Array of attributes name              |
 
-Array of attributes
+##### Example
 
 ```js
 const { hasAllAttributes } = await securityClient.users.hasAttributes(["ADMIN_PANEL"]);
@@ -518,7 +521,11 @@ console.log(result);
 // => true
 ```
 
-### `async securityClient.users.hasAccess(resources)`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.hasAccess(resources)
 
 Check if the user has access to provided resources
 
@@ -531,11 +538,13 @@ Returns an object
 ```
 or throw HttpError
 
-#### resources
+##### Parameters
 
-Type: `array`
+| Name                  | Type       | Description                           |
+|-----------------------|------------|---------------------------------------|
+| resources             | `string[]` | Array of resources name               |
 
-Array of resources
+##### Example
 
 ```js
 const result = await securityClient.users.hasAccess(["api/users"]);
@@ -544,23 +553,22 @@ console.log(result);
 // => { hasAccess: true, forbidden: [] }
 ```
 
-### `async securityClient.users.addAttributes({ userId, attributes })`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.addAttributes({ userId, attributes })
 
 Add attributes to the user
 
 Returns an empty object or throw HttpError
 
-#### userId
+##### Parameters
 
-Type: `string`
-
-User ID
-
-#### attributes
-
-Type: `array`
-
-Array of attributes
+| Name                  | Type       | Description                                              |
+|-----------------------|------------|----------------------------------------------------------|
+| user ID               | `string`   | User ID                                                  |
+| attributes            | `string[]` | An array of attributes for add to the user with userID   |
 
 ```js
 await securityClient.users.addAttributes({
@@ -569,23 +577,24 @@ await securityClient.users.addAttributes({
 });
 ```
 
-### `async securityClient.users.removeAttributes({ userId, attributes })`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.removeAttributes({ userId, attributes })
 
 Remove attributes from the user
 
 Returns an empty object or throw HttpError
 
-#### userId
+##### Parameters
 
-Type: `string`
+| Name                  | Type       | Description                                                  |
+|-----------------------|------------|--------------------------------------------------------------|
+| user ID               | `string`   | User ID                                                      |
+| attributes            | `string[]` | An array of attributes to remove from the user with userID   |
 
-User ID
-
-#### attributes
-
-Type: `array`
-
-Array of attributes
+##### Example
 
 ```js
 await securityClient.users.removeAttributes({
@@ -594,7 +603,11 @@ await securityClient.users.removeAttributes({
 });
 ```
 
-### `async securityClient.users.addUser({ username, password, attributes? })`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.addUser({ username, password, attributes? })
 
 Create a new user
 
@@ -606,23 +619,15 @@ Returns an object
 ```
 throw HttpError
 
-#### username
+##### Parameters
 
-Type: `string`
+| Name                  | Type       | Description                                              |
+|-----------------------|------------|----------------------------------------------------------|
+| username              | `string`   | New user username                                        |
+| password              | `string`   | New user password                                        |
+| attributes            | `string[]` | **optional** <p>An array of user attributes</p>          |
 
-New user username
-
-#### password
-
-Type: `string`
-
-New user password
-
-#### attributes
-
-Type: `array`
-
-Array of attributes, optional.
+##### Example
 
 ```js
 const { newUserId } = await securityClient.users.addUser({
@@ -635,7 +640,11 @@ console.log(newUserId);
 // => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
 ```
 
-### `async securityClient.users.deleteUser({ userId })`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.deleteUser({ userId })
 
 Delete user
 
@@ -647,13 +656,19 @@ Type: `string`
 
 User ID
 
+##### Example
+
 ```js
 await securityClient.users.getUser({
   userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382",
 });
 ```
 
-### `async securityClient.users.getUser({ userId })`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.getUser({ userId })
 
 Get user
 
@@ -671,11 +686,13 @@ User {
 ```
 or throw HttpError
 
-#### userId
+##### Parameters
 
-Type: `string`
+| Name                  | Type       | Description                                              |
+|-----------------------|------------|----------------------------------------------------------|
+| user ID               | `string`   | User ID                                                  |
 
-User ID
+##### Example
 
 ```js
 const result = await securityClient.users.getUser({
@@ -683,7 +700,11 @@ const result = await securityClient.users.getUser({
 });
 ```
 
-### `async securityClient.users.getUserId({ username })`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.getUserId({ username })
 
 Get user id
 
@@ -695,11 +716,13 @@ Returns an object
 ```
 or throw HttpError
 
-#### username
+##### Parameters
 
-Type: `string`
+| Name                  | Type       | Description                                              |
+|-----------------------|------------|----------------------------------------------------------|
+| username              | `string`   | User name                                                |
 
-User username
+##### Example
 
 ```js
 const { userId } = await securityClient.users.getUserId({
@@ -709,7 +732,11 @@ console.log(userId)
 // => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
 ```
 
-### `async securityClient.users.getUserByResources({ resource, page?, limit? })`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.getUserByResources({ resource, page?, limit? })
 
 Get users by resource name
 
@@ -724,27 +751,16 @@ Returns an object
 ```
 or throw HttpError
 
-#### resource
+##### Parameters
 
-Type: `string`
+| Name         | Type       | Description                                     | Default | Range |
+|--------------|------------|-------------------------------------------------|---------|-------|
+| resource     | `string`   | Resource name                                   |         |       |
+| page         | `number`   | **optional** <p>Page number</p>                 | 1       | 1 - MaxInteger |
+| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      | 1 - 1000 |
 
-Resource name
+##### Example
 
-#### page
-
-Type: `number`
-
-Page, optional
-
-Default: `1`
-
-#### limit
-
-Type: `number`
-
-Limit, optional `1-10000`
-
-Default: `25`
 ```js
 const result = await securityClient.getUserByResources.getUserId({
   resource: "RES1",
@@ -753,7 +769,11 @@ console.log(result)
 // => { users: [...],  total: 5, page: 1, limit: 25 }
 ```
 
-### `async securityClient.users.setPassword({ username, oldPassword, newPassword })`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.setPassword({ username, oldPassword, newPassword })
 
 Set a new password for user
 
@@ -765,23 +785,16 @@ Returns an object
 ```
 or throw HttpError
 
-#### username
+##### Parameters
 
-Type: `string`
+| Name                  | Type       | Description                                              |
+|-----------------------|------------|----------------------------------------------------------|
+| username              | `string`   | User name                                                |
+| oldPassword           | `string`   | Old user password                                                |
+| newPassword           | `string`   | New user password                                                |
 
-User username
+##### Example
 
-#### oldPassword
-
-Type: `string`
-
-User password
-
-#### newPassword
-
-Type: `string`
-
-The new user password
 ```js
 const { passwordChanged } = await securityClient.getUserByResources.setPassword({
   username: "superadmin",
@@ -792,7 +805,11 @@ console.log(passwordChanged)
 // => true
 ```
 
-### `async securityClient.users.passwordResetToken({ username })`
+[Back to Users API](#users-api)
+
+<hr />
+
+### async securityClient.users.passwordResetToken({ username })
 
 Returns token which will be used to reset the user password
 
@@ -804,11 +821,13 @@ Returns an object
 ```
 or throw HttpError
 
-#### username
+##### Parameters
 
-Type: `string`
+| Name                  | Type       | Description                                              |
+|-----------------------|------------|----------------------------------------------------------|
+| username              | `string`   | User name                                                |
 
-User username
+##### Example
 
 ```js
 const { resetPasswordToken } = await securityClient.passwordResetToken.setPassword({
@@ -818,9 +837,11 @@ console.log(resetPasswordToken)
 // => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
 ```
 
+[Back to Users API](#users-api)
+
 ## Attributes API
 
-### `async securityClient.attributes.getAttributes(queryFilter?)`
+### async securityClient.attributes.getAttributes({ page?, limit?, filter?, order? })
 
 Return attributes list (if no queryFilter parameters returns first 25 attributes)
 ```js
@@ -841,25 +862,14 @@ Attribute {
 ```
 or throw HttpError
 
-#### queryFilter
+##### Parameters
 
-Type: `object`
-
-##### page
-
-Type: `number`
-
-Optional, default value: `1`
-
-##### limit
-
-Type: `number`
-
-Optional, default value: `25`
-
-##### filter
-
-Type: `object`
+| Name         | Type       | Description                                     | Default |
+|--------------|------------|-------------------------------------------------|---------|
+| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
+| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
+| filter       | `object`   | **optional** <p>[Query filter](#understanding-filters-and-ordering)</p>               | {}      |
+| order        | `object`   | **optional** <p>[Order filter](#understanding-filters-and-ordering)</p>                | {}      |
 
 ##### filter[column] = operator
 ```ts
@@ -869,27 +879,8 @@ export type GetAttributesFilterOperators = "eq" | "eqOr" | "neq" | "lt" | "gt" |
 
 ```
 
-##### order
+##### Example
 
-Type: `object`
-
-##### order.by
-
-Type: `string`
-
-Default: `id`
-
-Values: `id | name | user.id | user.username`
-
-##### order.type
-
-Type: `string`
-
-Default: `asc`
-
-Values: `asc` | `desc`
-
-Examples:
 ```js
 const attributes = await securityClient.attributes.getAttributes();
 console.log(attributes);
@@ -919,10 +910,13 @@ console.log(users);
 // => { users: [{username: "superadmin", ...}, ...], total: 1, page: 1, limit: 10, }
 ```
 
+[Back to Attributes API](#attributes-api)
+
+<hr />
 
 ## Policy API
 
-### `async securityClient.policy.addPolicy(policy)`
+### async securityClient.policy.addPolicy({ resource, attribute })
 
 Adds a new policy
 
@@ -934,30 +928,26 @@ Return object with policy id
 ```
 or throw HttpError
 
-#### policy
+##### Parameters
 
-Type: `object`
+| Name                  | Type       | Description                                              |
+|-----------------------|------------|----------------------------------------------------------|
+| resource              | `string`   | Policy resource                                          |
+| attribute             | `string`   | Policy attribute                                         |
 
-##### resource
+##### Example
 
-Type: `string`
-
-Resource name
-
-##### attribute
-
-Type: `string`
-
-Attribute name
-
-Examples:
 ```js
 const { id } = await securityClient.policy.addPolicy({ resource: "NEW_RESOURCE", attribute: "ATTR_1"});
 console.log(id);
 // => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
 ```
 
-### `async securityClient.policy.getPolicies(queryFilter)`
+[Back to Policy API](#policy-api)
+
+<hr />
+
+### async securityClient.policy.getPolicies({ page?, limit?, filter?, order? })
 
 Get policies list (if no query parameters returns first 25 policies)
 
@@ -979,25 +969,14 @@ PolicyItem {
 ```
 or throw HttpError
 
-#### queryFilter
+##### Parameters
 
-Type: `object`
-
-##### page
-
-Type: `number`
-
-Optional, default value: `1`
-
-##### limit
-
-Type: `number`
-
-Optional, default value: `25`
-
-##### filter
-
-Type: `object`
+| Name         | Type       | Description                                     | Default |
+|--------------|------------|-------------------------------------------------|---------|
+| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
+| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
+| filter       | `object`   | **optional** <p>[Query filter](#understanding-filters-and-ordering)</p>               | {}      |
+| order        | `object`   | **optional** <p>[Order filter](#understanding-filters-and-ordering)</p>                | {}      |
 
 ##### filter[column] = operator
 ```ts
@@ -1006,27 +985,8 @@ export type GetPoliciesColumns = "id" | "resource" | "attribute";
 export type GetPoliciesFilterOperators = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr";
 ```
 
-##### order
+##### Example
 
-Type: `object`
-
-##### order.by
-
-Type: `string`
-
-Default: `id`
-
-Values: `id | resource | attribute`
-
-##### order.type
-
-Type: `string`
-
-Default: `asc`
-
-Values: `asc` | `desc`
-
-Examples:
 ```js
 const policies = await securityClient.policy.getPolicies();
 console.log(policies);
@@ -1056,46 +1016,54 @@ console.log(policies);
 // => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", resource: "api/users", attribute: "ADMIN_PANEL"}], total: 1, page: 1, limit: 10 }
 ```
 
-### `async securityClient.policy.removePolicy(policyId | policyQuery)`
+[Back to Policy API](#policy-api)
 
-Removes a policy (identified either by id or resource and attribute)
+<hr />
+
+### async securityClient.policy.removePolicy({ id })
+
+Removes a policy by id
 
 Return an empty object or throw HttpError
 
-#### policyId
+##### Parameters
 
-Type: `object`
+| Name                  | Type       | Description                                              |
+|-----------------------|------------|----------------------------------------------------------|
+| id                    | `string`   | Policy ID                                                |
 
-##### id
+##### Example
 
-Type: `string`
-
-Policy id
-
-#### policyQuery
-
-Type: `object`
-
-##### resource
-
-Type: `string`
-
-Resource name
-
-##### attribute
-
-Type: `string`
-
-Attribute name
-
-Examples:
 ```js
-await securityClient.policy.removePolicy({ resource: "RESOURCE", attribute: "ATTR_1"});
-
-// or
-
 await securityClient.policy.removePolicy({ id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"});
 ```
+
+[Back to Policy API](#policy-api)
+
+<hr />
+
+### async securityClient.policy.removePolicy({ resource, attribute })
+
+Removes a policy by id
+
+Return an empty object or throw HttpError
+
+##### Parameters
+
+| Name                  | Type       | Description                                              |
+|-----------------------|------------|----------------------------------------------------------|
+| resource              | `string`   | Policy resource                                          |
+| attribute             | `string`   | Policy attribute                                         |
+
+##### Example
+
+```js
+await securityClient.policy.removePolicy({ resource: "RESOURCE", attribute: "ATTR_1"});
+```
+
+[Back to Policy API](#policy-api)
+
+<hr />
 
 ### Understanding filters and ordering
 
@@ -1117,54 +1085,83 @@ interface UsersQueryFilter {
   };
 }
 ```
-- filter
-  - Single parameter filter
-    ```js
-    filter: {
-      username: {
-        include: "super"
-      }
+
+- filter[column][operator] = value
+
+  | Name                  | Type       | Description                                              |
+  |-----------------------|------------|----------------------------------------------------------|
+  | column                | `string`   | Column name, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)             |
+  | operator              | `string`   | Operator name, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)                                     |
+  | value                 | `string` or `number` or `boolean` (depending on the `column` type)         |                                          |
+  
+  #### Examples
+
+  Single parameter filter
+  ```js
+  filter: {
+    username: {
+      include: "super"
     }
-    ```
-  - Two parameter filter
-    ```js
-    filter: {
-      username: {
-        include: "super"
-      },
-      isActive: {
-        eq: true,
-      },
-    }
-    ```
+  }
+  ```
+
+  Two parameter filter
+  ```js
+  filter: {
+    username: {
+      include: "super"
+    },
+    isActive: {
+      eq: true,
+    },
+  }
+  ```
+
 - order
   
-  Type: `object`
-  - by
-  
-    type: `string`
-    
-    default: `id`
-  - type
-    
-    type: `string`
-    
-    default: `asc`
-    
-  Example:
+  | Name                  | Type       | Description                                                                     | Default |
+  |-----------------------|------------|---------------------------------------------------------------------------------|---------|
+  | by                | `string`       | **optional** <p>column name for order sorting, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)</p> | `id`    |
+  | type              | `asc` or `desc`| **optional** <p>Ascending or descending order</p>                               | `asc`   |
+
+  #### Examples
   ```js
   order: {
     by: "username",
     type: "desc"
   }
   ```
-- page
-  
-  type: `number`
-  
-  default: `1`
-- limit
 
-  type: `number`
-  
-  default: `25`
+#### getUsers filter and order
+[Get users method](#async-securityclientusersgetusers-page-limit-filter-order)
+
+```js
+column = "id" | "username" | "isActive" | "createdAt" | "updatedAt" | "attribute.name"
+```
+
+```js
+operator = "eq"| "eqOr" | "neq" | "neqOr" | "lt" | "ltOr" | "gt" | "gtOr" | "gte" | "gteOr" | "include" | "includeOr"
+```
+
+#### getAttributes filter and order 
+
+[Get attributes method](#async-securityclientattributesgetattributes-page-limit-filter-order-)
+
+```js
+column = "id" | "name" | "user.id" | "user.username"`
+```
+
+```js
+operator = "eq" | "eqOr" | "neq" | "lt" | "gt" | "include" | "includeOr"
+```
+
+#### getPolicies filter and order
+[Get attributes method](#async-securityclientattributesgetattributes-page-limit-filter-order-)
+
+```js
+column = "id" | "resource" | "attribute"
+```
+
+```js
+operator = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr"
+```
