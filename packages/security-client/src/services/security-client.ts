@@ -20,17 +20,20 @@ import {
   TooManyRequests,
   Unauthorized,
 } from "./http-errors";
-import { Users } from "../defs/user";
-import { auth } from "../resources/auth";
+import { AuthResources } from "../resources/auth";
 import { tokens } from "../resources/tokens";
 import { attributes } from "../resources/attributes";
-import { policy } from "../resources/policy";
+import { PolicyResources } from "../resources/policy";
+import { Users } from "../defs/user";
+import { Auth } from "../defs/auth";
+import { Attributes } from "../defs/attributes";
+import { Tokens } from "../defs/tokens";
 
 export function getHttpError(error: ResponseFilterError): HttpError {
   const { response } = error;
-  const { error: errorMessage } = response.body as any;
+  const errorMessage = (response as any)?.body?.error ?? error.message;
 
-  switch (response.statusCode) {
+  switch (response?.statusCode) {
     case 400:
       return new BadRequest(errorMessage);
     case 401:
@@ -93,33 +96,29 @@ export class SecurityClient {
       ],
     });
     this.users = users(this.serviceClient);
-    this.auth = auth(this.serviceClient);
+    this.auth = new AuthResources(this.serviceClient);
     this.tokens = tokens(this.serviceClient);
     this.attributes = attributes(this.serviceClient);
-    this.policy = policy(this.serviceClient);
+    this.policy = new PolicyResources(this.serviceClient);
   }
 
   public serviceClient: ServiceClient;
 
   public users: Users;
 
-  public auth: any;
+  public auth: Auth;
 
-  public tokens: any;
+  public tokens: Tokens;
 
-  public attributes: any;
+  public attributes: Attributes;
 
-  public policy: any;
+  public policy: PolicyResources;
 
-  public async setApiKey(apiKey: string) {
-    const { credentials = { apiKey } } = this.options;
-    credentials.apiKey = apiKey;
-    this.options.credentials = credentials;
+  public setApiKey(apiKey: string) {
+    this.options.credentials.apiKey = apiKey;
   }
 
-  public async setToken(token: Token) {
-    const { credentials = { token } } = this.options;
-    credentials.token = token;
-    this.options.credentials = credentials;
+  public setToken(token: Token) {
+    this.options.credentials.token = token;
   }
 }

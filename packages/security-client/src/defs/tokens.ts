@@ -37,3 +37,10 @@ export interface GetAccessKeysResponse {
 export interface RemoveAccessKeyRequest {
   apiKey: string;
 }
+
+export interface Tokens {
+  createAccessKey(request: CreateAccessKeyRequest): Promise<CreateAccessKeyResponse>;
+  generateToken(request: GenerateTokenRequest): Promise<GenerateTokenResponse>;
+  getAccessKeys(request?: GetAccessKeysRequest): Promise<GetAccessKeysResponse>;
+  removeAccessKey(request?: RemoveAccessKeyRequest): Promise<void>;
+}

@@ -1,18 +1,22 @@
 import { getHttpError } from "../services/security-client";
 import { ServiceClient } from "perron";
+import * as qs from "qs";
 import {
   AddPolicyRequest,
   AddPolicyResponse,
+  GetPoliciesRequest,
   GetPoliciesResponse,
-  PoliciesQueryFilter,
+  Policy,
   RemovePolicyRequest,
 } from "../defs/policy";
 
-export const policy = (serviceClient: ServiceClient) => ({
+export class PolicyResources implements Policy {
+  constructor(private serviceClient: ServiceClient) {}
+
   addPolicy(request: AddPolicyRequest): Promise<AddPolicyResponse> {
-    return serviceClient
+    return this.serviceClient
       .request({
-        pathname: "/api/policy/get-policies",
+        pathname: "/api/policy/add-policy",
         method: "POST",
         body: JSON.stringify({ ...request }),
       })
@@ -20,32 +24,29 @@ export const policy = (serviceClient: ServiceClient) => ({
       .catch((error) => {
         throw getHttpError(error);
       });
-  },
+  }
 
-  getPolicies(queryFilter: PoliciesQueryFilter) {
-    return serviceClient
+  getPolicies(queryFilter: GetPoliciesRequest = {}): Promise<GetPoliciesResponse> {
+    return this.serviceClient
       .request({
-        pathname: "/api/policy/get-policies",
+        pathname: `/api/policy/get-policies?${qs.stringify(queryFilter)}`,
         method: "GET",
-        query: queryFilter,
       })
       .then((response) => response.body as GetPoliciesResponse)
       .catch((error) => {
         throw getHttpError(error);
       });
-  },
+  }
 
   async removePolicy(request: RemovePolicyRequest): Promise<void> {
-    await serviceClient
+    await this.serviceClient
       .request({
         pathname: "/api/policy/remove-policy",
         method: "DELETE",
-        query: {
-          ...request,
-        },
+        query: request,
       })
       .catch((error) => {
         throw getHttpError(error);
       });
-  },
-});
+  }
+}

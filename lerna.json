@@ -2,9 +2,10 @@
   "private": true,
   "npmClient": "npm",
   "packages": [
-    "packages/*",
-    "examples/*"
+    "packages/security-client"
   ],
   "version": "independent",
-  "useWorkspaces": true
+  "workspaces": [
+    "packages/security-client"
+  ]
 }

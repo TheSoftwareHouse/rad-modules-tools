@@ -16,8 +16,8 @@ export interface PoliciesQueryFilter {
   page?: number;
   limit?: number;
   filter?: {
-    [column in GetPoliciesColumns]: {
-      [operator in GetPoliciesFilterOperators]: string;
+    [column in GetPoliciesColumns]?: {
+      [operator in GetPoliciesFilterOperators]?: string;
     };
   };
   order?: {
@@ -26,15 +26,19 @@ export interface PoliciesQueryFilter {
   };
 }
 
-export interface Policy {
+export interface PolicyItem {
   id: string;
   resource: string;
   attribute: string;
 }
 
+export type GetPoliciesRequest = PoliciesQueryFilter;
+
 export interface GetPoliciesResponse {
-  policies: Policy[];
+  policies: PolicyItem[];
   total: number;
+  page: number;
+  limit: number;
 }
 
 export interface AddPolicyRequest {
@@ -56,3 +60,9 @@ export interface PolicyQuery {
 }
 
 export type RemovePolicyRequest = PolicyIdQuery | PolicyQuery;
+
+export interface Policy {
+  addPolicy(request: AddPolicyRequest): Promise<AddPolicyResponse>;
+  getPolicies(queryFilter?: GetPoliciesRequest): Promise<GetPoliciesResponse>;
+  removePolicy(request: RemovePolicyRequest): Promise<void>;
+}

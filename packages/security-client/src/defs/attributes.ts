@@ -16,8 +16,8 @@ export interface AttributesQueryFilter {
   page?: number;
   limit?: number;
   filter?: {
-    [column in GetAttributesColumns]: {
-      [operator in GetAttributesFilterOperators]: string;
+    [column in GetAttributesColumns]?: {
+      [operator in GetAttributesFilterOperators]?: string;
     };
   };
   order?: {
@@ -41,5 +41,5 @@ export interface GetAttributesResponse {
 }
 
 export interface Attributes {
-  getAttributes(queryFilter: AttributesQueryFilter): Promise<GetAttributesResponse>;
+  getAttributes(queryFilter?: AttributesQueryFilter): Promise<GetAttributesResponse>;
 }

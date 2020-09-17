@@ -3,5 +3,5 @@ dist
 .idea
 .DS_Store
 .workspace
-./**/*.js
-./**/*.js.map
+*.js
+*.js.map

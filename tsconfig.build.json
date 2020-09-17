@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "target": "ES2019",
+    "target": "ES6",
+    "types": ["node"],
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
