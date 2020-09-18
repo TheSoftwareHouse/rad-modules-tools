@@ -1,6 +1,6 @@
 {
   "name": "@tshio/security-client",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": false,
   "description": "",
   "author": "tsh.io",
@@ -35,5 +35,5 @@
     "typedoc": "^0.19.1",
     "typedoc-plugin-markdown": "^2.4.2"
   },
-  "gitHead": "20898a8120db4ffb6d2be5ac0ff3f2e49622dde4"
+  "gitHead": "e0ccfaa5a40c9800fa23d0111088c442bd18ec89"
 }
