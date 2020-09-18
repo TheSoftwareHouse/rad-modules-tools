@@ -1,6 +1,10 @@
 {
   "name": "@tshio/security-client",
-  "version": "0.0.8",
+  "version": "0.0.9",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheSoftwareHouse/rad-modules-tools.git"
+  },
   "private": false,
   "description": "",
   "author": "tsh.io",
