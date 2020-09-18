@@ -9,8 +9,8 @@
   "description": "",
   "author": "tsh.io",
   "license": "MIT",
-  "main": "dist/index",
-  "types": "dist/index",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -19,7 +19,7 @@
   },
   "scripts": {
     "docs": "typedoc --options typedoc.js",
-    "build": "npm run clean && npm run compile",
+    "build": "npm run clean && npm run compile && npm run generate-types",
     "generate-types": "tsc --declaration ./src/**/*.ts --outDir ./dist",
     "clean": "rimraf -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
