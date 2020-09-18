@@ -1,6 +1,6 @@
 {
   "name": "@tshio/security-client",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": false,
   "description": "",
   "author": "tsh.io",
@@ -21,7 +21,8 @@
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build",
     "test": "npm run build",
-    "integration": "mocha dist/test/**/*.spec.js --exit"
+    "integration": "mocha dist/test/**/*.spec.js --exit",
+    "rimraf": "./node_modules/rimraf/bin.js"
   },
   "dependencies": {
     "perron": "0.11.4",
@@ -35,5 +36,5 @@
     "typedoc": "^0.19.1",
     "typedoc-plugin-markdown": "^2.4.2"
   },
-  "gitHead": "4cd97cf9bc98e637681cce13d68dd34e406d6f71"
+  "gitHead": "8e95838468f07921e3b735fb77f3616a39ee30e3"
 }
