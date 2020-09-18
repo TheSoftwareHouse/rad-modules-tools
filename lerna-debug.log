@@ -1,7 +1,7 @@
-33 error Error: Command failed: git tag @tshio/security-client@0.0.2 -m @tshio/security-client@0.0.2
-33 error fatal: tag '@tshio/security-client@0.0.2' already exists
-33 error
-33 error     at makeError (/home/marcin/projects/tsh/rad-modules-tools/node_modules/execa/index.js:174:9)
-33 error     at /home/marcin/projects/tsh/rad-modules-tools/node_modules/execa/index.js:278:16
-33 error     at processTicksAndRejections (internal/process/task_queues.js:97:5)
-33 error     at async Promise.all (index 0)
+36 error Error: Command failed: git tag @tshio/security-client@0.0.10 -m @tshio/security-client@0.0.10
+36 error fatal: tag '@tshio/security-client@0.0.10' already exists
+36 error
+36 error     at makeError (/home/marcin/projects/tsh/rad-modules-tools/node_modules/execa/index.js:174:9)
+36 error     at /home/marcin/projects/tsh/rad-modules-tools/node_modules/execa/index.js:278:16
+36 error     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+36 error     at async Promise.all (index 0)
