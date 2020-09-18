@@ -16,6 +16,7 @@
   "scripts": {
     "docs": "typedoc --options typedoc.js",
     "build": "npm run clean && npm run compile",
+    "generate-types": "tsc --declaration ./src/**/*.ts --outDir ./dist",
     "clean": "rimraf -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build",

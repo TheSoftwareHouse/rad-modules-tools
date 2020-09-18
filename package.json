@@ -11,6 +11,7 @@
     "docs": "lerna run docs",
     "bootstrap": "./node_modules/.bin/lerna clean -y && ./node_modules/.bin/lerna bootstrap --hoist",
     "build": "./node_modules/.bin/lerna run build",
+    "generate-types": "./node_modules/.bin/lerna run generate-types",
     "unit": "./node_modules/.bin/lerna run units",
     "integration": "lerna run integration",
     "add": "./node_modules/.bin/lerna add --exact",
