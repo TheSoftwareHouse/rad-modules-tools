@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/feature/RAD-302-security-client-tests/assets/rad-modules.svg">
+  <img src="https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/feature/RAD-302-security-client-tests/assets/rad-modules-tools.svg">
 </p>
 
 #
