@@ -3,8 +3,6 @@
   <p>Rad Modules Tools</p>
 </h1>
 
-# Rad Modules Tools
-
 [![Build Status](https://travis-ci.com/TheSoftwareHouse/rad-modules-tools.svg?branch=master)](https://travis-ci.com/github/TheSoftwareHouse/rad-modules-tools)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
