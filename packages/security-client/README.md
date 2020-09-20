@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-  * [Install](#install)
+  * [Install](#installing)
   * [Loading and configuration](#loading-and-configuration-module)
   * [Usage](#usage)
   * [API](#api)
@@ -12,10 +12,14 @@
     * [Attributes](#attributes-api)
     * [Policy](#policy-api)
   
-## Install
-
-```sh
+## Installing
+[![npm version](https://badge.fury.io/js/%40tshio%2Fsecurity-client.svg)](https://badge.fury.io/js/%40tshio%2Fsecurity-client)
+```bash
 $ npm install @tshio/security-client
+```
+or
+```bash
+yarn add @tshio/security-client
 ```
 
 ## Loading and configuration module
