@@ -1,6 +1,6 @@
-<h1 align="center">
+<h1 align="center" style="color: cornflowerblue">
   <img width="100" height="100" src="https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/feature/RAD-302-security-client-tests/assets/rad-modules-logo.svg">
-  <p>Rad Modules Tools</p>
+  <p style="color: cornflowerblue">Rad Modules Tools</p>
 </h1>
 
 [![Build Status](https://travis-ci.com/TheSoftwareHouse/rad-modules-tools.svg?branch=master)](https://travis-ci.com/github/TheSoftwareHouse/rad-modules-tools)
