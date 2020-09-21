@@ -1275,3 +1275,15 @@ column = "id" | "resource" | "attribute"
 operator = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr"
 ```
 
+## License
+
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/master/LICENSE)
+
+This project is licensed under the terms of the [MIT license](/LICENSE).
+
+## About us:
+
+<a href="https://tsh.io"><b>The Software House</b></a>
+
+<img src="https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/feature/RAD-302-security-client-tests/assets/tsh.png" alt="tsh.png" width="150"  />  
+

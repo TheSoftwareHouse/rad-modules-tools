@@ -12,9 +12,9 @@ rad-modules-tools are set of tools that easily cooperate with rad-modules.
 
 ## Monorepo
 
-This repo is a monorepo which contains the [rad-modules](https://github.com/TheSoftwareHouse/rad-modules) API clients.
+This repo is a monorepo which contains the [rad-modules](https://github.com/TheSoftwareHouse/rad-modules) API clients:
 
-- [Rad Security Client](https://github.com/TheSoftwareHouse/rad-modules-tools/tree/master/packages/security-client)
+- [RAD Security Client](https://github.com/TheSoftwareHouse/rad-modules-tools/tree/master/packages/security-client)
 
 ## Setting up for local development
 
@@ -29,6 +29,13 @@ This repo is a monorepo which contains the [rad-modules](https://github.com/TheS
 
 ## License
 
-[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/TheSoftwareHouse/rad-modules-tools/blob/feature/RAD-302-security-client-tests/LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/master/LICENSE)
 
 This project is licensed under the terms of the [MIT license](/LICENSE).
+
+## About us:
+
+<a href="https://tsh.io"><b>The Software House</b></a>
+
+<img src="https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/feature/RAD-302-security-client-tests/assets/tsh.png" alt="tsh.png" width="150"  />  
+
