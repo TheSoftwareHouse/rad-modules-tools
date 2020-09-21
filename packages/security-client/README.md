@@ -1,4 +1,13 @@
-# Security Client
+# RAD Security Client
+
+[![npm version](https://badge.fury.io/js/%40tshio%2Fsecurity-client.svg)](https://badge.fury.io/js/%40tshio%2Fsecurity-client)
+
+
+**Non-blocking RAD Security client for Node.js.**
+
+This is a 100% JavaScript library, with TypeScript definition, with the Promise API.
+
+This module makes it simple to implement a Node.js application that uses [RAD Security](https://thesoftwarehouse.github.io/rad-modules-docs/docs/security/security-index) for its authentication and authorization needs.
 
 ## Table of Contents
 
@@ -11,9 +20,8 @@
     * [Users](#users-api)
     * [Attributes](#attributes-api)
     * [Policy](#policy-api)
-  
+
 ## Installing
-[![npm version](https://badge.fury.io/js/%40tshio%2Fsecurity-client.svg)](https://badge.fury.io/js/%40tshio%2Fsecurity-client)
 ```bash
 $ npm install @tshio/security-client
 ```
@@ -50,18 +58,18 @@ const SecurityClient = require('@tshio/security-client');
 (async () => {
     const securityClient = SecurityClient.getSecurityClient();
     const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
-	
+
     console.log(token);
     // => { accessToken: "xxx", refreshToken: "xxx" }
-   
+
     securityClient.setToken(token); // From now, the token will be automatically added to all API requests
-    
+
     // Alternatively, you can set the API Key instead of a Token
     // securityClient.setApiKey("api key string");
 })();
 ```
 
-### Examples
+ ### Examples
 ```js
 (async () => {
     const securityClient = SecurityClient.getSecurityClient();
@@ -131,7 +139,7 @@ const SecurityClient = require('@tshio/security-client');
     //   page: 1,
     //   limit: 25
     // }
-    
+
     // Delete user
     await securityClient.users.deleteUser({ userId: newUserId });
 
@@ -185,27 +193,27 @@ const { getSecurityClient } = require('@tshio/security-client');
 (async () => {
     const securityClient = getSecurityClient();
     const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
-   
+
     securityClient.setToken(token);
-  
+
     const newUser = {
       username: "superadmin2",
       password: "superadmin",
       attributes: ["ROLE_SUPERADMIN"],
     }
-   
+
     const { newUserId } = await securityClient.users.addUser(newUser);
 
     console.log(newUserId);
     // => 45287eff-cdb0-4cd4-8a0f-a07d1a11b382
-  
+
     const newUserAttribute = {
       userId: newUserId,
       attributes: ["ATTR1", "ATTR2"],
     }
 
     await securityClient.users.addAttributes(newUserAttribute)
-  
+
     const user = await securityClient.users.getUser({ userId: newUserId });
     console.log(user);
     // =>
@@ -222,15 +230,15 @@ const { getSecurityClient } = require('@tshio/security-client');
 (async () => {
     const securityClient = getSecurityClient();
     const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
-   
+
     securityClient.setToken(token);
-  
+
     const user = {
       username: "superadmin2",
       password: "superadmin",
       attributes: ["ROLE_SUPERADMIN"],
     }
-   
+
     const { newUserId } = await security.users.addUser(user);
 
     console.log(newUserId);
@@ -298,8 +306,8 @@ Returns a new password or throw HttpError
 The `newPassword` is optional. If `undefined`, the password will be generated randomly
 .
 ```js
-const token = await securityClient.auth.resetPassword({ 
-  resetPasswordToken: "reset password token...", 
+const token = await securityClient.auth.resetPassword({
+  resetPasswordToken: "reset password token...",
   newPassword: "NewSuperSecret",
 });
 ```
@@ -431,12 +439,12 @@ or throw HttpError
 ##### Example
 
 ```js
-const result = await securityClient.auth.activateUser({ 
+const result = await securityClient.auth.activateUser({
   activationToken: "activation token..."
 });
 
 console.log(result);
-// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: true } 
+// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: true }
 ```
 
 [Back to Users API](#users-api)
@@ -466,12 +474,12 @@ or throw HttpError
 ##### Example
 
 ```js
-const result = await securityClient.auth.deactivateUser({ 
+const result = await securityClient.auth.deactivateUser({
   userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
 });
 
 console.log(result);
-// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: false,  deactivationDate: Date Tue Sep 15 2020 14:03:25 GMT+0200 (Central European Summer Time)} 
+// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: false,  deactivationDate: Date Tue Sep 15 2020 14:03:25 GMT+0200 (Central European Summer Time)}
 ```
 
 [Back to Users API](#users-api)
@@ -575,7 +583,7 @@ Returns an empty object or throw HttpError
 
 ```js
 await securityClient.users.addAttributes({
-  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", 
+  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382",
   attributes: ["ATTR_1", "ATTR_2"]
 });
 ```
@@ -601,7 +609,7 @@ Returns an empty object or throw HttpError
 
 ```js
 await securityClient.users.removeAttributes({
-  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", 
+  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382",
   attributes: ["ATTR_1", "ATTR_2"]
 });
 ```
@@ -634,7 +642,7 @@ throw HttpError
 
 ```js
 const { newUserId } = await securityClient.users.addUser({
-  username: "new-user", 
+  username: "new-user",
   password: "password",
   attributes: ["ADMIN_PANEL"],
 });
@@ -675,7 +683,7 @@ await securityClient.users.getUser({
 
 Get user
 
-Returns an user object 
+Returns an user object
 ```js
 User {
   id: string;
@@ -711,7 +719,7 @@ const result = await securityClient.users.getUser({
 
 Get user id
 
-Returns an object 
+Returns an object
 ```js
 {
   userId: string;
@@ -743,7 +751,7 @@ console.log(userId)
 
 Get users by resource name
 
-Returns an object 
+Returns an object
 ```js
 {
   users: User[];
@@ -780,7 +788,7 @@ console.log(result)
 
 Set a new password for user
 
-Returns an object 
+Returns an object
 ```js
 {
   passwordChanged: boolean;
@@ -816,7 +824,7 @@ console.log(passwordChanged)
 
 Returns token which will be used to reset the user password
 
-Returns an object 
+Returns an object
 ```js
 {
   resetPasswordToken: string;
@@ -1070,10 +1078,10 @@ await securityClient.policy.removePolicy({ resource: "RESOURCE", attribute: "ATT
 
 ### Understanding filters and ordering
 
-Filters can be used search for a single condition or they can be wrapped in logical operands AND and OR. Filtering can be a simple conditional evaluation of a single field. The operator, `column`, and `operator` used in a filter are specific to the API they are used in. 
+Filters can be used search for a single condition or they can be wrapped in logical operands AND and OR. Filtering can be a simple conditional evaluation of a single field. The operator, `column`, and `operator` used in a filter are specific to the API they are used in.
 
 ```ts
-// 
+//
 interface UsersQueryFilter {
   page?: number;
   limit?: number;
@@ -1096,7 +1104,7 @@ interface UsersQueryFilter {
   | column                | `string`   | Column name, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)             |
   | operator              | `string`   | Operator name, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)                                     |
   | value                 | `string` or `number` or `boolean` (depending on the `column` type)         |                                          |
-  
+
   #### Examples
 
   Single parameter filter
@@ -1121,7 +1129,7 @@ interface UsersQueryFilter {
   ```
 
 - order
-  
+
   | Name                  | Type       | Description                                                                     | Default |
   |-----------------------|------------|---------------------------------------------------------------------------------|---------|
   | by                | `string`       | **optional** <p>column name for order sorting, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)</p> | `id`    |
@@ -1146,7 +1154,7 @@ column = "id" | "username" | "isActive" | "createdAt" | "updatedAt" | "attribute
 operator = "eq"| "eqOr" | "neq" | "neqOr" | "lt" | "ltOr" | "gt" | "gtOr" | "gte" | "gteOr" | "include" | "includeOr"
 ```
 
-#### getAttributes filter and order 
+#### getAttributes filter and order
 
 [Get attributes method](#async-securityclientattributesgetattributes-page-limit-filter-order-)
 
@@ -1168,3 +1176,4 @@ column = "id" | "resource" | "attribute"
 ```js
 operator = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr"
 ```
+

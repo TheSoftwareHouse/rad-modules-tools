@@ -1,3 +1,8 @@
+/**
+ * Authorization module.
+ * @module auth
+ */
+
 import { getHttpError } from "../services/security-client";
 import { ServiceClient } from "perron";
 import { Token } from "../services/service";
@@ -16,13 +21,16 @@ export const auth = (serviceClient: ServiceClient) =>
     /**
      * Returns Token object
      *
+     * @param credentials {object} - Credentials object
+     * @param credentials.username {string} - User name
+     * @param credentials.password {string} - User password
+     * @return {Promise<Token>}
+     * @fulfil {string} - the rendered docs
+     * @category async
      *
-     * @param {Promise<Token>} request - LoginRequest
-     * @returns Token
-     *
-     * @beta
+     * @alias module:auth.login
      */
-    login(request: LoginRequest): Promise<Token> {
+    async login(request: LoginRequest): Promise<Token> {
       return serviceClient
         .request({
           pathname: "/api/public/auth/login",
