@@ -16,7 +16,7 @@ This module makes it simple to implement a Node.js application that uses [RAD Se
   * [Usage](#usage)
   * [API](#api)
     * [Authorization](#authorization-api)
-    * [Token](#token-api)
+    * [Tokens](#tokens-api)
     * [Users](#users-api)
     * [Attributes](#attributes-api)
     * [Policy](#policy-api)
@@ -346,6 +346,104 @@ Returns a new Token object or throw HttpError
 | userId       | `string`   | User ID                               |
 
 [Back to Authorization API](#authorization-api)
+
+## Tokens API
+
+### async securityClient.tokens.createAccessKey({ accessToken })
+
+Create Api Key
+
+Return object
+```js
+{
+  apiKey: string;
+  type: "custom";
+  createdBy: string;
+}
+```
+or throw HttpError
+
+##### Parameters
+
+| Name         | Type       | Description                                     |
+|--------------|------------|-------------------------------------------------|
+| accessToken         | `string`   | Access Token                 |
+
+
+[Back to Tokens API](#tokens-api)
+
+<hr />
+
+### async securityClient.tokens.generateToken({ accessToken })
+
+Creates new token with default policies and attributes without SUPERADMIN_ROLE attribute
+
+Return object
+```js
+{
+  accessToken: string;
+  refreshToken: string;
+}
+```
+or throw HttpError
+
+##### Parameters
+
+| Name         | Type       | Description                                     |
+|--------------|------------|-------------------------------------------------|
+| accessExpirationInSeconds         | `number`   | Access token expiration time                |
+| refreshExpirationInSeconds         | `number`   | Refresh token expiration time                |
+
+
+[Back to Tokens API](#tokens-api)
+
+<hr />
+
+### async securityClient.tokens.getAccessKeys({ page, limit })
+
+Get access keys list (if no query parameters returns first 25 keys)
+
+Return object
+```js
+{
+  accessKeys: {
+    id: string;
+    apiKey: string;
+    type: string;
+    createdBy: string;
+    createdAt: Date;
+  }[];
+  total: number;
+}
+```
+or throw HttpError
+
+##### Parameters
+
+| Name         | Type       | Description                                     | Default |
+|--------------|------------|-------------------------------------------------|---------|
+| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
+| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
+
+
+[Back to Tokens API](#tokens-api)
+
+<hr />
+
+### async securityClient.tokens.removeAccessKey({ apiKey })
+
+Remove api key
+
+Return `void` or throw HttpError
+
+##### Parameters
+
+| Name         | Type       | Description                                     |
+|--------------|------------|-------------------------------------------------|
+| apiKey         | `string`   | ApiKey that should be deleted           |
+
+
+[Back to Tokens API](#tokens-api)
 
 ## Users API
 

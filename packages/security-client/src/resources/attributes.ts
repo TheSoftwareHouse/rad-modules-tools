@@ -1,11 +1,11 @@
 import { getHttpError } from "../services/security-client";
 import { ServiceClient } from "perron";
-import { Attributes, AttributesQueryFilter, GetAttributesResponse } from "../defs/attributes";
+import { Attributes, GetAttributesRequest, GetAttributesResponse } from "../defs/attributes";
 import * as qs from "qs";
 
 export const attributes = (serviceClient: ServiceClient) =>
   ({
-    getAttributes(queryFilter: AttributesQueryFilter = {}): Promise<GetAttributesResponse> {
+    getAttributes(queryFilter: GetAttributesRequest = {}): Promise<GetAttributesResponse> {
       return serviceClient
         .request({
           pathname: `/api/attributes?${qs.stringify(queryFilter)}`,

@@ -33,6 +33,8 @@ export interface Attribute {
   username: string;
 }
 
+export type GetAttributesRequest = AttributesQueryFilter;
+
 export interface GetAttributesResponse {
   attributes: Attribute[];
   total: number;
