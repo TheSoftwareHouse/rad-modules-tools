@@ -1,1166 +1,1289 @@
-# Security Client
-
-## Table of Contents
-
-  * [Install](#install)
-  * [Loading and configuration](#loading-and-configuration-module)
-  * [Usage](#usage)
-  * [API](#api)
-    * [Authorization](#authorization-api)
-    * [Token](#token-api)
-    * [Users](#users-api)
-    * [Attributes](#attributes-api)
-    * [Policy](#policy-api)
-  
-## Install
-
-```sh
-$ npm install @tshio/security-client
-```
-
-## Loading and configuration module
-
-```js
-// CommonJS
-const { getSecurityClient } = require('@tshio/security-client');
-
-// ES Module
-import { getSecurityClient } from '@tshio/security-client';
-
-
-const options = {
-  host: "localhost",
-  port: "50050",
-}
-
-const securityClient = getSecurityClient(options);
-```
-
-## Getting started
-
-### Login and authorization
-
-```js
-const SecurityClient = require('@tshio/security-client');
-
-(async () => {
-    const securityClient = SecurityClient.getSecurityClient();
-    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
-	
-    console.log(token);
-    // => { accessToken: "xxx", refreshToken: "xxx" }
-   
-    securityClient.setToken(token); // From now, the token will be automatically added to all API requests
-    
-    // Alternatively, you can set the API Key instead of a Token
-    // securityClient.setApiKey("api key string");
-})();
-```
-
-### Examples
-```js
-(async () => {
-    const securityClient = SecurityClient.getSecurityClient();
-    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
-
-    securityClient.setToken(token);
-
-    // Add User
-    const newUser = {
-      username: "superadmin2",
-       password: "superadmin",
-       attributes: ["ROLE_SUPERADMIN"],
-    }
-
-    const { newUserId } = await securityClient.users.addUser(newUser);
-
-    console.log(newUserId);
-    // => 45287eff-cdb0-4cd4-8a0f-a07d1a11b382
-
-    // Add Attribute
-    const newUserAttribute = {
-      userId: newUserId,
-       attributes: ["ATTR1", "ATTR2"],
-    }
-
-    await securityClient.users.addAttributes(newUserAttribute)
-
-    const user = await securityClient.users.getUser({ userId: newUserId });
-    console.log(user);
-    // =>
-    // {
-    //   id: '78204778-de24-4957-83d5-e01235d1d52a',
-    //   username: 'superadmin2',
-    //   isActive: true,
-    //   activationToken: null,
-    //   createdAt: '2020-09-16T11:25:44.509Z',
-    //   updatedAt: '2020-09-16T11:25:44.509Z',
-    //   attributes: [ 'ROLE_SUPERADMIN', 'ATTR1', 'ATTR2' ],
-    //   isSuperAdmin: true
-    // }
-
-    // Get Users with query filter
-    const users = await securityClient.users.getUsers({
-      filter: {
-        username: {
-          include: "superadmin2",
-        },
-      },
-    });
-
-    console.log(users);
-    // =>
-    // {
-    //   users: [
-    //     {
-    //       id: 'c44ed13d-09cc-4797-8835-18e98b5f3e07',
-    //       username: 'superadmin2',
-    //       isActive: true,
-    //       activationToken: null,
-    //       createdAt: '2020-09-16T13:16:25.997Z',
-    //       updatedAt: '2020-09-16T13:16:25.997Z',
-    //       attributes: [Array],
-    //       isSuperAdmin: true
-    //     }
-    //   ],
-    //     total: 1,
-    //   page: 1,
-    //   limit: 25
-    // }
-    
-    // Delete user
-    await securityClient.users.deleteUser({ userId: newUserId });
-
-    // Get policies
-    const policy = await securityClient.policy.getPolicies({ limit: 100 });
-    console.log(policy);
-
-    // Add policy
-    const newPolicy = {
-      resource: "TEST",
-      attribute: "TEST",
-    }
-
-    const { id } = await securityClient.policy.addPolicy(newPolicy);
-
-    // Get policies with query filter
-    const result2 = await securityClient.policy.getPolicies({
-      filter: {
-        id: {
-          eq: id,
-        },
-      }
-    });
-
-    console.log(result2);
-    // =>
-    // {
-    //   policies: [
-    //     {
-    //       id: '7d9b054a-0c41-4517-8818-baa8af70cc12',
-    //       attribute: 'TEST',
-    //       resource: 'TEST'
-    //     }
-    //   ],
-    //     total: 1,
-    //   page: 1,
-    //   limit: 25
-    // }
-
-
-    // Remove policy
-    await securityClient.policy.removePolicy({ id });
-})();
-```
-
-## Add user and attributes
-
-```js
-const { getSecurityClient } = require('@tshio/security-client');
-
-(async () => {
-    const securityClient = getSecurityClient();
-    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
-   
-    securityClient.setToken(token);
-  
-    const newUser = {
-      username: "superadmin2",
-      password: "superadmin",
-      attributes: ["ROLE_SUPERADMIN"],
-    }
-   
-    const { newUserId } = await securityClient.users.addUser(newUser);
-
-    console.log(newUserId);
-    // => 45287eff-cdb0-4cd4-8a0f-a07d1a11b382
-  
-    const newUserAttribute = {
-      userId: newUserId,
-      attributes: ["ATTR1", "ATTR2"],
-    }
-
-    await securityClient.users.addAttributes(newUserAttribute)
-  
-    const user = await securityClient.users.getUser({ userId: newUserId });
-    console.log(user);
-    // =>
-
-    await securityClient.users.deleteUser({ userId: newUserId });
-})();
-```
-
-## Add user
-
-```js
-const { getSecurityClient } = require('@tshio/security-client');
-
-(async () => {
-    const securityClient = getSecurityClient();
-    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
-   
-    securityClient.setToken(token);
-  
-    const user = {
-      username: "superadmin2",
-      password: "superadmin",
-      attributes: ["ROLE_SUPERADMIN"],
-    }
-   
-    const { newUserId } = await security.users.addUser(user);
-
-    console.log(newUserId);
-    // => 45287eff-cdb0-4cd4-8a0f-a07d1a11b382
-})();
-```
-
-## API
-
-### securityClient.setToken({ accessToken, refreshToken })
-
-Set the token object for authorize api requests.
-
-**This command is crucial, the token will be used for authorization all of api requests.**
+	# RAD Security Client
 
-##### Parameters
+	[![npm version](https://badge.fury.io/js/%40tshio%2Fsecurity-client.svg)](https://badge.fury.io/js/%40tshio%2Fsecurity-client)
 
-| Name         | Type       | Description                           |
-|--------------|------------|---------------------------------------|
-| accessToken  | `string`   | Access token                          |
-| refreshToken | `string`   | Refresh token                         |
-
-[Back to API](#api)
 
-## Authorization API
-
-### async securityClient.auth.login({ username, password })
+	**Non-blocking RAD Security client for Node.js.**
 
-Login to rad-security
-
-Returns a Token object or throw HttpError
-
-##### Parameters
-
-| Name     | Type       | Description                           |
-|----------|------------|---------------------------------------|
-| username | `string`   | User name                             |
-| password | `string`   | User password                         |
-
-##### Example
-
-```js
-const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
-console.log(token);
-// => { accessToken: "...", refreshToken: "..." }
-```
-
-[Back to Authorization API](#authorization-api)
-
-<hr />
-
-### async securityClient.auth.resetPassword({resetPasswordToken, newPassword?})
-
-Reset password
-
-Returns a new password or throw HttpError
-
-##### Parameters
-
-| Name               | Type       | Description                           |
-|--------------------|------------|---------------------------------------|
-| resetPasswordToken | `string`   | Reset password token                  |
-| newPassword        | `string`   | **optional** <p>New password</p>      |
-
-The `newPassword` is optional. If `undefined`, the password will be generated randomly
-.
-```js
-const token = await securityClient.auth.resetPassword({ 
-  resetPasswordToken: "reset password token...", 
-  newPassword: "NewSuperSecret",
-});
-```
-
-[Back to Authorization API](#authorization-api)
-
-<hr />
-
-### async securityClient.auth.refreshToken({ asccessToken, refreshToken })
-
-Refreshes access token.
-
-Returns a new Token object or throw HttpError
-
-##### Parameters
-
-| Name         | Type       | Description                           |
-|--------------|------------|---------------------------------------|
-| accessToken  | `string`   | Access token                          |
-| refreshToken | `string`   | Refresh token                         |
-
-[Back to Authorization API](#authorization-api)
-
-<hr />
-
-### async securityClient.auth.refreshUserActiveToken(userId)
-
-Refresh user's active token if token has expired.
-
-Returns a new Token object or throw HttpError
-
-##### Parameters
-
-| Name         | Type       | Description                           |
-|--------------|------------|---------------------------------------|
-| userId       | `string`   | User ID                               |
-
-[Back to Authorization API](#authorization-api)
-
-## Users API
-
-### async securityClient.users.getUsers({ page?, limit?, filter?, order?})
-
-Get users list (if no query parameters returns first 25 users)
-
-##### Parameters
-
-| Name         | Type       | Description                                     | Default |
-|--------------|------------|-------------------------------------------------|---------|
-| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
-| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
-| filter       | `object`   | **optional** <p>[Query filter](#understanding-filters-and-ordering)</p>               | {}      |
-| order        | `object`   | **optional** <p>[Order filter](#understanding-filters-and-ordering)</p>                | {}      |
-
-##### filter[column] = operator
-```ts
-export type GetUserColumns = "id" | "username" | "isActive" | "createdAt" | "updatedAt" | "attribute.name";
-
-export type FilterOperators =
-  | "eq"
-  | "eqOr"
-  | "neq"
-  | "neqOr"
-  | "lt"
-  | "ltOr"
-  | "gt"
-  | "gtOr"
-  | "gte"
-  | "gteOr"
-  | "include"
-  | "includeOr";
-
-```
-
-##### Example
-
-```js
-const users = await securityClient.users.getUsers();
-console.log(users);
-// => { users: [...], total: 1, page: 1, limit: 25, }
-
-const users = await securityClient.users.getUsers({
-  page: 1,
-  limit: 10,
-});
-console.log(users);
-// => { users: [...], total: 1, page: 1, limit: 10, }
-
-const users = await securityClient.users.getUsers({
-  page: 1,
-  limit: 10,
-  filter: {
-    username: {
-      include: "super",
-    }
-  },
-  order: {
-    by: "username",
-    type: "asc",
-  },
-});
-console.log(users);
-// => { users: [{username: "superadmin", ...}, ...], total: 1, page: 1, limit: 10, }
-```
+	This is a 100% JavaScript library, with TypeScript definition, with the Promise API.
 
-[Back to Users API](#users-api)
+	This module makes it simple to implement a Node.js application that uses [RAD Security](https://thesoftwarehouse.github.io/rad-modules-docs/docs/security/security-index) for its authentication and authorization needs.
 
-<hr />
+	## Table of Contents
 
-### async securityClient.users.activateUser({ activationToken })
+	  * [Install](#installing)
+	  * [Loading and configuration](#loading-and-configuration-module)
+	  * [Usage](#usage)
+	  * [API](#api)
+	    * [Authorization](#authorization-api)
+	    * [Tokens](#tokens-api)
+	    * [Users](#users-api)
+	    * [Attributes](#attributes-api)
+	    * [Policy](#policy-api)
 
-Activate a new user
+	## Installing
+	```bash
+	$ npm install @tshio/security-client
+	```
+	or
+	```bash
+	yarn add @tshio/security-client
+	```
+
+	## Loading and configuration module
+
+	```js
+	// CommonJS
+	const { getSecurityClient } = require('@tshio/security-client');
+
+	// ES Module
+	import { getSecurityClient } from '@tshio/security-client';
+
+
+	const options = {
+	  host: "localhost",
+	  port: "50050",
+	}
+
+	const securityClient = getSecurityClient(options);
+	```
+
+	## Getting started
+
+	### Login and authorization
+
+	```js
+	const SecurityClient = require('@tshio/security-client');
+
+	(async () => {
+	    const securityClient = SecurityClient.getSecurityClient();
+	    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
+
+	    console.log(token);
+	    // => { accessToken: "xxx", refreshToken: "xxx" }
+
+	    securityClient.setToken(token); // From now, the token will be automatically added to all API requests
+
+	    // Alternatively, you can set the API Key instead of a Token
+	    // securityClient.setApiKey("api key string");
+	})();
+	```
+
+	 ### Examples
+	```js
+	(async () => {
+	    const securityClient = SecurityClient.getSecurityClient();
+	    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
+
+	    securityClient.setToken(token);
+
+	    // Add User
+	    const newUser = {
+	      username: "superadmin2",
+	       password: "superadmin",
+	       attributes: ["ROLE_SUPERADMIN"],
+	    }
+
+	    const { newUserId } = await securityClient.users.addUser(newUser);
+
+	    console.log(newUserId);
+	    // => 45287eff-cdb0-4cd4-8a0f-a07d1a11b382
+
+	    // Add Attribute
+	    const newUserAttribute = {
+	      userId: newUserId,
+	       attributes: ["ATTR1", "ATTR2"],
+	    }
+
+	    await securityClient.users.addAttributes(newUserAttribute)
+
+	    const user = await securityClient.users.getUser({ userId: newUserId });
+	    console.log(user);
+	    // =>
+	    // {
+	    //   id: '78204778-de24-4957-83d5-e01235d1d52a',
+	    //   username: 'superadmin2',
+	    //   isActive: true,
+	    //   activationToken: null,
+	    //   createdAt: '2020-09-16T11:25:44.509Z',
+	    //   updatedAt: '2020-09-16T11:25:44.509Z',
+	    //   attributes: [ 'ROLE_SUPERADMIN', 'ATTR1', 'ATTR2' ],
+	    //   isSuperAdmin: true
+	    // }
+
+	    // Get Users with query filter
+	    const users = await securityClient.users.getUsers({
+	      filter: {
+		username: {
+		  include: "superadmin2",
+		},
+	      },
+	    });
+
+	    console.log(users);
+	    // =>
+	    // {
+	    //   users: [
+	    //     {
+	    //       id: 'c44ed13d-09cc-4797-8835-18e98b5f3e07',
+	    //       username: 'superadmin2',
+	    //       isActive: true,
+	    //       activationToken: null,
+	    //       createdAt: '2020-09-16T13:16:25.997Z',
+	    //       updatedAt: '2020-09-16T13:16:25.997Z',
+	    //       attributes: [Array],
+	    //       isSuperAdmin: true
+	    //     }
+	    //   ],
+	    //     total: 1,
+	    //   page: 1,
+	    //   limit: 25
+	    // }
+
+	    // Delete user
+	    await securityClient.users.deleteUser({ userId: newUserId });
+
+	    // Get policies
+	    const policy = await securityClient.policy.getPolicies({ limit: 100 });
+	    console.log(policy);
+
+	    // Add policy
+	    const newPolicy = {
+	      resource: "TEST",
+	      attribute: "TEST",
+	    }
+
+	    const { id } = await securityClient.policy.addPolicy(newPolicy);
+
+	    // Get policies with query filter
+	    const result2 = await securityClient.policy.getPolicies({
+	      filter: {
+		id: {
+		  eq: id,
+		},
+	      }
+	    });
+
+	    console.log(result2);
+	    // =>
+	    // {
+	    //   policies: [
+	    //     {
+	    //       id: '7d9b054a-0c41-4517-8818-baa8af70cc12',
+	    //       attribute: 'TEST',
+	    //       resource: 'TEST'
+	    //     }
+	    //   ],
+	    //     total: 1,
+	    //   page: 1,
+	    //   limit: 25
+	    // }
+
+
+	    // Remove policy
+	    await securityClient.policy.removePolicy({ id });
+	})();
+	```
+
+	## Add user and attributes
+
+	```js
+	const { getSecurityClient } = require('@tshio/security-client');
+
+	(async () => {
+	    const securityClient = getSecurityClient();
+	    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
+
+	    securityClient.setToken(token);
+
+	    const newUser = {
+	      username: "superadmin2",
+	      password: "superadmin",
+	      attributes: ["ROLE_SUPERADMIN"],
+	    }
+
+	    const { newUserId } = await securityClient.users.addUser(newUser);
+
+	    console.log(newUserId);
+	    // => 45287eff-cdb0-4cd4-8a0f-a07d1a11b382
+
+	    const newUserAttribute = {
+	      userId: newUserId,
+	      attributes: ["ATTR1", "ATTR2"],
+	    }
+
+	    await securityClient.users.addAttributes(newUserAttribute)
+
+	    const user = await securityClient.users.getUser({ userId: newUserId });
+	    console.log(user);
+	    // =>
+
+	    await securityClient.users.deleteUser({ userId: newUserId });
+	})();
+	```
 
-Returns an object
-```ts
-{
-  userId: string,
-  isActive: boolean
-}
-```
-or throw HttpError
+	## Add user
 
-##### Parameters
+	```js
+	const { getSecurityClient } = require('@tshio/security-client');
 
-| Name                  | Type       | Description                           |
-|-----------------------|------------|---------------------------------------|
-| activationToken       | `string`   | Activation token                      |
+	(async () => {
+	    const securityClient = getSecurityClient();
+	    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
 
-##### Example
+	    securityClient.setToken(token);
 
-```js
-const result = await securityClient.auth.activateUser({ 
-  activationToken: "activation token..."
-});
+	    const user = {
+	      username: "superadmin2",
+	      password: "superadmin",
+	      attributes: ["ROLE_SUPERADMIN"],
+	    }
 
-console.log(result);
-// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: true } 
-```
+	    const { newUserId } = await security.users.addUser(user);
 
-[Back to Users API](#users-api)
+	    console.log(newUserId);
+	    // => 45287eff-cdb0-4cd4-8a0f-a07d1a11b382
+	})();
+	```
 
-<hr />
+	## API
 
-### async securityClient.users.deactivateUser({ userId })
+	### securityClient.setToken({ accessToken, refreshToken })
 
-Deactivate a user
+	Set the token object for authorize api requests.
 
-Returns an object
-```ts
-{
-  userId: string;
-  isActive: boolean;
-  deactivationDate: Date;
-}
-```
-or throw HttpError
+	**This command is crucial, the token will be used for authorization all of api requests.**
 
-##### Parameters
+	##### Parameters
 
-| Name                  | Type       | Description                           |
-|-----------------------|------------|---------------------------------------|
-| userId                | `string`   | User ID                               |
+	| Name         | Type       | Description                           |
+	|--------------|------------|---------------------------------------|
+	| accessToken  | `string`   | Access token                          |
+	| refreshToken | `string`   | Refresh token                         |
 
-##### Example
+	[Back to API](#api)
 
-```js
-const result = await securityClient.auth.deactivateUser({ 
-  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
-});
+	## Authorization API
 
-console.log(result);
-// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: false,  deactivationDate: Date Tue Sep 15 2020 14:03:25 GMT+0200 (Central European Summer Time)} 
-```
+	### async securityClient.auth.login({ username, password })
 
-[Back to Users API](#users-api)
+	Login to rad-security
 
-<hr />
+	Returns a Token object or throw HttpError
 
-### async securityClient.users.isAuthenticated()
+	##### Parameters
 
-Am I logged?
+	| Name     | Type       | Description                           |
+	|----------|------------|---------------------------------------|
+	| username | `string`   | User name                             |
+	| password | `string`   | User password                         |
 
-Returns `{ isAuthenticated: boolean }` or throw HttpError
+	##### Example
 
-##### Example
+	```js
+	const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
+	console.log(token);
+	// => { accessToken: "...", refreshToken: "..." }
+	```
 
-```js
-const  { isAuthenticated } = await securityClient.users.isAuthenticated();
+	[Back to Authorization API](#authorization-api)
 
-console.log(isAuthenticated);
-// => true
-```
+	<hr />
 
-[Back to Users API](#users-api)
+	### async securityClient.auth.resetPassword({resetPasswordToken, newPassword?})
 
-<hr />
+	Reset password
 
-### async securityClient.users.hasAttributes(attributes)
+	Returns a new password or throw HttpError
 
-Check if the user has provided attributes
+	##### Parameters
 
-Returns an object
-```ts
-{
-  hasAllAttributes: boolean;
-}
-```
-or throw HttpError
+	| Name               | Type       | Description                           |
+	|--------------------|------------|---------------------------------------|
+	| resetPasswordToken | `string`   | Reset password token                  |
+	| newPassword        | `string`   | **optional** <p>New password</p>      |
 
-##### Parameters
+	The `newPassword` is optional. If `undefined`, the password will be generated randomly
+	.
+	```js
+	const token = await securityClient.auth.resetPassword({
+	  resetPasswordToken: "reset password token...",
+	  newPassword: "NewSuperSecret",
+	});
+	```
 
-| Name                  | Type       | Description                           |
-|-----------------------|------------|---------------------------------------|
-| attributes            | `string[]` | Array of attributes name              |
+	[Back to Authorization API](#authorization-api)
 
-##### Example
+	<hr />
 
-```js
-const { hasAllAttributes } = await securityClient.users.hasAttributes(["ADMIN_PANEL"]);
+	### async securityClient.auth.refreshToken({ asccessToken, refreshToken })
 
-console.log(result);
-// => true
-```
+	Refreshes access token.
 
-[Back to Users API](#users-api)
+	Returns a new Token object or throw HttpError
 
-<hr />
+	##### Parameters
 
-### async securityClient.users.hasAccess(resources)
+	| Name         | Type       | Description                           |
+	|--------------|------------|---------------------------------------|
+	| accessToken  | `string`   | Access token                          |
+	| refreshToken | `string`   | Refresh token                         |
 
-Check if the user has access to provided resources
+	[Back to Authorization API](#authorization-api)
 
-Returns an object
-```ts
-{
-  hasAccess: boolean;  // true if the user has access to all of the resources
-  forbidden: string[]; // list of forbidden resources
-}
-```
-or throw HttpError
+	<hr />
 
-##### Parameters
+	### async securityClient.auth.refreshUserActiveToken(userId)
 
-| Name                  | Type       | Description                           |
-|-----------------------|------------|---------------------------------------|
-| resources             | `string[]` | Array of resources name               |
+	Refresh user's active token if token has expired.
 
-##### Example
+	Returns a new Token object or throw HttpError
 
-```js
-const result = await securityClient.users.hasAccess(["api/users"]);
+	##### Parameters
 
-console.log(result);
-// => { hasAccess: true, forbidden: [] }
-```
+	| Name         | Type       | Description                           |
+	|--------------|------------|---------------------------------------|
+	| userId       | `string`   | User ID                               |
 
-[Back to Users API](#users-api)
+	[Back to Authorization API](#authorization-api)
 
-<hr />
+	## Tokens API
 
-### async securityClient.users.addAttributes({ userId, attributes })
+	### async securityClient.tokens.createAccessKey({ accessToken })
 
-Add attributes to the user
+	Create Api Key
 
-Returns an empty object or throw HttpError
+	Return object
+	```js
+	{
+	  apiKey: string;
+	  type: "custom";
+	  createdBy: string;
+	}
+	```
+	or throw HttpError
 
-##### Parameters
+	##### Parameters
 
-| Name                  | Type       | Description                                              |
-|-----------------------|------------|----------------------------------------------------------|
-| user ID               | `string`   | User ID                                                  |
-| attributes            | `string[]` | An array of attributes for add to the user with userID   |
+	| Name         | Type       | Description                                     |
+	|--------------|------------|-------------------------------------------------|
+	| accessToken         | `string`   | Access Token                 |
 
-```js
-await securityClient.users.addAttributes({
-  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", 
-  attributes: ["ATTR_1", "ATTR_2"]
-});
-```
 
-[Back to Users API](#users-api)
+	[Back to Tokens API](#tokens-api)
 
-<hr />
+	<hr />
 
-### async securityClient.users.removeAttributes({ userId, attributes })
+	### async securityClient.tokens.generateToken({ accessToken })
 
-Remove attributes from the user
+	Creates new token with default policies and attributes without SUPERADMIN_ROLE attribute
 
-Returns an empty object or throw HttpError
+	Return object
+	```js
+	{
+	  accessToken: string;
+	  refreshToken: string;
+	}
+	```
+	or throw HttpError
 
-##### Parameters
+	##### Parameters
 
-| Name                  | Type       | Description                                                  |
-|-----------------------|------------|--------------------------------------------------------------|
-| user ID               | `string`   | User ID                                                      |
-| attributes            | `string[]` | An array of attributes to remove from the user with userID   |
+	| Name         | Type       | Description                                     |
+	|--------------|------------|-------------------------------------------------|
+	| accessExpirationInSeconds         | `number`   | Access token expiration time                |
+	| refreshExpirationInSeconds         | `number`   | Refresh token expiration time                |
 
-##### Example
 
-```js
-await securityClient.users.removeAttributes({
-  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", 
-  attributes: ["ATTR_1", "ATTR_2"]
-});
-```
+	[Back to Tokens API](#tokens-api)
 
-[Back to Users API](#users-api)
+	<hr />
 
-<hr />
+	### async securityClient.tokens.getAccessKeys({ page, limit })
 
-### async securityClient.users.addUser({ username, password, attributes? })
+	Get access keys list (if no query parameters returns first 25 keys)
 
-Create a new user
+	Return object
+	```js
+	{
+	  accessKeys: {
+	    id: string;
+	    apiKey: string;
+	    type: string;
+	    createdBy: string;
+	    createdAt: Date;
+	  }[];
+	  total: number;
+	}
+	```
+	or throw HttpError
 
-Returns an object
-```js
-{
-  newUserId: string;
-}
-```
-throw HttpError
+	##### Parameters
 
-##### Parameters
+	| Name         | Type       | Description                                     | Default |
+	|--------------|------------|-------------------------------------------------|---------|
+	| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
+	| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
 
-| Name                  | Type       | Description                                              |
-|-----------------------|------------|----------------------------------------------------------|
-| username              | `string`   | New user username                                        |
-| password              | `string`   | New user password                                        |
-| attributes            | `string[]` | **optional** <p>An array of user attributes</p>          |
 
-##### Example
+	[Back to Tokens API](#tokens-api)
 
-```js
-const { newUserId } = await securityClient.users.addUser({
-  username: "new-user", 
-  password: "password",
-  attributes: ["ADMIN_PANEL"],
-});
+	<hr />
 
-console.log(newUserId);
-// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
-```
+	### async securityClient.tokens.removeAccessKey({ apiKey })
 
-[Back to Users API](#users-api)
+	Remove api key
 
-<hr />
+	Return `void` or throw HttpError
 
-### async securityClient.users.deleteUser({ userId })
+	##### Parameters
 
-Delete user
+	| Name         | Type       | Description                                     |
+	|--------------|------------|-------------------------------------------------|
+	| apiKey         | `string`   | ApiKey that should be deleted           |
 
-Returns an empty object or throw HttpError
 
-#### userId
+	[Back to Tokens API](#tokens-api)
 
-Type: `string`
+	## Users API
 
-User ID
+	### async securityClient.users.getUsers({ page?, limit?, filter?, order?})
 
-##### Example
+	Get users list (if no query parameters returns first 25 users)
 
-```js
-await securityClient.users.getUser({
-  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382",
-});
-```
+	##### Parameters
 
-[Back to Users API](#users-api)
+	| Name         | Type       | Description                                     | Default |
+	|--------------|------------|-------------------------------------------------|---------|
+	| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
+	| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
+	| filter       | `object`   | **optional** <p>[Query filter](#understanding-filters-and-ordering)</p>               | {}      |
+	| order        | `object`   | **optional** <p>[Order filter](#understanding-filters-and-ordering)</p>                | {}      |
 
-<hr />
+	##### filter[column] = operator
+	```ts
+	export type GetUserColumns = "id" | "username" | "isActive" | "createdAt" | "updatedAt" | "attribute.name";
 
-### async securityClient.users.getUser({ userId })
+	export type FilterOperators =
+	  | "eq"
+	  | "eqOr"
+	  | "neq"
+	  | "neqOr"
+	  | "lt"
+	  | "ltOr"
+	  | "gt"
+	  | "gtOr"
+	  | "gte"
+	  | "gteOr"
+	  | "include"
+	  | "includeOr";
 
-Get user
+	```
 
-Returns an user object 
-```js
-User {
-  id: string;
-  username: string;
-  isActive: boolean;
-  isSuperAdmin: boolean;
-  attributes: string[];
-  createdAt: Date;
-  updatedAt: Date;
-}
-```
-or throw HttpError
+	##### Example
 
-##### Parameters
+	```js
+	const users = await securityClient.users.getUsers();
+	console.log(users);
+	// => { users: [...], total: 1, page: 1, limit: 25, }
 
-| Name                  | Type       | Description                                              |
-|-----------------------|------------|----------------------------------------------------------|
-| user ID               | `string`   | User ID                                                  |
+	const users = await securityClient.users.getUsers({
+	  page: 1,
+	  limit: 10,
+	});
+	console.log(users);
+	// => { users: [...], total: 1, page: 1, limit: 10, }
 
-##### Example
+	const users = await securityClient.users.getUsers({
+	  page: 1,
+	  limit: 10,
+	  filter: {
+	    username: {
+	      include: "super",
+	    }
+	  },
+	  order: {
+	    by: "username",
+	    type: "asc",
+	  },
+	});
+	console.log(users);
+	// => { users: [{username: "superadmin", ...}, ...], total: 1, page: 1, limit: 10, }
+	```
 
-```js
-const result = await securityClient.users.getUser({
-  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382",
-});
-```
+	[Back to Users API](#users-api)
 
-[Back to Users API](#users-api)
+	<hr />
 
-<hr />
+	### async securityClient.users.activateUser({ activationToken })
 
-### async securityClient.users.getUserId({ username })
+	Activate a new user
 
-Get user id
+	Returns an object
+	```ts
+	{
+	  userId: string,
+	  isActive: boolean
+	}
+	```
+	or throw HttpError
 
-Returns an object 
-```js
-{
-  userId: string;
-}
-```
-or throw HttpError
+	##### Parameters
 
-##### Parameters
+	| Name                  | Type       | Description                           |
+	|-----------------------|------------|---------------------------------------|
+	| activationToken       | `string`   | Activation token                      |
 
-| Name                  | Type       | Description                                              |
-|-----------------------|------------|----------------------------------------------------------|
-| username              | `string`   | User name                                                |
+	##### Example
 
-##### Example
+	```js
+	const result = await securityClient.auth.activateUser({
+	  activationToken: "activation token..."
+	});
 
-```js
-const { userId } = await securityClient.users.getUserId({
-  username: "superadmin",
-});
-console.log(userId)
-// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
-```
+	console.log(result);
+	// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: true }
+	```
 
-[Back to Users API](#users-api)
+	[Back to Users API](#users-api)
 
-<hr />
+	<hr />
 
-### async securityClient.users.getUserByResources({ resource, page?, limit? })
+	### async securityClient.users.deactivateUser({ userId })
 
-Get users by resource name
+	Deactivate a user
 
-Returns an object 
-```js
-{
-  users: User[];
-  total: number;
-  page: number;
-  limit: number;
-}
-```
-or throw HttpError
+	Returns an object
+	```ts
+	{
+	  userId: string;
+	  isActive: boolean;
+	  deactivationDate: Date;
+	}
+	```
+	or throw HttpError
 
-##### Parameters
+	##### Parameters
 
-| Name         | Type       | Description                                     | Default | Range |
-|--------------|------------|-------------------------------------------------|---------|-------|
-| resource     | `string`   | Resource name                                   |         |       |
-| page         | `number`   | **optional** <p>Page number</p>                 | 1       | 1 - MaxInteger |
-| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      | 1 - 1000 |
+	| Name                  | Type       | Description                           |
+	|-----------------------|------------|---------------------------------------|
+	| userId                | `string`   | User ID                               |
 
-##### Example
+	##### Example
 
-```js
-const result = await securityClient.getUserByResources.getUserId({
-  resource: "RES1",
-});
-console.log(result)
-// => { users: [...],  total: 5, page: 1, limit: 25 }
-```
+	```js
+	const result = await securityClient.auth.deactivateUser({
+	  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
+	});
 
-[Back to Users API](#users-api)
+	console.log(result);
+	// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: false,  deactivationDate: Date Tue Sep 15 2020 14:03:25 GMT+0200 (Central European Summer Time)}
+	```
 
-<hr />
+	[Back to Users API](#users-api)
 
-### async securityClient.users.setPassword({ username, oldPassword, newPassword })
+	<hr />
 
-Set a new password for user
+	### async securityClient.users.isAuthenticated()
 
-Returns an object 
-```js
-{
-  passwordChanged: boolean;
-}
-```
-or throw HttpError
+	Am I logged?
 
-##### Parameters
+	Returns `{ isAuthenticated: boolean }` or throw HttpError
 
-| Name                  | Type       | Description                                              |
-|-----------------------|------------|----------------------------------------------------------|
-| username              | `string`   | User name                                                |
-| oldPassword           | `string`   | Old user password                                                |
-| newPassword           | `string`   | New user password                                                |
+	##### Example
 
-##### Example
+	```js
+	const  { isAuthenticated } = await securityClient.users.isAuthenticated();
 
-```js
-const { passwordChanged } = await securityClient.getUserByResources.setPassword({
-  username: "superadmin",
-  oldPassword: "superadmin",
-  newPassword: "My new password"
-});
-console.log(passwordChanged)
-// => true
-```
+	console.log(isAuthenticated);
+	// => true
+	```
 
-[Back to Users API](#users-api)
+	[Back to Users API](#users-api)
 
-<hr />
+	<hr />
 
-### async securityClient.users.passwordResetToken({ username })
+	### async securityClient.users.hasAttributes(attributes)
 
-Returns token which will be used to reset the user password
+	Check if the user has provided attributes
 
-Returns an object 
-```js
-{
-  resetPasswordToken: string;
-}
-```
-or throw HttpError
+	Returns an object
+	```ts
+	{
+	  hasAllAttributes: boolean;
+	}
+	```
+	or throw HttpError
 
-##### Parameters
+	##### Parameters
 
-| Name                  | Type       | Description                                              |
-|-----------------------|------------|----------------------------------------------------------|
-| username              | `string`   | User name                                                |
+	| Name                  | Type       | Description                           |
+	|-----------------------|------------|---------------------------------------|
+	| attributes            | `string[]` | Array of attributes name              |
 
-##### Example
+	##### Example
 
-```js
-const { resetPasswordToken } = await securityClient.passwordResetToken.setPassword({
-  username: "superadmin"
-});
-console.log(resetPasswordToken)
-// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
-```
+	```js
+	const { hasAllAttributes } = await securityClient.users.hasAttributes(["ADMIN_PANEL"]);
 
-[Back to Users API](#users-api)
+	console.log(result);
+	// => true
+	```
 
-## Attributes API
+	[Back to Users API](#users-api)
 
-### async securityClient.attributes.getAttributes({ page?, limit?, filter?, order? })
+	<hr />
 
-Return attributes list (if no queryFilter parameters returns first 25 attributes)
-```js
-{
-  attributes: Attribute[];
-  total: number;
-  page: number;
-  limit: number;
-}
-```
-```js
-Attribute {
-  id: string;
-  name: string;
-  userId: string;
-  username: string;
-}
-```
-or throw HttpError
+	### async securityClient.users.hasAccess(resources)
 
-##### Parameters
+	Check if the user has access to provided resources
 
-| Name         | Type       | Description                                     | Default |
-|--------------|------------|-------------------------------------------------|---------|
-| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
-| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
-| filter       | `object`   | **optional** <p>[Query filter](#understanding-filters-and-ordering)</p>               | {}      |
-| order        | `object`   | **optional** <p>[Order filter](#understanding-filters-and-ordering)</p>                | {}      |
+	Returns an object
+	```ts
+	{
+	  hasAccess: boolean;  // true if the user has access to all of the resources
+	  forbidden: string[]; // list of forbidden resources
+	}
+	```
+	or throw HttpError
 
-##### filter[column] = operator
-```ts
-export type GetAttributesColumns = "id" | "name" | "user.id" | "user.username";
+	##### Parameters
 
-export type GetAttributesFilterOperators = "eq" | "eqOr" | "neq" | "lt" | "gt" | "include" | "includeOr";
+	| Name                  | Type       | Description                           |
+	|-----------------------|------------|---------------------------------------|
+	| resources             | `string[]` | Array of resources name               |
 
-```
+	##### Example
 
-##### Example
+	```js
+	const result = await securityClient.users.hasAccess(["api/users"]);
 
-```js
-const attributes = await securityClient.attributes.getAttributes();
-console.log(attributes);
-// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", name: "ROLE_SUPERADMIN", userId: "21637dee-3d21-4cd4-aa0f-117d1a11b123", username: "superadmin}], total: 1, page: 1, limit: 25, }
+	console.log(result);
+	// => { hasAccess: true, forbidden: [] }
+	```
 
-const attributes = await securityClient.attributes.getAttributes({
-  page: 1,
-  limit: 10,
-});
-console.log(attributes);
-// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", name: "ROLE_SUPERADMIN", userId: "21637dee-3d21-4cd4-aa0f-117d1a11b123", username: "superadmin}], total: 1, page: 1, limit: 10, }
+	[Back to Users API](#users-api)
 
-const attributes = await securityClient.attributes.getAttributes({
-  page: 1,
-  limit: 10,
-  filter: {
-    name: {
-      eq: "ROLE_SUPERADMIN",
-    }
-  },
-  order: {
-    by: "name",
-    type: "asc",
-  },
-});
-console.log(users);
-// => { users: [{username: "superadmin", ...}, ...], total: 1, page: 1, limit: 10, }
-```
+	<hr />
 
-[Back to Attributes API](#attributes-api)
+	### async securityClient.users.addAttributes({ userId, attributes })
 
-<hr />
+	Add attributes to the user
 
-## Policy API
+	Returns an empty object or throw HttpError
 
-### async securityClient.policy.addPolicy({ resource, attribute })
+	##### Parameters
 
-Adds a new policy
+	| Name                  | Type       | Description                                              |
+	|-----------------------|------------|----------------------------------------------------------|
+	| user ID               | `string`   | User ID                                                  |
+	| attributes            | `string[]` | An array of attributes for add to the user with userID   |
 
-Return object with policy id
-```js
-{
-  id: string;
-}
-```
-or throw HttpError
+	```js
+	await securityClient.users.addAttributes({
+	  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382",
+	  attributes: ["ATTR_1", "ATTR_2"]
+	});
+	```
 
-##### Parameters
+	[Back to Users API](#users-api)
 
-| Name                  | Type       | Description                                              |
-|-----------------------|------------|----------------------------------------------------------|
-| resource              | `string`   | Policy resource                                          |
-| attribute             | `string`   | Policy attribute                                         |
+	<hr />
 
-##### Example
+	### async securityClient.users.removeAttributes({ userId, attributes })
 
-```js
-const { id } = await securityClient.policy.addPolicy({ resource: "NEW_RESOURCE", attribute: "ATTR_1"});
-console.log(id);
-// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
-```
+	Remove attributes from the user
 
-[Back to Policy API](#policy-api)
+	Returns an empty object or throw HttpError
 
-<hr />
+	##### Parameters
 
-### async securityClient.policy.getPolicies({ page?, limit?, filter?, order? })
+	| Name                  | Type       | Description                                                  |
+	|-----------------------|------------|--------------------------------------------------------------|
+	| user ID               | `string`   | User ID                                                      |
+	| attributes            | `string[]` | An array of attributes to remove from the user with userID   |
 
-Get policies list (if no query parameters returns first 25 policies)
+	##### Example
 
-Return object
-```js
-{
-  policies: PolicyItem[];
-  total: number;
-  page: number;
-  limit: number;
-}
-```
-```
-PolicyItem {
-  id: string;
-  resource: string;
-  attribute: string;
-}
-```
-or throw HttpError
+	```js
+	await securityClient.users.removeAttributes({
+	  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382",
+	  attributes: ["ATTR_1", "ATTR_2"]
+	});
+	```
 
-##### Parameters
+	[Back to Users API](#users-api)
 
-| Name         | Type       | Description                                     | Default |
-|--------------|------------|-------------------------------------------------|---------|
-| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
-| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
-| filter       | `object`   | **optional** <p>[Query filter](#understanding-filters-and-ordering)</p>               | {}      |
-| order        | `object`   | **optional** <p>[Order filter](#understanding-filters-and-ordering)</p>                | {}      |
+	<hr />
 
-##### filter[column] = operator
-```ts
-export type GetPoliciesColumns = "id" | "resource" | "attribute";
+	### async securityClient.users.addUser({ username, password, attributes? })
 
-export type GetPoliciesFilterOperators = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr";
-```
+	Create a new user
 
-##### Example
+	Returns an object
+	```js
+	{
+	  newUserId: string;
+	}
+	```
+	throw HttpError
 
-```js
-const policies = await securityClient.policy.getPolicies();
-console.log(policies);
-// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", resource: "api/users", attribute: "ADMIN_PANEL"}], total: 1, page: 1, limit: 25 }
+	##### Parameters
 
-const policies = await securityClient.policy.getPolicies({
-  page: 1,
-  limit: 10,
-});
-console.log(policies);
-// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", resource: "api/users", attribute: "ADMIN_PANEL"}], total: 1, page: 1, limit: 10 }
+	| Name                  | Type       | Description                                              |
+	|-----------------------|------------|----------------------------------------------------------|
+	| username              | `string`   | New user username                                        |
+	| password              | `string`   | New user password                                        |
+	| attributes            | `string[]` | **optional** <p>An array of user attributes</p>          |
 
-const policies = await securityClient.policy.getPolicies({
-  page: 1,
-  limit: 10,
-  filter: {
-    attribute: {
-      eq: "ROLE_SUPERADMIN",
-    }
-  },
-  order: {
-    by: "resource",
-    type: "asc",
-  },
-});
-console.log(policies);
-// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", resource: "api/users", attribute: "ADMIN_PANEL"}], total: 1, page: 1, limit: 10 }
-```
+	##### Example
 
-[Back to Policy API](#policy-api)
+	```js
+	const { newUserId } = await securityClient.users.addUser({
+	  username: "new-user",
+	  password: "password",
+	  attributes: ["ADMIN_PANEL"],
+	});
 
-<hr />
+	console.log(newUserId);
+	// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
+	```
 
-### async securityClient.policy.removePolicy({ id })
+	[Back to Users API](#users-api)
 
-Removes a policy by id
+	<hr />
 
-Return an empty object or throw HttpError
+	### async securityClient.users.deleteUser({ userId })
 
-##### Parameters
+	Delete user
 
-| Name                  | Type       | Description                                              |
-|-----------------------|------------|----------------------------------------------------------|
-| id                    | `string`   | Policy ID                                                |
+	Returns an empty object or throw HttpError
 
-##### Example
+	#### userId
 
-```js
-await securityClient.policy.removePolicy({ id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"});
-```
+	Type: `string`
 
-[Back to Policy API](#policy-api)
+	User ID
 
-<hr />
+	##### Example
 
-### async securityClient.policy.removePolicy({ resource, attribute })
+	```js
+	await securityClient.users.getUser({
+	  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382",
+	});
+	```
 
-Removes a policy by id
+	[Back to Users API](#users-api)
 
-Return an empty object or throw HttpError
+	<hr />
 
-##### Parameters
+	### async securityClient.users.getUser({ userId })
 
-| Name                  | Type       | Description                                              |
-|-----------------------|------------|----------------------------------------------------------|
-| resource              | `string`   | Policy resource                                          |
-| attribute             | `string`   | Policy attribute                                         |
+	Get user
 
-##### Example
+	Returns an user object
+	```js
+	User {
+	  id: string;
+	  username: string;
+	  isActive: boolean;
+	  isSuperAdmin: boolean;
+	  attributes: string[];
+	  createdAt: Date;
+	  updatedAt: Date;
+	}
+	```
+	or throw HttpError
 
-```js
-await securityClient.policy.removePolicy({ resource: "RESOURCE", attribute: "ATTR_1"});
-```
+	##### Parameters
 
-[Back to Policy API](#policy-api)
+	| Name                  | Type       | Description                                              |
+	|-----------------------|------------|----------------------------------------------------------|
+	| user ID               | `string`   | User ID                                                  |
 
-<hr />
+	##### Example
 
-### Understanding filters and ordering
+	```js
+	const result = await securityClient.users.getUser({
+	  userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382",
+	});
+	```
 
-Filters can be used search for a single condition or they can be wrapped in logical operands AND and OR. Filtering can be a simple conditional evaluation of a single field. The operator, `column`, and `operator` used in a filter are specific to the API they are used in. 
+	[Back to Users API](#users-api)
 
-```ts
-// 
-interface UsersQueryFilter {
-  page?: number;
-  limit?: number;
-  filter?: {
-    [column in Columns]: {
-      [operator in Operators]: string;
-    };
-  };
-  order?: {
-    by: GetUserColumns;
-    type: "asc" | "desc";
-  };
-}
-```
+	<hr />
 
-- filter[column][operator] = value
+	### async securityClient.users.getUserId({ username })
 
-  | Name                  | Type       | Description                                              |
-  |-----------------------|------------|----------------------------------------------------------|
-  | column                | `string`   | Column name, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)             |
-  | operator              | `string`   | Operator name, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)                                     |
-  | value                 | `string` or `number` or `boolean` (depending on the `column` type)         |                                          |
-  
-  #### Examples
+	Get user id
 
-  Single parameter filter
-  ```js
-  filter: {
-    username: {
-      include: "super"
-    }
-  }
-  ```
+	Returns an object
+	```js
+	{
+	  userId: string;
+	}
+	```
+	or throw HttpError
 
-  Two parameter filter
-  ```js
-  filter: {
-    username: {
-      include: "super"
-    },
-    isActive: {
-      eq: true,
-    },
-  }
-  ```
+	##### Parameters
 
-- order
-  
-  | Name                  | Type       | Description                                                                     | Default |
-  |-----------------------|------------|---------------------------------------------------------------------------------|---------|
-  | by                | `string`       | **optional** <p>column name for order sorting, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)</p> | `id`    |
-  | type              | `asc` or `desc`| **optional** <p>Ascending or descending order</p>                               | `asc`   |
+	| Name                  | Type       | Description                                              |
+	|-----------------------|------------|----------------------------------------------------------|
+	| username              | `string`   | User name                                                |
 
-  #### Examples
-  ```js
-  order: {
-    by: "username",
-    type: "desc"
-  }
-  ```
+	##### Example
 
-#### getUsers filter and order
-[Get users method](#async-securityclientusersgetusers-page-limit-filter-order)
+	```js
+	const { userId } = await securityClient.users.getUserId({
+	  username: "superadmin",
+	});
+	console.log(userId)
+	// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
+	```
 
-```js
-column = "id" | "username" | "isActive" | "createdAt" | "updatedAt" | "attribute.name"
-```
+	[Back to Users API](#users-api)
 
-```js
-operator = "eq"| "eqOr" | "neq" | "neqOr" | "lt" | "ltOr" | "gt" | "gtOr" | "gte" | "gteOr" | "include" | "includeOr"
-```
+	<hr />
 
-#### getAttributes filter and order 
+	### async securityClient.users.getUserByResources({ resource, page?, limit? })
 
-[Get attributes method](#async-securityclientattributesgetattributes-page-limit-filter-order-)
+	Get users by resource name
 
-```js
-column = "id" | "name" | "user.id" | "user.username"`
-```
+	Returns an object
+	```js
+	{
+	  users: User[];
+	  total: number;
+	  page: number;
+	  limit: number;
+	}
+	```
+	or throw HttpError
 
-```js
-operator = "eq" | "eqOr" | "neq" | "lt" | "gt" | "include" | "includeOr"
-```
+	##### Parameters
 
-#### getPolicies filter and order
-[Get attributes method](#async-securityclientattributesgetattributes-page-limit-filter-order-)
+	| Name         | Type       | Description                                     | Default | Range |
+	|--------------|------------|-------------------------------------------------|---------|-------|
+	| resource     | `string`   | Resource name                                   |         |       |
+	| page         | `number`   | **optional** <p>Page number</p>                 | 1       | 1 - MaxInteger |
+	| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      | 1 - 1000 |
 
-```js
-column = "id" | "resource" | "attribute"
-```
+	##### Example
 
-```js
-operator = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr"
-```
+	```js
+	const result = await securityClient.getUserByResources.getUserId({
+	  resource: "RES1",
+	});
+	console.log(result)
+	// => { users: [...],  total: 5, page: 1, limit: 25 }
+	```
+
+	[Back to Users API](#users-api)
+
+	<hr />
+
+	### async securityClient.users.setPassword({ username, oldPassword, newPassword })
+
+	Set a new password for user
+
+	Returns an object
+	```js
+	{
+	  passwordChanged: boolean;
+	}
+	```
+	or throw HttpError
+
+	##### Parameters
+
+	| Name                  | Type       | Description                                              |
+	|-----------------------|------------|----------------------------------------------------------|
+	| username              | `string`   | User name                                                |
+	| oldPassword           | `string`   | Old user password                                                |
+	| newPassword           | `string`   | New user password                                                |
+
+	##### Example
+
+	```js
+	const { passwordChanged } = await securityClient.getUserByResources.setPassword({
+	  username: "superadmin",
+	  oldPassword: "superadmin",
+	  newPassword: "My new password"
+	});
+	console.log(passwordChanged)
+	// => true
+	```
+
+	[Back to Users API](#users-api)
+
+	<hr />
+
+	### async securityClient.users.passwordResetToken({ username })
+
+	Returns token which will be used to reset the user password
+
+	Returns an object
+	```js
+	{
+	  resetPasswordToken: string;
+	}
+	```
+	or throw HttpError
+
+	##### Parameters
+
+	| Name                  | Type       | Description                                              |
+	|-----------------------|------------|----------------------------------------------------------|
+	| username              | `string`   | User name                                                |
+
+	##### Example
+
+	```js
+	const { resetPasswordToken } = await securityClient.passwordResetToken.setPassword({
+	  username: "superadmin"
+	});
+	console.log(resetPasswordToken)
+	// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
+	```
+
+	[Back to Users API](#users-api)
+
+	## Attributes API
+
+	### async securityClient.attributes.getAttributes({ page?, limit?, filter?, order? })
+
+	Return attributes list (if no queryFilter parameters returns first 25 attributes)
+	```js
+	{
+	  attributes: Attribute[];
+	  total: number;
+	  page: number;
+	  limit: number;
+	}
+	```
+	```js
+	Attribute {
+	  id: string;
+	  name: string;
+	  userId: string;
+	  username: string;
+	}
+	```
+	or throw HttpError
+
+	##### Parameters
+
+	| Name         | Type       | Description                                     | Default |
+	|--------------|------------|-------------------------------------------------|---------|
+	| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
+	| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
+	| filter       | `object`   | **optional** <p>[Query filter](#understanding-filters-and-ordering)</p>               | {}      |
+	| order        | `object`   | **optional** <p>[Order filter](#understanding-filters-and-ordering)</p>                | {}      |
+
+	##### filter[column] = operator
+	```ts
+	export type GetAttributesColumns = "id" | "name" | "user.id" | "user.username";
+
+	export type GetAttributesFilterOperators = "eq" | "eqOr" | "neq" | "lt" | "gt" | "include" | "includeOr";
+
+	```
+
+	##### Example
+
+	```js
+	const attributes = await securityClient.attributes.getAttributes();
+	console.log(attributes);
+	// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", name: "ROLE_SUPERADMIN", userId: "21637dee-3d21-4cd4-aa0f-117d1a11b123", username: "superadmin}], total: 1, page: 1, limit: 25, }
+
+	const attributes = await securityClient.attributes.getAttributes({
+	  page: 1,
+	  limit: 10,
+	});
+	console.log(attributes);
+	// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", name: "ROLE_SUPERADMIN", userId: "21637dee-3d21-4cd4-aa0f-117d1a11b123", username: "superadmin}], total: 1, page: 1, limit: 10, }
+
+	const attributes = await securityClient.attributes.getAttributes({
+	  page: 1,
+	  limit: 10,
+	  filter: {
+	    name: {
+	      eq: "ROLE_SUPERADMIN",
+	    }
+	  },
+	  order: {
+	    by: "name",
+	    type: "asc",
+	  },
+	});
+	console.log(users);
+	// => { users: [{username: "superadmin", ...}, ...], total: 1, page: 1, limit: 10, }
+	```
+
+	[Back to Attributes API](#attributes-api)
+
+	<hr />
+
+	## Policy API
+
+	### async securityClient.policy.addPolicy({ resource, attribute })
+
+	Adds a new policy
+
+	Return object with policy id
+	```js
+	{
+	  id: string;
+	}
+	```
+	or throw HttpError
+
+	##### Parameters
+
+	| Name                  | Type       | Description                                              |
+	|-----------------------|------------|----------------------------------------------------------|
+	| resource              | `string`   | Policy resource                                          |
+	| attribute             | `string`   | Policy attribute                                         |
+
+	##### Example
+
+	```js
+	const { id } = await securityClient.policy.addPolicy({ resource: "NEW_RESOURCE", attribute: "ATTR_1"});
+	console.log(id);
+	// => "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"
+	```
+
+	[Back to Policy API](#policy-api)
+
+	<hr />
+
+	### async securityClient.policy.getPolicies({ page?, limit?, filter?, order? })
+
+	Get policies list (if no query parameters returns first 25 policies)
+
+	Return object
+	```js
+	{
+	  policies: PolicyItem[];
+	  total: number;
+	  page: number;
+	  limit: number;
+	}
+	```
+	```
+	PolicyItem {
+	  id: string;
+	  resource: string;
+	  attribute: string;
+	}
+	```
+	or throw HttpError
+
+	##### Parameters
+
+	| Name         | Type       | Description                                     | Default |
+	|--------------|------------|-------------------------------------------------|---------|
+	| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
+	| limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
+	| filter       | `object`   | **optional** <p>[Query filter](#understanding-filters-and-ordering)</p>               | {}      |
+	| order        | `object`   | **optional** <p>[Order filter](#understanding-filters-and-ordering)</p>                | {}      |
+
+	##### filter[column] = operator
+	```ts
+	export type GetPoliciesColumns = "id" | "resource" | "attribute";
+
+	export type GetPoliciesFilterOperators = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr";
+	```
+
+	##### Example
+
+	```js
+	const policies = await securityClient.policy.getPolicies();
+	console.log(policies);
+	// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", resource: "api/users", attribute: "ADMIN_PANEL"}], total: 1, page: 1, limit: 25 }
+
+	const policies = await securityClient.policy.getPolicies({
+	  page: 1,
+	  limit: 10,
+	});
+	console.log(policies);
+	// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", resource: "api/users", attribute: "ADMIN_PANEL"}], total: 1, page: 1, limit: 10 }
+
+	const policies = await securityClient.policy.getPolicies({
+	  page: 1,
+	  limit: 10,
+	  filter: {
+	    attribute: {
+	      eq: "ROLE_SUPERADMIN",
+	    }
+	  },
+	  order: {
+	    by: "resource",
+	    type: "asc",
+	  },
+	});
+	console.log(policies);
+	// => { attributes: [{id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", resource: "api/users", attribute: "ADMIN_PANEL"}], total: 1, page: 1, limit: 10 }
+	```
+
+	[Back to Policy API](#policy-api)
+
+	<hr />
+
+	### async securityClient.policy.removePolicy({ id })
+
+	Removes a policy by id
+
+	Return an empty object or throw HttpError
+
+	##### Parameters
+
+	| Name                  | Type       | Description                                              |
+	|-----------------------|------------|----------------------------------------------------------|
+	| id                    | `string`   | Policy ID                                                |
+
+	##### Example
+
+	```js
+	await securityClient.policy.removePolicy({ id: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382"});
+	```
+
+	[Back to Policy API](#policy-api)
+
+	<hr />
+
+	### async securityClient.policy.removePolicy({ resource, attribute })
+
+	Removes a policy by id
+
+	Return an empty object or throw HttpError
+
+	##### Parameters
+
+	| Name                  | Type       | Description                                              |
+	|-----------------------|------------|----------------------------------------------------------|
+	| resource              | `string`   | Policy resource                                          |
+	| attribute             | `string`   | Policy attribute                                         |
+
+	##### Example
+
+	```js
+	await securityClient.policy.removePolicy({ resource: "RESOURCE", attribute: "ATTR_1"});
+	```
+
+	[Back to Policy API](#policy-api)
+
+	<hr />
+
+	### Understanding filters and ordering
+
+	Filters can be used search for a single condition or they can be wrapped in logical operands AND and OR. Filtering can be a simple conditional evaluation of a single field. The operator, `column`, and `operator` used in a filter are specific to the API they are used in.
+
+	```ts
+	//
+	interface UsersQueryFilter {
+	  page?: number;
+	  limit?: number;
+	  filter?: {
+	    [column in Columns]: {
+	      [operator in Operators]: string;
+	    };
+	  };
+	  order?: {
+	    by: GetUserColumns;
+	    type: "asc" | "desc";
+	  };
+	}
+	```
+
+	- filter[column][operator] = value
+
+	  | Name                  | Type       | Description                                              |
+	  |-----------------------|------------|----------------------------------------------------------|
+	  | column                | `string`   | Column name, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)             |
+	  | operator              | `string`   | Operator name, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)                                     |
+	  | value                 | `string` or `number` or `boolean` (depending on the `column` type)         |                                          |
+
+	  #### Examples
+
+	  Single parameter filter
+	  ```js
+	  filter: {
+	    username: {
+	      include: "super"
+	    }
+	  }
+	  ```
+
+	  Two parameter filter
+	  ```js
+	  filter: {
+	    username: {
+	      include: "super"
+	    },
+	    isActive: {
+	      eq: true,
+	    },
+	  }
+	  ```
+
+	- order
+
+	  | Name                  | Type       | Description                                                                     | Default |
+	  |-----------------------|------------|---------------------------------------------------------------------------------|---------|
+	  | by                | `string`       | **optional** <p>column name for order sorting, depending on the api method. See [getUsers](#getusers-filter-and-order) [getAttributes](#getattributes-filter-and-order) [getPolicies](#getpolicies-filter-and-order)</p> | `id`    |
+	  | type              | `asc` or `desc`| **optional** <p>Ascending or descending order</p>                               | `asc`   |
+
+	  #### Examples
+	  ```js
+	  order: {
+	    by: "username",
+	    type: "desc"
+	  }
+	  ```
+
+	#### getUsers filter and order
+	[Get users method](#async-securityclientusersgetusers-page-limit-filter-order)
+
+	```js
+	column = "id" | "username" | "isActive" | "createdAt" | "updatedAt" | "attribute.name"
+	```
+
+	```js
+	operator = "eq"| "eqOr" | "neq" | "neqOr" | "lt" | "ltOr" | "gt" | "gtOr" | "gte" | "gteOr" | "include" | "includeOr"
+	```
+
+	#### getAttributes filter and order
+
+	[Get attributes method](#async-securityclientattributesgetattributes-page-limit-filter-order-)
+
+	```js
+	column = "id" | "name" | "user.id" | "user.username"`
+	```
+
+	```js
+	operator = "eq" | "eqOr" | "neq" | "lt" | "gt" | "include" | "includeOr"
+	```
+
+	#### getPolicies filter and order
+	[Get attributes method](#async-securityclientattributesgetattributes-page-limit-filter-order-)
+
+	```js
+	column = "id" | "resource" | "attribute"
+	```
+
+	```js
+	operator = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr"
+	```
+
+	## License
+
+	[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/master/LICENSE)
+
+	This project is licensed under the terms of the [MIT license](/LICENSE).
+
+	## About us:
+
+	<a href="https://tsh.io"><b>The Software House</b></a>
+
+	<img src="https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/master/assets/tsh.png" alt="tsh.png" width="150"  />  
+

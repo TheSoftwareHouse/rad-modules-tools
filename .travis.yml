@@ -11,3 +11,16 @@ before_script:
 script:
   - npm run lint
   - npm run integration
+
+before_deploy:
+  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+  - git remote add pub https://github.com/TheSoftwareHouse/rad-modules-tools.git -f
+  - git checkout master
+
+deploy:
+  provider: script
+  script: npx lerna publish --yes
+  skip_cleanup: true
+  on:
+    tags: false
+    branch: master

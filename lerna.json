@@ -1,6 +1,15 @@
 {
   "private": true,
   "npmClient": "npm",
+  "command": {
+    "publish": {
+      "ignoreChanges": ["*.md"],
+      "allowBranch": "master"
+    },
+    "publishConfig": {
+      "directory": "dist"
+    }
+  },
   "packages": [
     "packages/security-client"
   ],

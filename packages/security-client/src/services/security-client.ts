@@ -20,14 +20,15 @@ import {
   TooManyRequests,
   Unauthorized,
 } from "./http-errors";
-import { AuthResources } from "../resources/auth";
+import { auth } from "../resources/auth";
 import { tokens } from "../resources/tokens";
 import { attributes } from "../resources/attributes";
-import { PolicyResources } from "../resources/policy";
+import { policy } from "../resources/policy";
 import { Users } from "../defs/user";
 import { Auth } from "../defs/auth";
 import { Attributes } from "../defs/attributes";
 import { Tokens } from "../defs/tokens";
+import { Policy } from "../defs/policy";
 
 export function getHttpError(error: ResponseFilterError): HttpError {
   const { response } = error;
@@ -96,10 +97,10 @@ export class SecurityClient {
       ],
     });
     this.users = users(this.serviceClient);
-    this.auth = new AuthResources(this.serviceClient);
+    this.auth = auth(this.serviceClient);
     this.tokens = tokens(this.serviceClient);
     this.attributes = attributes(this.serviceClient);
-    this.policy = new PolicyResources(this.serviceClient);
+    this.policy = policy(this.serviceClient);
   }
 
   public serviceClient: ServiceClient;
@@ -112,7 +113,7 @@ export class SecurityClient {
 
   public attributes: Attributes;
 
-  public policy: PolicyResources;
+  public policy: Policy;
 
   public setApiKey(apiKey: string) {
     this.options.credentials.apiKey = apiKey;

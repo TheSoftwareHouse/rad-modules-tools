@@ -1,5 +1,8 @@
-# Rad Modules Tools
+<p align="center">
+  <img src="https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/feature/master/assets/rad-modules-tools.svg">
+</p>
 
+# 
 [![Build Status](https://travis-ci.com/TheSoftwareHouse/rad-modules-tools.svg?branch=master)](https://travis-ci.com/github/TheSoftwareHouse/rad-modules-tools)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
@@ -9,9 +12,9 @@ rad-modules-tools are set of tools that easily cooperate with rad-modules.
 
 ## Monorepo
 
-This repo is a monorepo which contains the [rad-modules](https://github.com/TheSoftwareHouse/rad-modules) API clients.
+This repo is a monorepo which contains the [rad-modules](https://github.com/TheSoftwareHouse/rad-modules) API clients:
 
-- [Rad Security Client](https://github.com/TheSoftwareHouse/rad-modules-tools/tree/master/packages/security-client)
+- [RAD Security Client](https://github.com/TheSoftwareHouse/rad-modules-tools/tree/master/packages/security-client)
 
 ## Setting up for local development
 
@@ -24,25 +27,15 @@ This repo is a monorepo which contains the [rad-modules](https://github.com/TheS
 - `npm run lint` - run linter analysis 
 - `npm run watch` - build packages and watch for changes
 
-
 ## License
 
-Copyright (c) 2017 The Software House
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/master/LICENSE)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This project is licensed under the terms of the [MIT license](/LICENSE).
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## About us:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+<a href="https://tsh.io"><b>The Software House</b></a>
+
+<img src="https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/master/assets/tsh.png" alt="tsh.png" width="150"  />  
+
