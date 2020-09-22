@@ -15,13 +15,22 @@ export class SchedulerClient {
         port: options.port,
         protocol: "http:",
       },
-      filters: [ServiceClient.treat4xxAsError, ServiceClient.treat5xxAsError],
+      filters: [
+        {
+          request(request) {
+            request.headers["Content-Type"] = "application/json";
+            return request;
+          },
+        },
+        ServiceClient.treat4xxAsError,
+        ServiceClient.treat5xxAsError,
+      ],
     });
 
     this.jobs = jobs(this.serviceClient);
   }
 
-  private serviceClient: ServiceClient;
+  private readonly serviceClient: ServiceClient;
 
   public jobs: Jobs;
 }

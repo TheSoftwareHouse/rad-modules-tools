@@ -83,6 +83,53 @@ export interface GetJobsResponse {
   total: number;
 }
 
+export type ObjectType = { [key: string]: string };
+
+export enum HttpMethod {
+  GET = "GET",
+  HEAD = "HEAD",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+  CONNECT = "CONNECT",
+  OPTIONS = "OPTIONS",
+  TRACE = "TRACE",
+  PATCH = "PATCH",
+}
+
+export type HttpPayload = {
+  method?: HttpMethod;
+  url: string;
+  headers?: string[][] | ObjectType;
+  body?: string | ObjectType | ObjectType[];
+  options?: {
+    compress?: boolean;
+    follow?: number;
+    size?: number;
+    timeout?: number;
+  };
+};
+
+export interface AddJobRequest {
+  name: string;
+  type: JobType;
+  payload?: HttpPayload;
+  jobOptions?: JobOptions;
+  startImmediately?: boolean;
+}
+
+export interface AddJobResponse {
+  id: string;
+}
+
+export interface CancelJobRequest {
+  jobId: string;
+}
+
+export type CancelJobResponse = void;
+
 export interface Jobs {
   getJobs(queryFilter?: GetJobsRequest): Promise<GetJobsResponse>;
+  addJob(request: AddJobRequest): Promise<AddJobResponse>;
+  cancelJob(request: CancelJobRequest): Promise<CancelJobResponse>;
 }
