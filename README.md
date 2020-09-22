@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/feature/master/assets/rad-modules-tools.svg">
+  <img src="https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/master/assets/rad-modules-tools.svg">
 </p>
 
 # 
 [![Build Status](https://travis-ci.com/TheSoftwareHouse/rad-modules-tools.svg?branch=master)](https://travis-ci.com/github/TheSoftwareHouse/rad-modules-tools)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-4dc71f.svg)](https://lerna.js.org/)
 
 rad-modules-tools are set of tools that easily cooperate with rad-modules.
 
@@ -29,7 +29,7 @@ This repo is a monorepo which contains the [rad-modules](https://github.com/TheS
 
 ## License
 
-[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/master/LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-4dc71f.svg)](https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/master/LICENSE)
 
 This project is licensed under the terms of the [MIT license](/LICENSE).
 
