@@ -27,7 +27,7 @@ export interface JobsQueryFilter {
     };
   };
   order?: {
-    by: "user.username" | "name";
+    by: "id" | "name" | "service" | "action" | "status" | "createdAt" | "updatedAt";
     type: "asc" | "desc";
   };
 }
@@ -79,7 +79,9 @@ export interface Job {
 export type GetJobsRequest = JobsQueryFilter;
 
 export interface GetJobsResponse {
-  attributes: Job[];
+  jobs: Job[];
+  page: number;
+  limit: number;
   total: number;
 }
 

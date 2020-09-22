@@ -7,7 +7,7 @@ import { v4 } from "uuid";
 describe("Resource Jobs", () => {
   const schedulerClient = new SchedulerClient({
     host: "localhost",
-    port: 50053,
+    port: 50070,
   });
 
   let jobId;
