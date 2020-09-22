@@ -15,6 +15,7 @@ rad-modules-tools are set of tools that easily cooperate with rad-modules.
 This repo is a monorepo which contains the [rad-modules](https://github.com/TheSoftwareHouse/rad-modules) API clients:
 
 - [RAD Security Client](https://github.com/TheSoftwareHouse/rad-modules-tools/tree/master/packages/security-client)
+- [RAD Scheduler Client](https://github.com/TheSoftwareHouse/rad-modules-tools/tree/master/packages/scheduler-client)
 
 ## Setting up for local development
 

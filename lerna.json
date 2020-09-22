@@ -11,7 +11,8 @@
     }
   },
   "packages": [
-    "packages/security-client"
+    "packages/security-client",
+    "packages/scheduler-client"
   ],
   "version": "independent",
   "workspaces": [

@@ -1,5 +1,7 @@
 /* eslint max-classes-per-file: ["off"] */
 
+import { ResponseFilterError } from "perron";
+
 export interface HttpError extends Error {
   statusCode: number;
 }
@@ -119,4 +121,44 @@ export class GatewayTimeout extends HttpErrorBase {
   statusCode = 504;
 
   title = "Gateway Timeout";
+}
+
+export function getHttpError(error: ResponseFilterError): HttpError {
+  const { response } = error;
+  const errorMessage = (response as any)?.body?.error ?? error.message;
+
+  switch (response?.statusCode) {
+    case 400:
+      return new BadRequest(errorMessage);
+    case 401:
+      return new Unauthorized(errorMessage);
+    case 403:
+      return new Forbidden(errorMessage);
+    case 404:
+      return new NotFound(errorMessage);
+    case 405:
+      return new MethodNotAllowed(errorMessage);
+    case 407:
+      return new ProxyAuthenticationRequired(errorMessage);
+    case 408:
+      return new RequestTimeout(errorMessage);
+    case 409:
+      return new Conflict(errorMessage);
+    case 410:
+      return new Gone(errorMessage);
+    case 429:
+      return new TooManyRequests(errorMessage);
+    case 500:
+      throw new InternalServerError(errorMessage);
+    case 501:
+      return new NotImplemented(errorMessage);
+    case 502:
+      return new BadGateway(errorMessage);
+    case 503:
+      return new ServiceUnavailable(errorMessage);
+    case 504:
+      return new GatewayTimeout(errorMessage);
+    default:
+      return new HttpErrorBase(error.message);
+  }
 }
