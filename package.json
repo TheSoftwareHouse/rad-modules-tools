@@ -13,6 +13,7 @@
     "build": "./node_modules/.bin/lerna run build",
     "generate-types": "./node_modules/.bin/lerna run generate-types",
     "generate-api-doc": "lerna run generate-api-doc",
+    "publish": "lerna publish from-package --yes",
     "unit": "./node_modules/.bin/lerna run units",
     "integration": "lerna run integration",
     "add": "./node_modules/.bin/lerna add --exact",
