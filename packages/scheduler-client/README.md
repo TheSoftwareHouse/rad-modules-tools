@@ -127,7 +127,7 @@ or throw HttpError
 
 [Back to API](#api)
 
-### schedulerClient.jobs.getJobs({ queryFilter? }) => Promise<{ object }>
+### schedulerClient.jobs.getJobs( queryFilter? ) => Promise< object >
 
 Get jobs list (if no query parameters it returns first 25 jobs ordered by name)
 

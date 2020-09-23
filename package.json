@@ -54,6 +54,7 @@
   "dependencies": {
     "@tshio/security-client": "file:packages/security-client",
     "@tshio/scheduler-client": "file:packages/scheduler-client",
-    "@tshio/pdf-client": "file:packages/pdf-client"
+    "@tshio/pdf-client": "file:packages/pdf-client",
+    "@tshio/notifications-client": "file:packages/notifications-client"
   }
 }
