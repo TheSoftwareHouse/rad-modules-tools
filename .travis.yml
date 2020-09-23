@@ -7,6 +7,7 @@ before_script:
   - npm run bootstrap
   - npm run build
   - docker-compose up -d security
+  - docker-compose up -d scheduler
 
 script:
   - npm run lint

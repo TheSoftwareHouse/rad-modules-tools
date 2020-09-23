@@ -48,9 +48,11 @@
     "tsconfig-paths": "~3.9.0",
     "typedoc": "^0.19.1",
     "typedoc-plugin-markdown": "^2.4.2",
-    "typescript": "4.0.2"
+    "typescript": "4.0.2",
+    "uuid": "3.3.3"
   },
   "dependencies": {
-    "@tshio/security-client": "file:packages/security-client"
+    "@tshio/security-client": "file:packages/security-client",
+    "@tshio/scheduler-client": "file:packages/scheduler-client"
   }
 }

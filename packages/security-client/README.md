@@ -69,7 +69,8 @@ const SecurityClient = require('@tshio/security-client');
 })();
 ```
 
- ### Examples
+### Examples
+
 ```js
 (async () => {
     const securityClient = SecurityClient.getSecurityClient();
@@ -1277,7 +1278,7 @@ operator = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr"
 
 ## License
 
-[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/master/LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-4dc71f.svg)](https://raw.githubusercontent.com/TheSoftwareHouse/rad-modules-tools/master/LICENSE)
 
 This project is licensed under the terms of the [MIT license](/LICENSE).
 

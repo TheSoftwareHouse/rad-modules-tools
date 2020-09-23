@@ -11,10 +11,12 @@
     }
   },
   "packages": [
-    "packages/security-client"
+    "packages/security-client",
+    "packages/scheduler-client"
   ],
   "version": "independent",
   "workspaces": [
-    "packages/security-client"
+    "packages/security-client",
+    "packages/scheduler-client"
   ]
 }

@@ -3,16 +3,31 @@ version: '3.4'
 services:
   postgres:
     image: postgres:12-alpine
+    volumes:
+      - ./postgresql-multiple-databases:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_USERNAME: postgres
-      POSTGRES_DB: users
+      POSTGRES_MULTIPLE_DATABASES: users,scheduler,notifications
     networks:
       - app
 
   redis:
     image: redis:4-alpine
     hostname: redis
+    networks:
+      - app
+
+  scheduler:
+    image: tshio/scheduler:latest
+    working_dir: /app/build/services/scheduler
+    command: "api"
+    hostname: scheduler
+    ports:
+      - 50070:50050
+    depends_on:
+      - postgres
+      - redis
     networks:
       - app
 
