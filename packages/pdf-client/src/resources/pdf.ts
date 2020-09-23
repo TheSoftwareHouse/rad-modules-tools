@@ -11,7 +11,10 @@ export const pdf = (serviceClient: ServiceClient) =>
           method: "POST",
           body: JSON.stringify(request),
         })
-        .then((response) => ({ fileId: (response.body as any).url.split("/").pop(), ...(response.body as any) } as CreatePdfResponse))
+        .then(
+          (response) =>
+            ({ fileId: (response.body as any).url.split("/").pop(), ...(response.body as any) } as CreatePdfResponse),
+        )
         .catch((error) => {
           throw getHttpError(error);
         });
@@ -26,5 +29,5 @@ export const pdf = (serviceClient: ServiceClient) =>
         .catch((error) => {
           throw getHttpError(error);
         });
-    }
+    },
   } as Pdf);
