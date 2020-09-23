@@ -34,6 +34,6 @@ describe("Resource Jobs", () => {
   });
 
   it("Should cancel job", async () => {
-    await schedulerClient.jobs.cancelJob({ jobId }).catch();
+    await schedulerClient.jobs.cancelJob({ jobId });
   });
 });

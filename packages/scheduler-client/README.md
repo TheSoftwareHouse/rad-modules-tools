@@ -7,12 +7,14 @@
 
 This is a 100% JavaScript library, with TypeScript definition, with the Promise API.
 
-This module makes it simple to implement a Node.js application that uses [RAD Scheduler](https://thesoftwarehouse.github.io/rad-modules-docs/docs/scheduler/scheduler-index) for its authentication and authorization needs.
+This module makes it simple to implement a Node.js application that uses [RAD Scheduler](https://thesoftwarehouse.github.io/rad-modules-docs/docs/scheduler/scheduler-index).
 
 ## Table of Contents
 
   * [Install](#installing)
   * [Loading and configuration](#loading-and-configuration-module)
+  * [API](#api)
+  * [Examples](#examples)
 
 ## Installing
 ```bash
@@ -41,30 +43,40 @@ const options = {
 const schedulerClient = new SchedulerClient(options);
 ```
 
-## Getting started
-
-### Login and authorization
+## Examples
 
 ```js
-const SecurityClient = require('@tshio/security-client');
+const SchedulerClient = require('@tshio/scheduler-client');
+
+const schedulerClient = new SchedulerClient({
+    host: "localhost",
+    port: 50070,
+  });
 
 (async () => {
-    const securityClient = SecurityClient.getSecurityClient();
-    const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
+    
+    // Add job
+    
+    const job = {
+      name: "JobExample",
+      type: "http",
+      payload: {
+        url: "example.com",
+      },
+    };
 
-    console.log(token);
-    // => { accessToken: "xxx", refreshToken: "xxx" }
+    const { id } = await schedulerClient.jobs.addJob(job).catch();
+  
+    // Get jobs
+   
+    const jobsQueryFilter = {};
+    
+    const jobs = await schedulerClient.jobs.getJobs(jobsQueryFilter);
 
-    securityClient.setToken(token); // From now, the token will be automatically added to all API requests
-
-    // Alternatively, you can set the API Key instead of a Token
-    // securityClient.setApiKey("api key string");
+    // Cancel job
+    
+    await schedulerClient.jobs.cancelJob({ jobId: id }).catch();
 })();
-```
-
-### Examples
-
-```js
 ```
 
 ## API
@@ -158,7 +170,7 @@ Filters can be used search for a single condition or they can be wrapped in logi
 
 ```ts
 //
-export type GetJobsColumns = "id" | "name" | "service" | "action" | "status" | "createdAt" | "updatedAt";
+export type GetJobsColumns = "id" | "name" | "status" | "createdAt" | "updatedAt";
 
 export type GetJobsFilterOperators =
   | "eq"
@@ -187,7 +199,7 @@ export interface JobsQueryFilter {
     };
   };
   order?: {
-    by: "id" | "name" | "service" | "action" | "status" | "createdAt" | "updatedAt";
+    by: "id" | "name" | "status" | "createdAt" | "updatedAt";
     type: "asc" | "desc";
   };
 }
@@ -206,8 +218,8 @@ export interface JobsQueryFilter {
   Single parameter filter
   ```js
   filter: {
-    username: {
-      include: "super"
+    name: {
+      include: "job"
     }
   }
   ```
@@ -215,11 +227,11 @@ export interface JobsQueryFilter {
   Two parameter filter
   ```js
   filter: {
-    username: {
-      include: "super"
+    name: {
+      include: "job"
     },
-    isActive: {
-      eq: true,
+    status: {
+      eq: "active",
     },
   }
   ```
@@ -228,13 +240,13 @@ export interface JobsQueryFilter {
 
   | Name                  | Type       | Description                                                                     | Default |
   |-----------------------|------------|---------------------------------------------------------------------------------|---------|
-  | by                | `string`       | **optional** <p>column name for order sorting, allowed values: `"id", "name", "service", "action", "status", "createdAt", "updatedAt"`</p> | `id`    |
+  | by                | `string`       | **optional** <p>column name for order sorting, allowed values: `"id", "name", "status", "createdAt", "updatedAt"`</p> | `id`    |
   | type              | `asc` or `desc`| **optional** <p>Ascending or descending order</p>                               | `asc`   |
 
   #### Examples
   ```js
   order: {
-    by: "username",
+    by: "name",
     type: "desc"
   }
   ```
