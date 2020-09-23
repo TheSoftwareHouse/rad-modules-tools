@@ -69,7 +69,7 @@ const SecurityClient = require('@tshio/security-client');
 
 ## API
 
-### schedulerClient.pdf.addJob({ name, type, payload?, jobOptions? }) => Promise<{ id }>
+### schedulerClient.jobs.addJob({ name, type, payload?, jobOptions? }) => Promise<{ id }>
 
 Schedule an action to another service - either to run immediately, at some specific timestamp or as a cron job.
 
@@ -115,14 +115,14 @@ or throw HttpError
 
 [Back to API](#api)
 
-### schedulerClient.pdf.getJobs({ queryFilter? }) => Promise<{ pdf }>
+### schedulerClient.jobs.getJobs({ queryFilter? }) => Promise<{ object }>
 
-Get pdf list (if no query parameters it returns first 25 pdf ordered by name)
+Get jobs list (if no query parameters it returns first 25 jobs ordered by name)
 
 Returns an object
 ```ts
 {
-  pdf: Job[];
+  jobs: Job[];
   page: number;
   limit: number;
   total: number;
@@ -241,7 +241,7 @@ export interface JobsQueryFilter {
   
 [Back to API](#api)
 
-### schedulerClient.pdf.cancelJob({ jobId }) => Promise< void >
+### schedulerClient.jobs.cancelJob({ jobId }) => Promise< void >
 
 Cancels a job with given id
 

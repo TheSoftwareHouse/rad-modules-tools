@@ -1,6 +1,7 @@
 /**
  * Accepts values labeled with units. If number, treat as pixels.
  */
+
 export type LayoutDimension = string | number;
 
 export type PDFFormat = "Letter" | "Legal" | "Tabloid" | "Ledger" | "A0" | "A1" | "A2" | "A3" | "A4" | "A5" | "A6";
@@ -84,10 +85,16 @@ export interface CreatePdfRequest {
 }
 
 export interface CreatePdfResponse {
+  fileId: string;
   url: string;
   expiryAt: Date;
 }
 
+export interface DownloadPdfRequest {
+  fileId: string;
+}
+
 export interface Pdf {
   create(request: CreatePdfRequest): Promise<CreatePdfResponse>;
+  download(request: DownloadPdfRequest): Promise<string>;
 }
