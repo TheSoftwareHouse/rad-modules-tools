@@ -8,7 +8,7 @@ export const pdf = (serviceClient: ServiceClient) =>
       return serviceClient
         .request({
           pathname: "/api/pdf/create-pdf",
-          method: "GET",
+          method: "POST",
           body: JSON.stringify(request),
         })
         .then((response) => response.body as CreatePdfResponse)

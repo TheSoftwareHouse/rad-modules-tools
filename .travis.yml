@@ -8,6 +8,7 @@ before_script:
   - npm run build
   - docker-compose up -d security
   - docker-compose up -d scheduler
+  - docker-compose up -d pdf
 
 script:
   - npm run lint
