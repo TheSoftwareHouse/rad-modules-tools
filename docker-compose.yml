@@ -18,6 +18,12 @@ services:
     networks:
       - app
 
+  pdf:
+    image: tshio/pdf:latest
+    command: "api"
+    ports:
+      - 50080:50050
+
   scheduler:
     image: tshio/scheduler:latest
     working_dir: /app/build/services/scheduler

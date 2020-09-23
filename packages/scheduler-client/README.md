@@ -22,7 +22,7 @@ $ npm install @tshio/scheduler-client
 ```
 or
 ```bash
-yarn add @tshio/scheduler-client
+$ yarn add @tshio/scheduler-client
 ```
 
 ## Loading and configuration module
@@ -75,7 +75,7 @@ const schedulerClient = new SchedulerClient({
 
     // Cancel job
     
-    await schedulerClient.jobs.cancelJob({ jobId: id }).catch();
+    await schedulerClient.jobs.cancelJob({ jobId: id });
 })();
 ```
 
@@ -127,7 +127,7 @@ or throw HttpError
 
 [Back to API](#api)
 
-### schedulerClient.jobs.getJobs({ queryFilter? }) => Promise<{ jobs }>
+### schedulerClient.jobs.getJobs({ queryFilter? }) => Promise<{ object }>
 
 Get jobs list (if no query parameters it returns first 25 jobs ordered by name)
 
