@@ -11,6 +11,7 @@ This is a 100% JavaScript library, with TypeScript definition, with the Promise 
 
   * [Install](#installing)
   * [Loading and configuration](#loading-and-configuration-module)
+  * [Getting started](#getting-started)
   * [API](#api)
 
 ## Installing
@@ -54,7 +55,7 @@ pdfClient.pdf.create({
     });
 ```
 
-#### Create pdf
+#### Download pdf
 
 ```js
 pdfClient.pdf.download({ 
