@@ -13,12 +13,14 @@
   "packages": [
     "packages/security-client",
     "packages/scheduler-client",
-    "packages/pdf-client"
+    "packages/pdf-client",
+    "packages/mailer-client"
   ],
   "version": "independent",
   "workspaces": [
     "packages/security-client",
     "packages/scheduler-client",
-    "packages/pdf-client"
+    "packages/pdf-client",
+    "packages/mailer-client"
   ]
 }

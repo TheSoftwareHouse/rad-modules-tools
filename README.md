@@ -17,6 +17,7 @@ This repo is a monorepo which contains the [rad-modules](https://github.com/TheS
 - [RAD Security Client](https://github.com/TheSoftwareHouse/rad-modules-tools/tree/master/packages/security-client)
 - [RAD Scheduler Client](https://github.com/TheSoftwareHouse/rad-modules-tools/tree/master/packages/scheduler-client)
 - [RAD PDF Client](https://github.com/TheSoftwareHouse/rad-modules-tools/tree/master/packages/pdf-client)
+- [RAD Mailer Client](https://github.com/TheSoftwareHouse/rad-modules-tools/tree/master/packages/mailer-client)
 
 ## Setting up for local development
 
