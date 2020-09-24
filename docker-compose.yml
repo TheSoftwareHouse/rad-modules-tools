@@ -18,6 +18,30 @@ services:
     networks:
       - app
 
+  mailhog:
+    image: mailhog/mailhog
+    restart: always
+    networks:
+      - app
+    ports:
+      - 1025:1025
+      - 8025:8025
+
+  mailer:
+    image: tshio/mailer:latest
+    command: "api"
+    environment:
+      TRANSPORT_SMTP_HOST: mailhog
+      TRANSPORT_SMTP_PORT: 1025
+      TRANSPORT_SMTP_SECURE: "false"
+    ports:
+      - 50060:50050
+    hostname: mailer
+    depends_on:
+      - mailhog
+    networks:
+      - app
+
   pdf:
     image: tshio/pdf:latest
     command: "api"

@@ -48,7 +48,28 @@ const mailerClient = new MailerClient(options);
 #### Send email
 
 ```js
-  await mailerClient.mailer.send();
+const request: SendRequest = {
+emails: [
+  {
+    sender: {
+      name: "tsh.io",
+      email: "sender@example.com",
+    },
+    recipient: {
+      to: ["recipient@example.com"],
+    },
+    template: {
+      id: "test",
+      parameters: {
+        firstName: "Antonio",
+        lastName: "Hernández",
+      },
+    },
+  },
+],
+}
+
+await mailerClient.mailer.send(request);
 ```
 
 ## API
@@ -64,7 +85,7 @@ Returns void or throw HttpError
 | Name         | Type       | Description                           | Default |
 |--------------|------------|---------------------------------------|-----|
 | messages  | `object[]`   | Array of [MailMessage](#mail-message)                      | |
-| priority | `string`   | Send priority, allowed values: `urgent`, `high`, `medium`, `low`                        | |
+| priority | `string`   | **optional** <p>Send priority, allowed values: `urgent`, `high`, `medium`, `low`</p>   | urgent |
 
 ##### Mail message
 

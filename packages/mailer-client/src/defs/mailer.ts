@@ -37,7 +37,7 @@ export enum EmailQueuePriority {
 
 export interface SendRequest {
   emails: MailMessage[];
-  priority: EmailQueuePriority;
+  priority?: EmailQueuePriority;
 }
 
 export interface Mailer {
