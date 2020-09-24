@@ -10,6 +10,7 @@ before_script:
   - docker-compose up -d scheduler
   - docker-compose up -d pdf
   - docker-compose up -d notifications
+  - docker-compose up -d mailer
 
 script:
   - npm run lint
