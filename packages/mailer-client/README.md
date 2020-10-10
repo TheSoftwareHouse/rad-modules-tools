@@ -5,7 +5,7 @@
 
 **Non-blocking RAD Mailer client for Node.js.**
 
-This is a 100% JavaScript library, with TypeScript definition, with the Promise API.
+This is a 100% JavaScript library, with TypeScript definition and the Promise API.
 
 This module makes it simple to implement a Node.js application that uses [RAD Mailer](https://thesoftwarehouse.github.io/rad-modules-docs/docs/mailer/mailer-index).
 
@@ -34,6 +34,10 @@ const { MailerClient } = require('@tshio/mailer-client');
 // ES Module
 import { MailerClient } from '@tshio/mailer-client';
 
+// TS
+All types are available on:
+import { EmailQueuePriority } from "@tshio/mailer-client/dist/defs/mailer";
+
 
 const options = {
   host: "localhost",
@@ -47,26 +51,29 @@ const mailerClient = new MailerClient(options);
 
 #### Send email
 
+It is important to remmeber that **template.id** is a name of a specific template directory.
+
 ```js
 const request: SendRequest = {
-emails: [
-  {
-    sender: {
-      name: "tsh.io",
-      email: "sender@example.com",
-    },
-    recipient: {
-      to: ["recipient@example.com"],
-    },
-    template: {
-      id: "test",
-      parameters: {
-        firstName: "Antonio",
-        lastName: "Hernández",
+  emails: [
+    {
+      sender: {
+        name: "tsh.io",
+        email: "sender@example.com",
+      },
+      recipient: {
+        to: ["recipient@example.com"],
+      },
+      template: {
+        id: "test",
+        parameters: {
+          firstName: "Antonio",
+          lastName: "Hernández",
+        },
       },
     },
-  },
-],
+  ],
+  priority: EmailQueuePriority.URGENT
 }
 
 await mailerClient.mailer.send(request);
@@ -85,7 +92,7 @@ Returns void or throw HttpError
 | Name         | Type       | Description                           | Default |
 |--------------|------------|---------------------------------------|-----|
 | messages  | `object[]`   | Array of [MailMessage](#mail-message)                      | |
-| priority | `string`   | **optional** <p>Send priority, allowed values: `urgent`, `high`, `medium`, `low`</p>   | urgent |
+| priority | `string`   | **optional** <p>Send priority, allowed values: `urgent`, `high`, `medium`, `low`</p>   | |
 
 ##### Mail message
 
