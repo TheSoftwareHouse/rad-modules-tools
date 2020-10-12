@@ -13,9 +13,13 @@ describe("Resource Jobs", () => {
   let jobId;
 
   it("Should get jobs", async () => {
-    const jobsQueryFilter: JobsQueryFilter = {};
+    const jobsQueryFilter: JobsQueryFilter = {
+      page: 1,
+      limit: 25,
+    };
 
     const result = await schedulerClient.jobs.getJobs(jobsQueryFilter);
+
     assert.deepStrictEqual(Object.keys(result ?? {}), ["jobs", "total", "page", "limit"]);
   });
 

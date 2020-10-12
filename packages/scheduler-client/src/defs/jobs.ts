@@ -1,4 +1,4 @@
-export type GetJobsColumns = "id" | "name" | "service" | "action" | "status" | "createdAt" | "updatedAt";
+export type GetJobsColumns = "id" | "name" | "type" | "status" | "createdAt" | "updatedAt";
 
 export type GetJobsFilterOperators =
   | "eq"
