@@ -10,6 +10,11 @@ export type Token = {
   refreshToken?: string;
 };
 
+export interface AuthOptions {
+  apiKey?: string;
+  accessToken?: string;
+}
+
 export type ApiKey = string;
 
 export type Resources = string[];
@@ -17,16 +22,6 @@ export type Resources = string[];
 export type Options = {
   host: string;
   port: number;
-  autoSetToken?: boolean;
-  credentials?: {
-    username?: string;
-    password?: string;
-    apiKey?: string;
-    token?: {
-      accessToken: string;
-      refreshToken?: string;
-    };
-  };
 };
 
 export { SecurityClient };

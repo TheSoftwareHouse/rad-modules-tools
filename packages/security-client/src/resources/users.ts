@@ -20,23 +20,29 @@ import {
   GetUsersByResourceResponse,
   GetUsersRequest,
   GetUsersResponse,
+  HasAccessRequest,
   HasAccessResponse,
+  HasAttributesRequest,
   HasAttributesResponse,
   IsAuthenticatedResponse,
   PasswordResetTokenRequest,
   PasswordResetTokenResponse,
+  RemoveAttributesRequest,
   SetPasswordRequest,
   SetPasswordResponse,
   Users,
 } from "../defs/user";
+import { createHeadersForRequest } from "../services/headers-factory";
+import { AuthOptions } from "../services/service";
 
 export const users = (serviceClient: ServiceClient) =>
   ({
-    getUsers(queryFilter?: GetUsersRequest): Promise<GetUsersResponse> {
+    getUsers(queryFilter: GetUsersRequest, authOptions?: AuthOptions): Promise<GetUsersResponse> {
       return serviceClient
         .request({
           pathname: `/api/users?${qs.stringify(queryFilter)}`,
           method: "GET",
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as GetUsersResponse)
         .catch((error) => {
@@ -44,11 +50,12 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    activateUser(request: ActivateUserRequest): Promise<ActivateUserResponse> {
+    activateUser(request: ActivateUserRequest, authOptions?: AuthOptions): Promise<ActivateUserResponse> {
       return serviceClient
         .request({
           pathname: `/api/users/activate-user/${request.activationToken}`,
           method: "POST",
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as ActivateUserResponse)
         .catch((error) => {
@@ -56,11 +63,12 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    isAuthenticated(): Promise<IsAuthenticatedResponse> {
+    isAuthenticated(authOptions?: AuthOptions): Promise<IsAuthenticatedResponse> {
       return serviceClient
         .request({
           pathname: "/api/users/is-authenticated",
           method: "GET",
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as IsAuthenticatedResponse)
         .catch((error) => {
@@ -68,12 +76,13 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    deactivateUser(request: DeactivateUserRequest): Promise<DeactivateUserResponse> {
+    deactivateUser(request: DeactivateUserRequest, authOptions?: AuthOptions): Promise<DeactivateUserResponse> {
       return serviceClient
         .request({
           pathname: "/api/users/deactivate-user",
           method: "POST",
           body: JSON.stringify(request),
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => {
           return {
@@ -87,12 +96,13 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    hasAttributes(attributes: string[]): Promise<HasAttributesResponse> {
+    hasAttributes(request: HasAttributesRequest, authOptions?: AuthOptions): Promise<HasAttributesResponse> {
       return serviceClient
         .request({
           pathname: "/api/users/has-attributes",
           method: "POST",
-          body: JSON.stringify({ attributes }),
+          body: JSON.stringify({ attributes: request.attributes }),
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as HasAttributesResponse)
         .catch((error) => {
@@ -100,12 +110,13 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    hasAccess(resources: string[]): Promise<HasAccessResponse> {
+    hasAccess(request: HasAccessRequest, authOptions?: AuthOptions): Promise<HasAccessResponse> {
       return serviceClient
         .request({
           pathname: "/api/users/has-access",
           method: "POST",
-          body: JSON.stringify({ resources }),
+          body: JSON.stringify({ resources: request.resources }),
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as HasAccessResponse)
         .catch((error) => {
@@ -113,12 +124,13 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    addAttributes(request: AddAttributesRequest): Promise<AddAttributesResponse> {
+    addAttributes(request: AddAttributesRequest, authOptions?: AuthOptions): Promise<AddAttributesResponse> {
       return serviceClient
         .request({
           pathname: "/api/users/add-attribute",
           method: "POST",
           body: JSON.stringify(request),
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as AddAttributesResponse)
         .catch((error) => {
@@ -126,12 +138,13 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    removeAttributes(userId: string, attributes: string[]) {
+    removeAttributes(request: RemoveAttributesRequest, authOptions?: AuthOptions) {
       return serviceClient
         .request({
-          pathname: `/api/users/remove-attribute?userId=${userId}attribute`,
-          query: { userId, attributes: attributes.join(",") },
+          pathname: `/api/users/remove-attribute?userId=${request.userId}attribute`,
+          query: { userId: request.userId, attributes: request.attributes.join(",") },
           method: "DELETE",
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body)
         .catch((error) => {
@@ -139,12 +152,13 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    addUser(request: AddUserRequest): Promise<AddUserResponse> {
+    addUser(request: AddUserRequest, authOptions?: AuthOptions): Promise<AddUserResponse> {
       return serviceClient
         .request({
           pathname: "/api/users/add-user",
           method: "POST",
           body: JSON.stringify({ attributes: [], ...request }),
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as AddUserResponse)
         .catch((error) => {
@@ -152,12 +166,13 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    deleteUser(request: DeleteUserRequest): Promise<DeleteUserResponse> {
+    deleteUser(request: DeleteUserRequest, authOptions?: AuthOptions): Promise<DeleteUserResponse> {
       return serviceClient
         .request({
           pathname: "/api/users/delete-user",
           method: "DELETE",
           query: request,
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body)
         .catch((error) => {
@@ -165,11 +180,12 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    getUser(request: GetUserRequest): Promise<GetUserResponse> {
+    getUser(request: GetUserRequest, authOptions?: AuthOptions): Promise<GetUserResponse> {
       return serviceClient
         .request({
           pathname: `/api/users/get-user/${request.userId}`,
           method: "GET",
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as GetUserResponse)
         .catch((error) => {
@@ -177,12 +193,13 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    getUserId(request: GetUserIdRequest): Promise<GetUserIdResponse> {
+    getUserId(request: GetUserIdRequest, authOptions?: AuthOptions): Promise<GetUserIdResponse> {
       return serviceClient
         .request({
           pathname: "/api/users/get-user-id",
           method: "GET",
           query: request,
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as GetUserIdResponse)
         .catch((error) => {
@@ -190,12 +207,16 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    getUsersByResource(request: GetUsersByResourceRequest): Promise<GetUsersByResourceResponse> {
+    getUsersByResource(
+      request: GetUsersByResourceRequest,
+      authOptions?: AuthOptions,
+    ): Promise<GetUsersByResourceResponse> {
       return serviceClient
         .request({
           pathname: "/api/users/get-user-id",
           method: "GET",
           query: { page: 1, limit: 25, ...request },
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as GetUsersByResourceResponse)
         .catch((error) => {
@@ -203,12 +224,13 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    setPassword(request: SetPasswordRequest): Promise<SetPasswordResponse> {
+    setPassword(request: SetPasswordRequest, authOptions?: AuthOptions): Promise<SetPasswordResponse> {
       return serviceClient
         .request({
           pathname: "/api/users/set-password",
           method: "POST",
           body: JSON.stringify(request),
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as SetPasswordResponse)
         .catch((error) => {
@@ -216,12 +238,16 @@ export const users = (serviceClient: ServiceClient) =>
         });
     },
 
-    passwordResetToken(request: PasswordResetTokenRequest): Promise<PasswordResetTokenResponse> {
+    passwordResetToken(
+      request: PasswordResetTokenRequest,
+      authOptions?: AuthOptions,
+    ): Promise<PasswordResetTokenResponse> {
       return serviceClient
         .request({
           pathname: "/api/users/password-reset-token",
           method: "POST",
           body: JSON.stringify(request),
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as PasswordResetTokenResponse)
         .catch((error) => {

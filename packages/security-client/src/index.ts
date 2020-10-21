@@ -6,8 +6,6 @@ export const getSecurityClient = (
   options: Options = {
     host: "localhost",
     port: 50050,
-    autoSetToken: true,
-    credentials: {},
   },
 ) => new SecurityClient(options);
 

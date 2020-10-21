@@ -1,5 +1,5 @@
 import { ResponseFilterError, ServiceClient } from "perron";
-import { Options, Token } from "./service";
+import { Options } from "./service";
 import { users } from "../resources/users";
 import {
   BadGateway,
@@ -78,23 +78,7 @@ export class SecurityClient {
         port: options.port,
         protocol: "http:",
       },
-      filters: [
-        {
-          request(request) {
-            request.headers["Content-Type"] = "application/json";
-            if (options.autoSetToken) {
-              if (options?.credentials?.apiKey) {
-                request.headers["x-api-key"] = options.credentials.apiKey;
-              } else if (options?.credentials?.token) {
-                request.headers.Authorization = `Bearer ${options.credentials.token.accessToken}`;
-              }
-            }
-            return request;
-          },
-        },
-        ServiceClient.treat4xxAsError,
-        ServiceClient.treat5xxAsError,
-      ],
+      filters: [ServiceClient.treat4xxAsError, ServiceClient.treat5xxAsError],
     });
     this.users = users(this.serviceClient);
     this.auth = auth(this.serviceClient);
@@ -114,12 +98,4 @@ export class SecurityClient {
   public attributes: Attributes;
 
   public policy: Policy;
-
-  public setApiKey(apiKey: string) {
-    this.options.credentials.apiKey = apiKey;
-  }
-
-  public setToken(token: Token) {
-    this.options.credentials.token = token;
-  }
 }
