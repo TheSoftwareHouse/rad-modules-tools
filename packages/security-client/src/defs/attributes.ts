@@ -1,3 +1,5 @@
+import { AuthOptions } from "../services/service";
+
 export interface User {
   id: string;
   username: string;
@@ -43,5 +45,5 @@ export interface GetAttributesResponse {
 }
 
 export interface Attributes {
-  getAttributes(queryFilter?: AttributesQueryFilter): Promise<GetAttributesResponse>;
+  getAttributes(queryFilter: AttributesQueryFilter, options?: AuthOptions): Promise<GetAttributesResponse>;
 }

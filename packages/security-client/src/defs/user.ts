@@ -1,3 +1,5 @@
+import { AuthOptions } from "../services/service";
+
 export interface User {
   id: string;
   username: string;
@@ -126,9 +128,17 @@ export interface GetUsersByResourceResponse {
   limit: number;
 }
 
+export interface HasAccessRequest {
+  resources: string[];
+}
+
 export interface HasAccessResponse {
   hasAccess: boolean;
   forbidden: string[];
+}
+
+export interface HasAttributesRequest {
+  attributes: string[];
 }
 
 export interface HasAttributesResponse {
@@ -147,20 +157,25 @@ export interface PasswordResetTokenResponse {
   resetPasswordToken: string;
 }
 
+export interface RemoveAttributesRequest {
+  userId: string;
+  attributes: string[];
+}
+
 export interface Users {
-  getUsers(queryFilter?: GetUsersRequest): Promise<GetUsersResponse>;
-  activateUser(request: ActivateUserRequest): Promise<ActivateUserResponse>;
-  addAttributes(request: AddAttributesRequest): Promise<AddAttributesResponse>;
-  removeAttributes(userId: string, attributes: string[]);
-  addUser(request: AddUserRequest): Promise<AddUserResponse>;
-  deactivateUser(request: DeactivateUserRequest): Promise<DeactivateUserResponse>;
-  deleteUser(request: DeleteUserRequest): Promise<DeleteUserResponse>;
-  getUser(request: GetUserRequest): Promise<GetUserResponse>;
-  getUserId(request: GetUserIdRequest): Promise<GetUserIdResponse>;
-  getUsersByResource(request: GetUsersByResourceRequest): Promise<GetUsersByResourceResponse>;
-  hasAccess(resources: string[]): Promise<HasAccessResponse>;
-  hasAttributes(attributes: string[]): Promise<HasAttributesResponse>;
-  isAuthenticated(): Promise<IsAuthenticatedResponse>;
-  setPassword(request: SetPasswordRequest): Promise<SetPasswordResponse>;
-  passwordResetToken(request: PasswordResetTokenRequest): Promise<PasswordResetTokenResponse>;
+  getUsers(queryFilter: GetUsersRequest, options?: AuthOptions): Promise<GetUsersResponse>;
+  activateUser(request: ActivateUserRequest, options?: AuthOptions): Promise<ActivateUserResponse>;
+  addAttributes(request: AddAttributesRequest, options?: AuthOptions): Promise<AddAttributesResponse>;
+  removeAttributes(request: RemoveAttributesRequest, options?: AuthOptions);
+  addUser(request: AddUserRequest, options?: AuthOptions): Promise<AddUserResponse>;
+  deactivateUser(request: DeactivateUserRequest, options?: AuthOptions): Promise<DeactivateUserResponse>;
+  deleteUser(request: DeleteUserRequest, options?: AuthOptions): Promise<DeleteUserResponse>;
+  getUser(request: GetUserRequest, options?: AuthOptions): Promise<GetUserResponse>;
+  getUserId(request: GetUserIdRequest, options?: AuthOptions): Promise<GetUserIdResponse>;
+  getUsersByResource(request: GetUsersByResourceRequest, options?: AuthOptions): Promise<GetUsersByResourceResponse>;
+  hasAccess(request: HasAccessRequest, options?: AuthOptions): Promise<HasAccessResponse>;
+  hasAttributes(request: HasAttributesRequest, options?: AuthOptions): Promise<HasAttributesResponse>;
+  isAuthenticated(options?: AuthOptions): Promise<IsAuthenticatedResponse>;
+  setPassword(request: SetPasswordRequest, options?: AuthOptions): Promise<SetPasswordResponse>;
+  passwordResetToken(request: PasswordResetTokenRequest, options?: AuthOptions): Promise<PasswordResetTokenResponse>;
 }

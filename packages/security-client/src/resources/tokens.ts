@@ -1,7 +1,6 @@
 import { getHttpError } from "../services/security-client";
 import { ServiceClient } from "perron";
 import {
-  CreateAccessKeyRequest,
   CreateAccessKeyResponse,
   GenerateTokenRequest,
   GenerateTokenResponse,
@@ -10,17 +9,17 @@ import {
   RemoveAccessKeyRequest,
   Tokens,
 } from "../defs/tokens";
+import { createHeadersForRequest } from "../services/headers-factory";
+import { AuthOptions } from "../services/service";
 
 export const tokens = (serviceClient: ServiceClient) =>
   ({
-    createAccessKey(request: CreateAccessKeyRequest): Promise<CreateAccessKeyResponse> {
+    createAccessKey(authOptions?: AuthOptions): Promise<CreateAccessKeyResponse> {
       return serviceClient
         .request({
           pathname: "/api/tokens/create-access-key",
           method: "POST",
-          body: JSON.stringify({
-            accessToken: request.accessToken,
-          }),
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response!.body as CreateAccessKeyResponse)
         .catch((error) => {
@@ -28,12 +27,13 @@ export const tokens = (serviceClient: ServiceClient) =>
         });
     },
 
-    generateToken(request: GenerateTokenRequest): Promise<GenerateTokenResponse> {
+    generateToken(request: GenerateTokenRequest, authOptions?: AuthOptions): Promise<GenerateTokenResponse> {
       return serviceClient
         .request({
           pathname: "/api/tokens/generate-token",
           method: "POST",
           body: JSON.stringify({ ...request }),
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response!.body as GenerateTokenResponse)
         .catch((error) => {
@@ -41,7 +41,7 @@ export const tokens = (serviceClient: ServiceClient) =>
         });
     },
 
-    getAccessKeys(request?: GetAccessKeysRequest): Promise<GetAccessKeysResponse> {
+    getAccessKeys(request: GetAccessKeysRequest, authOptions?: AuthOptions): Promise<GetAccessKeysResponse> {
       return serviceClient
         .request({
           pathname: "/api/tokens/get-access-keys",
@@ -49,6 +49,7 @@ export const tokens = (serviceClient: ServiceClient) =>
           query: {
             ...request,
           },
+          headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response!.body as GetAccessKeysResponse)
         .catch((error) => {
@@ -56,11 +57,12 @@ export const tokens = (serviceClient: ServiceClient) =>
         });
     },
 
-    async removeAccessKey(request?: RemoveAccessKeyRequest): Promise<void> {
+    async removeAccessKey(request: RemoveAccessKeyRequest, authOptions?: AuthOptions): Promise<void> {
       await serviceClient
         .request({
           pathname: `/api/tokens/remove-access-key/${request.apiKey}`,
           method: "DELETE",
+          headers: createHeadersForRequest(authOptions),
         })
         .catch((error) => {
           throw getHttpError(error);

@@ -12,7 +12,6 @@ describe("Resource Tokens", () => {
   before("Set token", async () => {
     const result = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
     assert.deepStrictEqual(Object.keys(result ?? []), ["accessToken", "refreshToken"]);
-    securityClient.setToken(result);
     token = result;
   });
 
@@ -26,12 +25,15 @@ describe("Resource Tokens", () => {
   });
 
   it("Should generateToken", async () => {
-    securityClient.setApiKey(apiKey);
-
-    const result = await securityClient.tokens.generateToken({
-      accessExpirationInSeconds: 10000,
-      refreshExpirationInSeconds: 20000,
-    });
+    const result = await securityClient.tokens.generateToken(
+      {
+        accessExpirationInSeconds: 10000,
+        refreshExpirationInSeconds: 20000,
+      },
+      {
+        apiKey,
+      },
+    );
 
     assert.deepStrictEqual(Object.keys(result ?? {}), ["accessToken", "refreshToken"]);
   });

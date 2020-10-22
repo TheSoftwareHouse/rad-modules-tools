@@ -1,3 +1,5 @@
+import { AuthOptions } from "../services/service";
+
 export interface User {
   id: string;
   username: string;
@@ -62,7 +64,7 @@ export interface PolicyQuery {
 export type RemovePolicyRequest = PolicyIdQuery | PolicyQuery;
 
 export interface Policy {
-  addPolicy(request: AddPolicyRequest): Promise<AddPolicyResponse>;
-  getPolicies(queryFilter?: GetPoliciesRequest): Promise<GetPoliciesResponse>;
-  removePolicy(request: RemovePolicyRequest): Promise<void>;
+  addPolicy(request: AddPolicyRequest, options?: AuthOptions): Promise<AddPolicyResponse>;
+  getPolicies(queryFilter: GetPoliciesRequest, options?: AuthOptions): Promise<GetPoliciesResponse>;
+  removePolicy(request: RemovePolicyRequest, options?: AuthOptions): Promise<void>;
 }

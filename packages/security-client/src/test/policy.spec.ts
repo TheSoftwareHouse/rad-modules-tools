@@ -11,24 +11,38 @@ describe("Resource Policy", () => {
     attribute: "TEST_ATTRIBUTE",
   };
 
+  let token;
+
   before("Set token", async () => {
     const result = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
     assert.deepStrictEqual(Object.keys(result ?? []), ["accessToken", "refreshToken"]);
-    securityClient.setToken(result);
+    token = result;
   });
 
   it("Should addPolicy", async () => {
-    const result = await securityClient.policy.addPolicy(policyItem);
+    const result = await securityClient.policy.addPolicy(
+      {
+        ...policyItem,
+      },
+      {
+        accessToken: token.accessToken,
+      },
+    );
     assert.deepStrictEqual(Object.keys(result ?? {}), ["id"]);
   });
 
   it("Should getPolicies", async () => {
     const filter: GetPoliciesRequest = {};
-    const result = await securityClient.policy.getPolicies(filter);
+    const result = await securityClient.policy.getPolicies(filter, { accessToken: token.accessToken });
     assert.deepStrictEqual(Object.keys(result ?? {}), ["policies", "total", "page", "limit"]);
   });
 
   it("Should removePolicy", async () => {
-    await securityClient.policy.removePolicy(policyItem);
+    await securityClient.policy.removePolicy(
+      {
+        ...policyItem,
+      },
+      { accessToken: token.accessToken },
+    );
   });
 });

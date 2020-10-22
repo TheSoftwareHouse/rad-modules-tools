@@ -15,6 +15,7 @@ import {
   ResetPasswordRequest,
   ResetPasswordResponse,
 } from "../defs/auth";
+import { createHeadersForRequest } from "../services/headers-factory";
 
 export const auth = (serviceClient: ServiceClient) =>
   ({
@@ -36,6 +37,7 @@ export const auth = (serviceClient: ServiceClient) =>
           pathname: "/api/public/auth/login",
           method: "POST",
           body: JSON.stringify(request),
+          headers: createHeadersForRequest(),
         })
         .then((response) => response!.body as Token)
         .catch((error) => {
@@ -51,6 +53,7 @@ export const auth = (serviceClient: ServiceClient) =>
           body: JSON.stringify({
             newPassword: request.newPassword,
           }),
+          headers: createHeadersForRequest(),
         })
         .then((response) => response.body as ResetPasswordResponse)
         .catch((error) => {
@@ -64,6 +67,7 @@ export const auth = (serviceClient: ServiceClient) =>
           pathname: "/api/public/auth/refresh-token",
           method: "POST",
           body: JSON.stringify(request),
+          headers: createHeadersForRequest(),
         })
         .then((response) => response.body as RefreshTokenResponse)
         .catch((error) => {
@@ -77,6 +81,7 @@ export const auth = (serviceClient: ServiceClient) =>
           pathname: "/api/public/auth/refresh-token",
           method: "POST",
           body: JSON.stringify({ userId }),
+          headers: createHeadersForRequest(),
         })
         .then((response) => response.body as RefreshUserActiveTokenResponse)
         .catch((error) => {

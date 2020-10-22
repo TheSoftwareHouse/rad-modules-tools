@@ -1,6 +1,4 @@
-export interface CreateAccessKeyRequest {
-  accessToken: string;
-}
+import { AuthOptions } from "../services/service";
 
 export interface CreateAccessKeyResponse {
   apiKey: string;
@@ -39,8 +37,8 @@ export interface RemoveAccessKeyRequest {
 }
 
 export interface Tokens {
-  createAccessKey(request: CreateAccessKeyRequest): Promise<CreateAccessKeyResponse>;
-  generateToken(request: GenerateTokenRequest): Promise<GenerateTokenResponse>;
-  getAccessKeys(request?: GetAccessKeysRequest): Promise<GetAccessKeysResponse>;
-  removeAccessKey(request?: RemoveAccessKeyRequest): Promise<void>;
+  createAccessKey(options?: AuthOptions): Promise<CreateAccessKeyResponse>;
+  generateToken(request: GenerateTokenRequest, options?: AuthOptions): Promise<GenerateTokenResponse>;
+  getAccessKeys(request?: GetAccessKeysRequest, options?: AuthOptions): Promise<GetAccessKeysResponse>;
+  removeAccessKey(request?: RemoveAccessKeyRequest, options?: AuthOptions): Promise<void>;
 }
