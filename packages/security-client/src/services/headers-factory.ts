@@ -1,7 +1,7 @@
 import { AuthOptions } from "./service";
 
 export const createHeadersForRequest = (authOptions?: AuthOptions) => {
-  const headers = {
+  const headers: any = {
     "Content-Type": "application/json",
   };
 
@@ -10,7 +10,7 @@ export const createHeadersForRequest = (authOptions?: AuthOptions) => {
   }
 
   if (authOptions?.accessToken) {
-    headers["Authorization"] = `Bearer ${authOptions.accessToken}`;
+    headers.Authorization = `Bearer ${authOptions.accessToken}`;
   }
 
   return headers;
