@@ -35,7 +35,7 @@ import { PdfClient } from '@tshio/pdf-client';
 
 const options = {
   host: "localhost",
-  port: "50080",
+  port: 50080,
 }
 
 const pdfClient = new PdfClient(options);
