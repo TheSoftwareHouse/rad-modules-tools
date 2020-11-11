@@ -41,7 +41,7 @@ import { EmailQueuePriority } from "@tshio/mailer-client/dist/defs/mailer";
 
 const options = {
   host: "localhost",
-  port: "50060",
+  port: 50060,
 }
 
 const mailerClient = new MailerClient(options);

@@ -37,7 +37,7 @@ import { SchedulerClient } from '@tshio/scheduler-client';
 
 const options = {
   host: "localhost",
-  port: "50070",
+  port: 50070,
 }
 
 const schedulerClient = new SchedulerClient(options);

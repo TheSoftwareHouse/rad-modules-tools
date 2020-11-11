@@ -37,7 +37,7 @@ import { PdfClient } from '@tshio/notifications-client';
 
 const options = {
   host: "localhost",
-  port: "50080",
+  port: 50080,
 }
 
 const notificationsClient = new NotificationsClient(options);
