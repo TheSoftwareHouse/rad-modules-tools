@@ -22,6 +22,7 @@ export type Resources = string[];
 export type Options = {
   host: string;
   port: number;
+  https?: boolean;
 };
 
 export { SecurityClient };

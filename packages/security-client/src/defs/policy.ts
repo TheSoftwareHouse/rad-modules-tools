@@ -1,6 +1,6 @@
 import { AuthOptions } from "../services/service";
 
-export interface User {
+interface User {
   id: string;
   username: string;
   isActive: boolean;
@@ -10,11 +10,11 @@ export interface User {
   updatedAt: Date;
 }
 
-export type GetPoliciesColumns = "id" | "resource" | "attribute";
+type GetPoliciesColumns = "id" | "resource" | "attribute";
 
-export type GetPoliciesFilterOperators = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr";
+type GetPoliciesFilterOperators = "eq" | "neq" | "lt" | "gt" | "include" | "includeOr";
 
-export interface PoliciesQueryFilter {
+interface PoliciesQueryFilter {
   page?: number;
   limit?: number;
   filter?: {
@@ -28,43 +28,57 @@ export interface PoliciesQueryFilter {
   };
 }
 
-export interface PolicyItem {
+interface PolicyItem {
   id: string;
   resource: string;
   attribute: string;
 }
 
-export type GetPoliciesRequest = PoliciesQueryFilter;
+type GetPoliciesRequest = PoliciesQueryFilter;
 
-export interface GetPoliciesResponse {
+interface GetPoliciesResponse {
   policies: PolicyItem[];
   total: number;
   page: number;
   limit: number;
 }
 
-export interface AddPolicyRequest {
+interface AddPolicyRequest {
   resource: string;
   attribute: string;
 }
 
-export interface AddPolicyResponse {
+interface AddPolicyResponse {
   id: string;
 }
 
-export interface PolicyIdQuery {
+interface PolicyIdQuery {
   id: string;
 }
 
-export interface PolicyQuery {
+interface PolicyQuery {
   resource: string;
   attribute: string;
 }
 
-export type RemovePolicyRequest = PolicyIdQuery | PolicyQuery;
+type RemovePolicyRequest = PolicyIdQuery | PolicyQuery;
 
-export interface Policy {
+interface Policy {
   addPolicy(request: AddPolicyRequest, options?: AuthOptions): Promise<AddPolicyResponse>;
   getPolicies(queryFilter: GetPoliciesRequest, options?: AuthOptions): Promise<GetPoliciesResponse>;
   removePolicy(request: RemovePolicyRequest, options?: AuthOptions): Promise<void>;
 }
+
+export {
+  Policy,
+  GetPoliciesColumns,
+  GetPoliciesFilterOperators,
+  PoliciesQueryFilter,
+  GetPoliciesRequest,
+  GetPoliciesResponse,
+  AddPolicyRequest,
+  AddPolicyResponse,
+  PolicyIdQuery,
+  PolicyQuery,
+  RemovePolicyRequest,
+};

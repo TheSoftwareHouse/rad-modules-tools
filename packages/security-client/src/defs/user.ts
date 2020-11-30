@@ -1,6 +1,6 @@
 import { AuthOptions } from "../services/service";
 
-export interface User {
+interface User {
   id: string;
   username: string;
   isActive: boolean;
@@ -10,9 +10,9 @@ export interface User {
   updatedAt: Date;
 }
 
-export type GetUserColumns = "id" | "username" | "isActive" | "createdAt" | "updatedAt" | "attribute.name";
+type GetUserColumns = "id" | "username" | "isActive" | "createdAt" | "updatedAt" | "attribute.name";
 
-export type FilterOperators =
+type FilterOperators =
   | "eq"
   | "eqOr"
   | "neq"
@@ -26,7 +26,7 @@ export type FilterOperators =
   | "include"
   | "includeOr";
 
-export interface UsersQueryFilter {
+interface UsersQueryFilter {
   page?: number;
   limit?: number;
   filter?: {
@@ -40,129 +40,129 @@ export interface UsersQueryFilter {
   };
 }
 
-export type GetUsersRequest = UsersQueryFilter;
+type GetUsersRequest = UsersQueryFilter;
 
-export interface GetUsersResponse {
+interface GetUsersResponse {
   users: User[];
   total: number;
   page: number;
   limit: number;
 }
 
-export interface SetPasswordRequest {
+interface SetPasswordRequest {
   username: string;
   oldPassword: string;
   newPassword: string;
 }
 
-export interface SetPasswordResponse {
+interface SetPasswordResponse {
   passwordChanged: boolean;
 }
 
-export interface ActivateUserRequest {
+interface ActivateUserRequest {
   activationToken: string;
 }
 
-export interface ActivateUserResponse {
+interface ActivateUserResponse {
   userId: string;
   isActive: boolean;
 }
 
-export interface AddAttributesRequest {
+interface AddAttributesRequest {
   userId: string;
   attributes: string[];
 }
 
-export interface AddAttributesResponse {}
+interface AddAttributesResponse {}
 
-export interface AddUserRequest {
+interface AddUserRequest {
   username: string;
   password: string;
   attributes?: string[];
 }
 
-export interface AddUserResponse {
+interface AddUserResponse {
   newUserId: string;
 }
 
-export interface DeactivateUserRequest {
+interface DeactivateUserRequest {
   userId: string;
 }
 
-export interface DeactivateUserResponse {
+interface DeactivateUserResponse {
   userId: string;
   isActive: boolean;
   deactivationDate: Date;
 }
 
-export interface DeleteUserRequest {
+interface DeleteUserRequest {
   userId: string;
 }
 
-export interface DeleteUserResponse {}
+interface DeleteUserResponse {}
 
-export interface GetUserRequest {
+interface GetUserRequest {
   userId: string;
 }
 
-export type GetUserResponse = User;
+type GetUserResponse = User;
 
-export interface GetUserIdRequest {
+interface GetUserIdRequest {
   username: string;
 }
 
-export interface GetUserIdResponse {
+interface GetUserIdResponse {
   userId: string;
 }
 
-export interface GetUsersByResourceRequest {
+interface GetUsersByResourceRequest {
   resource: string;
   page?: number;
   limit?: number;
 }
 
-export interface GetUsersByResourceResponse {
+interface GetUsersByResourceResponse {
   users: User[];
   total: number;
   page: number;
   limit: number;
 }
 
-export interface HasAccessRequest {
+interface HasAccessRequest {
   resources: string[];
 }
 
-export interface HasAccessResponse {
+interface HasAccessResponse {
   hasAccess: boolean;
   forbidden: string[];
 }
 
-export interface HasAttributesRequest {
+interface HasAttributesRequest {
   attributes: string[];
 }
 
-export interface HasAttributesResponse {
+interface HasAttributesResponse {
   hasAllAttributes: boolean;
 }
 
-export interface IsAuthenticatedResponse {
+interface IsAuthenticatedResponse {
   isAuthenticated: boolean;
 }
 
-export interface PasswordResetTokenRequest {
+interface PasswordResetTokenRequest {
   username: string;
 }
 
-export interface PasswordResetTokenResponse {
+interface PasswordResetTokenResponse {
   resetPasswordToken: string;
 }
 
-export interface RemoveAttributesRequest {
+interface RemoveAttributesRequest {
   userId: string;
   attributes: string[];
 }
 
-export interface Users {
+interface Users {
   getUsers(queryFilter: GetUsersRequest, options?: AuthOptions): Promise<GetUsersResponse>;
   activateUser(request: ActivateUserRequest, options?: AuthOptions): Promise<ActivateUserResponse>;
   addAttributes(request: AddAttributesRequest, options?: AuthOptions): Promise<AddAttributesResponse>;
@@ -179,3 +179,39 @@ export interface Users {
   setPassword(request: SetPasswordRequest, options?: AuthOptions): Promise<SetPasswordResponse>;
   passwordResetToken(request: PasswordResetTokenRequest, options?: AuthOptions): Promise<PasswordResetTokenResponse>;
 }
+
+export {
+  User,
+  GetUserColumns,
+  FilterOperators,
+  UsersQueryFilter,
+  GetUsersRequest,
+  GetUsersResponse,
+  SetPasswordRequest,
+  SetPasswordResponse,
+  ActivateUserRequest,
+  ActivateUserResponse,
+  AddAttributesRequest,
+  AddAttributesResponse,
+  AddUserRequest,
+  AddUserResponse,
+  DeactivateUserRequest,
+  DeactivateUserResponse,
+  DeleteUserRequest,
+  DeleteUserResponse,
+  GetUserRequest,
+  GetUserResponse,
+  GetUserIdRequest,
+  GetUserIdResponse,
+  GetUsersByResourceRequest,
+  GetUsersByResourceResponse,
+  HasAccessRequest,
+  HasAccessResponse,
+  HasAttributesRequest,
+  HasAttributesResponse,
+  IsAuthenticatedResponse,
+  PasswordResetTokenRequest,
+  PasswordResetTokenResponse,
+  RemoveAttributesRequest,
+  Users,
+};
