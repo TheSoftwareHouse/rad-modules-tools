@@ -1,31 +1,55 @@
 import { Token } from "../services/service";
 
-export interface LoginRequest {
+interface LoginRequest {
   username: string;
   password: string;
 }
 
-export interface ResetPasswordRequest {
+interface GoogleLoginRequest {
+  code: string;
+  redirectUrl: string;
+}
+
+interface FacebookLoginRequest {
+  code: string;
+  redirectUrl: string;
+}
+
+interface ResetPasswordRequest {
   resetPasswordToken: string;
   newPassword?: string;
 }
 
-export interface ResetPasswordResponse {
+interface ResetPasswordResponse {
   newPassword: string;
 }
 
-export interface RefreshTokenRequest {
+interface RefreshTokenRequest {
   accessToken: string;
   refreshToken: string;
 }
 
-export type RefreshTokenResponse = Token;
+type RefreshTokenResponse = Token;
 
-export type RefreshUserActiveTokenResponse = Token;
+type RefreshUserActiveTokenResponse = Token;
 
-export interface Auth {
+interface Auth {
   login(request: LoginRequest): Promise<Token>;
+  googleLogin(request: GoogleLoginRequest): Promise<Token>;
+  facebookLogin(request: FacebookLoginRequest): Promise<Token>;
   resetPassword(request: ResetPasswordRequest): Promise<ResetPasswordResponse>;
   refreshToken(request: RefreshTokenRequest): Promise<RefreshTokenResponse>;
   refreshUserActiveToken(userId: string): Promise<RefreshUserActiveTokenResponse>;
 }
+
+export {
+  Auth,
+  LoginRequest,
+  GoogleLoginRequest,
+  FacebookLoginRequest,
+  ResetPasswordRequest,
+  ResetPasswordResponse,
+  RefreshTokenRequest,
+  RefreshTokenResponse,
+  RefreshUserActiveTokenResponse,
+};

@@ -76,7 +76,7 @@ export class SecurityClient {
       hostname: process.env.API_HOST || options.host,
       defaultRequestOptions: {
         port: options.port,
-        protocol: "http:",
+        protocol: options.https ? "https:" : "http:",
       },
       filters: [ServiceClient.treat4xxAsError, ServiceClient.treat5xxAsError],
     });

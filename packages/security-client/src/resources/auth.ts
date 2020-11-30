@@ -8,6 +8,8 @@ import { ServiceClient } from "perron";
 import { Token } from "../services/service";
 import {
   Auth,
+  FacebookLoginRequest,
+  GoogleLoginRequest,
   LoginRequest,
   RefreshTokenRequest,
   RefreshTokenResponse,
@@ -35,6 +37,34 @@ export const auth = (serviceClient: ServiceClient) =>
       return serviceClient
         .request({
           pathname: "/api/public/auth/login",
+          method: "POST",
+          body: JSON.stringify(request),
+          headers: createHeadersForRequest(),
+        })
+        .then((response) => response!.body as Token)
+        .catch((error) => {
+          throw getHttpError(error);
+        });
+    },
+
+    async googleLogin(request: GoogleLoginRequest): Promise<Token> {
+      return serviceClient
+        .request({
+          pathname: "/api/public/auth/oauth-redirect/google",
+          method: "POST",
+          body: JSON.stringify(request),
+          headers: createHeadersForRequest(),
+        })
+        .then((response) => response!.body as Token)
+        .catch((error) => {
+          throw getHttpError(error);
+        });
+    },
+
+    async facebookLogin(request: FacebookLoginRequest): Promise<Token> {
+      return serviceClient
+        .request({
+          pathname: "/api/public/auth/oauth-redirect/facebook",
           method: "POST",
           body: JSON.stringify(request),
           headers: createHeadersForRequest(),

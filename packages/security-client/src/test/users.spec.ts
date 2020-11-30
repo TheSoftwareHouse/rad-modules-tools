@@ -50,7 +50,7 @@ describe("Resource Users", () => {
     const result = await securityClient.users
       .getUsers(usersQueryFilter, { accessToken: token.accessToken })
       .catch((error) => error.message);
-    assert.strictEqual(result, '"limit" must be less than or equal to 1000');
+    assert.strictEqual(result.details[0].message, '"limit" must be less than or equal to 1000');
   });
 
   it("Should isAuthenticated", async () => {

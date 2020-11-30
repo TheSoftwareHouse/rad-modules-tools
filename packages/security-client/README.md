@@ -43,6 +43,7 @@ import { getSecurityClient } from '@tshio/security-client';
 const options = {
   host: "localhost",
   port: 50050,
+  https: true, // default http protocol
 }
 
 const securityClient = getSecurityClient(options);
@@ -256,6 +257,60 @@ Returns a Token object or throw HttpError
 |----------|------------|---------------------------------------|
 | username | `string`   | User name                             |
 | password | `string`   | User password                         |
+
+##### Example
+
+```js
+const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
+console.log(token);
+// => { accessToken: "...", refreshToken: "..." }
+```
+
+[Back to Authorization API](#authorization-api)
+
+<hr />
+
+### async securityClient.auth.googleLogin({ code, redirectUrl })
+
+Login to rad-security with Google OAuth provider
+
+Returns a Token object or throw HttpError
+
+##### Parameters
+
+###### Request
+
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| code | `string`   | Google authorization code for access tokens                         |
+| redirectUrl | `string`   | redirect URL (configured in Google account)                        |
+
+##### Example
+
+```js
+const token = await securityClient.auth.login({ username: "superadmin", password: "superadmin" });
+console.log(token);
+// => { accessToken: "...", refreshToken: "..." }
+```
+
+[Back to Authorization API](#authorization-api)
+
+<hr />
+
+### async securityClient.auth.facebookLogin({ code, redirectUrl })
+
+Login to rad-security with Facebook OAuth provider
+
+Returns a Token object or throw HttpError
+
+##### Parameters
+
+###### Request
+
+| Name     | Type       | Description                           |
+|----------|------------|---------------------------------------|
+| code | `string`   | Facebook authorization code for access tokens                         |
+| redirectUrl | `string`   | redirect URL (configured in Facebook account)                        |
 
 ##### Example
 
