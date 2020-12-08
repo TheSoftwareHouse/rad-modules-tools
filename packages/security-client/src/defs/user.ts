@@ -162,6 +162,10 @@ interface RemoveAttributesRequest {
   attributes: string[];
 }
 
+interface MeResponse {
+  resetPasswordToken: string;
+}
+
 interface Users {
   getUsers(queryFilter: GetUsersRequest, options?: AuthOptions): Promise<GetUsersResponse>;
   activateUser(request: ActivateUserRequest, options?: AuthOptions): Promise<ActivateUserResponse>;
@@ -178,6 +182,7 @@ interface Users {
   isAuthenticated(options?: AuthOptions): Promise<IsAuthenticatedResponse>;
   setPassword(request: SetPasswordRequest, options?: AuthOptions): Promise<SetPasswordResponse>;
   passwordResetToken(request: PasswordResetTokenRequest, options?: AuthOptions): Promise<PasswordResetTokenResponse>;
+  me(options?: AuthOptions): Promise<MeResponse>;
 }
 
 export {
@@ -213,5 +218,6 @@ export {
   PasswordResetTokenRequest,
   PasswordResetTokenResponse,
   RemoveAttributesRequest,
+  MeResponse,
   Users,
 };

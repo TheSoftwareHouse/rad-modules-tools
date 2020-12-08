@@ -505,6 +505,49 @@ Return `void` or throw HttpError
 
 ## Users API
 
+<hr />
+
+### async securityClient.users.me({ accessToken, apiKey })
+
+Return logged in profile object
+
+Returns an object
+```ts
+{
+  id: string,
+  username: string,
+  username: string,
+  isActive: boolean,
+  attributes: string[],
+  resources: string[]
+}
+```
+or throw HttpError
+
+###### options
+
+| Name                  | Type       | Description                           |
+|-----------------------|------------|---------------------------------------|
+| apiKey                | `string`   | Api key                               |
+| accessToken           | `string`   | Access token                          |
+
+##### Example
+
+```js
+const result = await securityClient.auth.activateUser({
+  activationToken: "activation token..."
+}, { 
+  accessToken
+});
+
+console.log(result);
+// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: true }
+```
+
+[Back to Users API](#users-api)
+
+<hr />
+
 ### async securityClient.users.getUsers({ page?, limit?, filter?, order?}, { accessToken })
 
 Get users list (if no query parameters returns first 25 users)
@@ -513,7 +556,7 @@ Get users list (if no query parameters returns first 25 users)
 
 | Name         | Type       | Description                                     | Default |
 |--------------|------------|-------------------------------------------------|---------|
-| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
+| page         | `number`   | { accessToken } <p>Page number</p>                 | 1       |
 | limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
 | filter       | `object`   | **optional** <p>[Query filter](#understanding-filters-and-ordering)</p>               | {}      |
 | order        | `object`   | **optional** <p>[Order filter](#understanding-filters-and-ordering)</p>                | {}      |

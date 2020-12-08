@@ -25,6 +25,7 @@ import {
   HasAttributesRequest,
   HasAttributesResponse,
   IsAuthenticatedResponse,
+  MeResponse,
   PasswordResetTokenRequest,
   PasswordResetTokenResponse,
   RemoveAttributesRequest,
@@ -250,6 +251,19 @@ export const users = (serviceClient: ServiceClient) =>
           headers: createHeadersForRequest(authOptions),
         })
         .then((response) => response.body as PasswordResetTokenResponse)
+        .catch((error) => {
+          throw getHttpError(error);
+        });
+    },
+
+    me(authOptions?: AuthOptions): Promise<MeResponse> {
+      return serviceClient
+        .request({
+          pathname: "/api/public/me",
+          method: "GET",
+          headers: createHeadersForRequest(authOptions),
+        })
+        .then((response) => response.body as MeResponse)
         .catch((error) => {
           throw getHttpError(error);
         });
