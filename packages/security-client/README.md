@@ -516,7 +516,7 @@ Returns an object
 {
   id: string,
   username: string,
-  username: string,
+  email: string,
   isActive: boolean,
   attributes: string[],
   resources: string[]
@@ -528,20 +528,17 @@ or throw HttpError
 
 | Name                  | Type       | Description                           |
 |-----------------------|------------|---------------------------------------|
-| apiKey                | `string`   | Api key                               |
 | accessToken           | `string`   | Access token                          |
 
 ##### Example
 
 ```js
-const result = await securityClient.auth.activateUser({
-  activationToken: "activation token..."
-}, { 
+const result = await securityClient.auth.me({ 
   accessToken
 });
 
 console.log(result);
-// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", isActive: true }
+// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", username: "example", email: "example@example.com", isActive: true, atrributes: [], resources: [] }
 ```
 
 [Back to Users API](#users-api)
@@ -556,7 +553,7 @@ Get users list (if no query parameters returns first 25 users)
 
 | Name         | Type       | Description                                     | Default |
 |--------------|------------|-------------------------------------------------|---------|
-| page         | `number`   | { accessToken } <p>Page number</p>                 | 1       |
+| page         | `number`   | **optional** <p>Page number</p>                 | 1       |
 | limit        | `number`   | **optional** <p>Number of results per page</p>  | 25      |
 | filter       | `object`   | **optional** <p>[Query filter](#understanding-filters-and-ordering)</p>               | {}      |
 | order        | `object`   | **optional** <p>[Order filter](#understanding-filters-and-ordering)</p>                | {}      |
