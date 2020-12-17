@@ -505,6 +505,46 @@ Return `void` or throw HttpError
 
 ## Users API
 
+<hr />
+
+### async securityClient.users.me({ accessToken, apiKey })
+
+Return logged in profile object
+
+Returns an object
+```ts
+{
+  id: string,
+  username: string,
+  email: string,
+  isActive: boolean,
+  attributes: string[],
+  resources: string[]
+}
+```
+or throw HttpError
+
+###### options
+
+| Name                  | Type       | Description                           |
+|-----------------------|------------|---------------------------------------|
+| accessToken           | `string`   | Access token                          |
+
+##### Example
+
+```js
+const result = await securityClient.auth.me({ 
+  accessToken
+});
+
+console.log(result);
+// => { userId: "45287eff-cdb0-4cd4-8a0f-a07d1a11b382", username: "example", email: "example@example.com", isActive: true, atrributes: [], resources: [] }
+```
+
+[Back to Users API](#users-api)
+
+<hr />
+
 ### async securityClient.users.getUsers({ page?, limit?, filter?, order?}, { accessToken })
 
 Get users list (if no query parameters returns first 25 users)

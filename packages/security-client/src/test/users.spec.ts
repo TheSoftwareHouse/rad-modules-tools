@@ -27,7 +27,7 @@ describe("Resource Users", () => {
     assert.strictEqual(result.limit, 25);
   });
 
-  it("Should get users", async () => {
+  it("Should get users with filter", async () => {
     const usersQueryFilter: UsersQueryFilter = {
       limit: 500,
       page: 100,
@@ -42,7 +42,7 @@ describe("Resource Users", () => {
     assert.strictEqual(result.limit, 500);
   });
 
-  it("Should get users", async () => {
+  it("Should not get users", async () => {
     const usersQueryFilter: UsersQueryFilter = {
       limit: 10000,
     };
@@ -178,5 +178,20 @@ describe("Resource Users", () => {
     });
 
     assert.deepStrictEqual(Object.keys(result || []), ["resetPasswordToken"]);
+  });
+
+  it("Should get 'me' profile", async () => {
+    const result = await securityClient.users.me({
+      accessToken: token.accessToken,
+    });
+
+    assert.deepStrictEqual(Object.keys(result ?? {}), [
+      "id",
+      "username",
+      "email",
+      "isActive",
+      "attributes",
+      "resources",
+    ]);
   });
 });
